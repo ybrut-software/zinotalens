@@ -76,9 +76,9 @@ class _HomePageState extends State<HomePage> {
                   ]),
                   Expanded(
                     child: TabBarView(children: [
-                      categoryItems(itemCount: 10),
-                      categoryItems(itemCount: 8),
-                      categoryItems(itemCount: 5),
+                      categoryItems(itemCount: 10, context: context),
+                      categoryItems(itemCount: 8, context: context),
+                      categoryItems(itemCount: 5, context: context),
                     ]),
                   )
                 ],

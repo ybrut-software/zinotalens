@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart' hide Colors;
+import 'package:zinotalens/pages/product_list_page.dart';
 
 import '../utils/colors.dart';
 
-Widget categoryItems({required int itemCount}) => Padding(
+Widget categoryItems({required int itemCount, required BuildContext context}) =>
+    Padding(
       padding: EdgeInsets.only(top: 10.0),
       child: GridView.count(
         crossAxisCount: 3,
@@ -12,15 +14,23 @@ Widget categoryItems({required int itemCount}) => Padding(
           return Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              Container(
-                height: 50,
-                width: 50,
-                decoration: BoxDecoration(
-                  color: Colors.iconBackgroundColor,
-                  shape: BoxShape.circle,
+              GestureDetector(
+                onTap: () => Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: ((context) => ProductListPage()),
+                  ),
                 ),
-                child: Center(
-                  child: Text("$index"),
+                child: Container(
+                  height: 50,
+                  width: 50,
+                  decoration: BoxDecoration(
+                    color: Colors.iconBackgroundColor,
+                    shape: BoxShape.circle,
+                  ),
+                  child: Center(
+                    child: Text("$index"),
+                  ),
                 ),
               ),
               SizedBox(height: 5),
