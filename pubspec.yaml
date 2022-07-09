@@ -63,8 +63,12 @@ flutter:
   assets:
     - assets/images/profile_place_holder.png
     - assets/images/roshan.jpeg
-    - assets/images/demo.png
+    - assets/images/banner1.webp
+    - assets/images/banner2.webp
+    - assets/images/banner3.webp
+    - assets/images/banner4.webp
     - assets/images/frame2.jpg
+    - assets/images/frame4.jpg
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
