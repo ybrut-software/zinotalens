@@ -119,6 +119,7 @@ class _ProductViewPageState extends State<ProductViewPage> {
                       fontSize: 16),
                 ),
                 SizedBox(height: 15),
+                //check pincode textfield
                 Container(
                   height: 50,
                   decoration: BoxDecoration(
@@ -134,7 +135,7 @@ class _ProductViewPageState extends State<ProductViewPage> {
                     children: [
                       Expanded(
                         child: TextField(
-                          keyboardType: TextInputType.text,
+                          keyboardType: TextInputType.number,
                           maxLines: 1,
                           decoration: InputDecoration(
                               border: OutlineInputBorder(
@@ -167,7 +168,44 @@ class _ProductViewPageState extends State<ProductViewPage> {
                                 MaterialStateProperty.all(Colors.white),
                           ),
                         ),
+                      )
+                    ],
+                  ),
+                ),
+                SizedBox(height: 15),
+                Container(
+                  child: Row(
+                    children: [
+                      Container(
+                        width: 40,
+                        height: 40,
+                        decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            border: Border.all(
+                                color: Colors.gray.withOpacity(0.3),
+                                width: 1.5)),
+                        child: Icon(Icons.home, color: Colors.gray),
                       ),
+                      SizedBox(width: 15),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Text(
+                            "Home Delivery",
+                            style: TextStyle(
+                                color: Colors.black,
+                                fontWeight: FontWeight.w500),
+                          ),
+                          SizedBox(height: 2),
+                          Text(
+                            "Get your frame delivered at your doorsteps",
+                            style: TextStyle(
+                                color: Colors.gray,
+                                fontWeight: FontWeight.w400),
+                          )
+                        ],
+                      )
                     ],
                   ),
                 )
