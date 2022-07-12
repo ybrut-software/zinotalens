@@ -63,13 +63,20 @@ class _ProductListPageState extends State<ProductListPage> {
                       child: Column(
                         mainAxisSize: MainAxisSize.min,
                         children: [
-                          Align(
-                              alignment: Alignment.topRight,
-                              child: Icon(
-                                Icons.favorite_border,
-                                color: Colors.black,
-                                size: 20,
-                              )),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Row(children: [
+                                Icon(Icons.star, color: Colors.gray, size: 14),
+                                SizedBox(width: 2),
+                                Text("4.7",
+                                    style: TextStyle(
+                                        color: Colors.gray, fontSize: 12))
+                              ]),
+                              Icon(Icons.favorite_border,
+                                  color: Colors.black, size: 20),
+                            ],
+                          ),
                           SizedBox(height: 10),
                           Container(
                             height: 125,
