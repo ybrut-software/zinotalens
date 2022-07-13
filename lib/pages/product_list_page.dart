@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart' hide Colors;
 import 'package:zinotalens/pages/product_view_page.dart';
+import 'package:zinotalens/pages/wishlist_page.dart';
 import 'package:zinotalens/utils/images.dart';
 
 import '../utils/colors.dart';
@@ -73,8 +74,17 @@ class _ProductListPageState extends State<ProductListPage> {
                                     style: TextStyle(
                                         color: Colors.gray, fontSize: 12))
                               ]),
-                              Icon(Icons.favorite_border,
-                                  color: Colors.black, size: 20),
+                              IconButton(
+                                  padding: EdgeInsets.zero,
+                                  constraints: BoxConstraints(),
+                                  splashRadius: 20,
+                                  onPressed: () => Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              WishListPage())),
+                                  icon: Icon(Icons.favorite_border,
+                                      color: Colors.black, size: 20))
                             ],
                           ),
                           SizedBox(height: 10),
