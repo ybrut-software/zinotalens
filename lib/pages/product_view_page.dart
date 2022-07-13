@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart' hide Colors;
+import 'package:zinotalens/pages/cart_view_page.dart';
 import 'package:zinotalens/utils/images.dart';
 import 'package:zinotalens/widgets/product_viewpage_widgets.dart';
 
@@ -31,7 +32,8 @@ class _ProductViewPageState extends State<ProductViewPage> {
           //   splashRadius: 20,
           // ),
           IconButton(
-            onPressed: () {},
+            onPressed: () => Navigator.push(context,
+                MaterialPageRoute(builder: (context) => CartViewPage())),
             icon: Icon(Icons.shopping_cart),
             splashRadius: 20,
           ),
