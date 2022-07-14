@@ -37,27 +37,37 @@ class _WishListPageState extends State<WishListPage> {
                   flex: 6,
                   child: Padding(
                     padding: EdgeInsets.only(left: 15),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.start,
+                    child: Stack(
                       children: [
-                        Text("Zinotalens Air"),
-                        SizedBox(height: 4),
-                        RichText(
-                          textScaleFactor: 1.1,
-                          text: TextSpan(
-                              text: "₹999  ",
-                              style: TextStyle(
-                                  color: Colors.black,
-                                  fontWeight: FontWeight.w500),
-                              children: [
-                                TextSpan(
-                                    text: "₹2999",
+                        Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              Text("Zinotalens Air"),
+                              SizedBox(height: 4),
+                              RichText(
+                                textScaleFactor: 1.1,
+                                text: TextSpan(
+                                    text: "₹999  ",
                                     style: TextStyle(
-                                        color: Colors.gray,
-                                        decoration: TextDecoration.lineThrough))
-                              ]),
-                        )
+                                        color: Colors.black,
+                                        fontWeight: FontWeight.w500),
+                                    children: [
+                                      TextSpan(
+                                          text: "₹2999",
+                                          style: TextStyle(
+                                              color: Colors.gray,
+                                              decoration:
+                                                  TextDecoration.lineThrough))
+                                    ]),
+                              )
+                            ]),
+                            Positioned(
+                              bottom: 0.0,
+                              right: 0.0,
+                              child: Icon(Icons.delete,
+                                  size: 22, color: Colors.gray),
+                            )
                       ],
                     ),
                   )),
