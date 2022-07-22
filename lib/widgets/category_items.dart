@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart' hide Colors;
 import 'package:zinotalens/pages/product_list_page.dart';
+import 'package:zinotalens/utils/images.dart';
 
 import '../utils/colors.dart';
 
@@ -22,14 +23,15 @@ Widget categoryItems({required int itemCount, required BuildContext context}) =>
                   ),
                 ),
                 child: Container(
+                  padding: EdgeInsets.all(5),
                   height: 50,
                   width: 50,
                   decoration: BoxDecoration(
-                    color: Colors.iconBackgroundColor,
+                    color: Colors.iconBackgroundColor.withOpacity(0.3),
                     shape: BoxShape.circle,
                   ),
                   child: Center(
-                    child: Text("$index"),
+                    child: Image.asset(reading_eyeglasses_icon),
                   ),
                 ),
               ),

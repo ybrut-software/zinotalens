@@ -69,6 +69,11 @@ flutter:
     - assets/images/banner4.webp
     - assets/images/frame2.jpg
     - assets/images/frame4.jpg
+    - assets/images/contact_lens_icon.png
+    - assets/images/computer_glasses_icon.png
+    - assets/images/glasses_icon.png
+    - assets/images/reading_eyeglasses_icon.png
+    - assets/images/sun_glasses_icon.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
