@@ -274,46 +274,13 @@ Widget ProductSpecification() => Container(
           SizedBox(height: 10),
           Table(
             children: [
-              TableRow(children: [
-                Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [Text("Frame Width")]),
-                Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [Text("134 mm")]),
-              ]),
-              TableRow(children: [
-                Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [Text("Weight")]),
-                Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [Text("14 gm")]),
-              ]),
-              TableRow(children: [
-                Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [Text("Material")]),
-                Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [Text("Ultem (Vintage Regular)")]),
-              ]),
-              TableRow(children: [
-                Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [Text("Collection")]),
-                Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [Text("Air Flex")]),
-              ]),
-              TableRow(children: [
-                Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [Text("Height")]),
-                Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [Text("35 mm")]),
-              ]),
+              tableRow(column1_text: "Frame Width", column2_text: "134 mm"),
+              tableRow(column1_text: "Weight", column2_text: "14 gm"),
+              tableRow(
+                  column1_text: "Material",
+                  column2_text: "Ultem (Vintage Regular)"),
+              tableRow(column1_text: "Collection", column2_text: "Air Flex"),
+              tableRow(column1_text: "Height", column2_text: "35 mm"),
             ],
           ),
           SizedBox(height: 10),
@@ -339,3 +306,22 @@ Widget ProductSpecification() => Container(
         ],
       ),
     );
+
+TableRow tableRow(
+        {required String column1_text, required String column2_text}) =>
+    TableRow(children: [
+      Padding(
+        padding: EdgeInsets.symmetric(vertical: 5),
+        child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisSize: MainAxisSize.min,
+            children: [Text(column1_text)]),
+      ),
+      Padding(
+        padding: EdgeInsets.symmetric(vertical: 5),
+        child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisSize: MainAxisSize.min,
+            children: [Text(column2_text)]),
+      ),
+    ]);
