@@ -15,22 +15,15 @@ class ProductViewPage extends StatefulWidget {
 class _ProductViewPageState extends State<ProductViewPage> {
   @override
   Widget build(BuildContext context) {
+    ProductViewPageWidget productViewPageWidget =
+        ProductViewPageWidget(context);
     return Scaffold(
       backgroundColor: Colors.backgroundColor,
       appBar: AppBar(
         backgroundColor: Colors.skyBlue,
         shadowColor: Colors.transparent,
         iconTheme: IconThemeData(color: Colors.white),
-        // title: Text(
-        //   "Eyeglasses",
-        //   style: TextStyle(color: Colors.white),
-        // ),
         actions: [
-          // IconButton(
-          //   onPressed: () {},
-          //   icon: Icon(Icons.search),
-          //   splashRadius: 20,
-          // ),
           IconButton(
             onPressed: () => Navigator.push(context,
                 MaterialPageRoute(builder: (context) => CartViewPage())),
@@ -42,13 +35,13 @@ class _ProductViewPageState extends State<ProductViewPage> {
       body: Stack(
         children: [
           ListView(padding: EdgeInsets.only(bottom: 70), children: [
-            ProductImageSliderAndDesc(),
+            productViewPageWidget.ProductImageSliderAndDesc(),
             SizedBox(height: 5),
-            DeliveryOptionsView(),
+            productViewPageWidget.DeliveryOptionsView(),
             SizedBox(height: 5),
-            AboutProduct(),
+            productViewPageWidget.AboutProduct(),
             SizedBox(height: 5),
-            ProductSpecification()
+            productViewPageWidget.ProductSpecification()
           ]),
           Positioned(
             bottom: 0.0,
@@ -72,7 +65,7 @@ class _ProductViewPageState extends State<ProductViewPage> {
                         fontWeight: FontWeight.w500),
                   ),
                 )),
-          )
+          ),
         ],
       ),
     );
