@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart' hide Colors;
+import 'package:zinotalens/pages/cart_view_page.dart';
+import 'package:zinotalens/pages/myorder_page.dart';
 import 'package:zinotalens/utils/images.dart';
 
 import '../utils/colors.dart';
 
-Widget navigationDrawer() => Drawer(
+Widget navigationDrawer(BuildContext context) => Drawer(
       child: ListView(
         children: [
           drawerHeader(),
@@ -18,7 +20,10 @@ Widget navigationDrawer() => Drawer(
                   width: double.infinity,
                   height: 50,
                   child: ElevatedButton.icon(
-                      onPressed: () {},
+                      onPressed: () => Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => MyOrderPage())),
                       style: buttonStyle(),
                       icon: icon(Icons.shopping_bag_rounded),
                       label: Padding(

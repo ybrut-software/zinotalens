@@ -43,7 +43,7 @@ class _HomePageState extends State<HomePage> {
         ],
       ),
       drawerDragStartBehavior: DragStartBehavior.start,
-      drawer: navigationDrawer(),
+      drawer: navigationDrawer(context),
       body: ListView(
         children: [
           SizedBox(height: 5),
