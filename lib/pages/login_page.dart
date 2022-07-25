@@ -64,7 +64,7 @@ class _LoginPageState extends State<LoginPage> {
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 14),
                 child: TextFormField(
-                  keyboardType: TextInputType.text,
+                  keyboardType: TextInputType.number,
                   cursorColor: Colors.skyBlue,
                   decoration: InputDecoration(
                     labelText: "Enter mobile number",

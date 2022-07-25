@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart' hide Colors;
+import 'package:zinotalens/pages/order_details_page.dart';
 
 import '../utils/colors.dart';
 import '../utils/images.dart';
 
 Widget OrderItemViewholder(BuildContext context) => ElevatedButton(
-      onPressed: () {},
+      onPressed: () => Navigator.push(
+          context, MaterialPageRoute(builder: (context) => OrderDetailsPage())),
       style: ButtonStyle(
           overlayColor: MaterialStateProperty.all(Colors.gray.withOpacity(0.1)),
           padding: MaterialStateProperty.all(EdgeInsets.zero),
