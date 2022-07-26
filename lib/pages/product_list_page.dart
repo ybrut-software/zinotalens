@@ -59,11 +59,7 @@ class _ProductListPageState extends State<ProductListPage> {
                                   padding: EdgeInsets.zero,
                                   constraints: BoxConstraints(),
                                   splashRadius: 20,
-                                  onPressed: () => Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) =>
-                                              WishListPage())),
+                                  onPressed: () {},
                                   icon: Icon(Icons.favorite_border,
                                       color: Colors.black, size: 20))
                             ],

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart' hide Colors;
 import 'package:zinotalens/pages/myorder_page.dart';
 import 'package:zinotalens/pages/notification_page.dart';
+import 'package:zinotalens/pages/wishlist_page.dart';
 import 'package:zinotalens/utils/images.dart';
 
 import '../utils/colors.dart';
@@ -20,10 +21,13 @@ Widget navigationDrawer(BuildContext context) => Drawer(
                   width: double.infinity,
                   height: 50,
                   child: ElevatedButton.icon(
-                      onPressed: () => Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => MyOrderPage())),
+                      onPressed: () {
+                        Navigator.pop(context);
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => MyOrderPage()));
+                      },
                       style: buttonStyle(),
                       icon: icon(Icons.shopping_bag_rounded),
                       label: Padding(
@@ -38,16 +42,40 @@ Widget navigationDrawer(BuildContext context) => Drawer(
                   width: double.infinity,
                   height: 50,
                   child: ElevatedButton.icon(
-                      onPressed: () => Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => NotificationPage())),
+                      onPressed: () {
+                        Navigator.pop(context);
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => NotificationPage()));
+                      },
                       style: buttonStyle(),
                       icon: icon(Icons.notifications),
                       label: Padding(
                         padding: EdgeInsets.only(left: 14),
                         child: Text(
                           "Notification",
+                          style: textStyle(),
+                        ),
+                      )),
+                ),
+                Container(
+                  width: double.infinity,
+                  height: 50,
+                  child: ElevatedButton.icon(
+                      onPressed: () {
+                        Navigator.pop(context);
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => WishListPage()));
+                      },
+                      style: buttonStyle(),
+                      icon: icon(Icons.favorite),
+                      label: Padding(
+                        padding: EdgeInsets.only(left: 14),
+                        child: Text(
+                          "WishList",
                           style: textStyle(),
                         ),
                       )),
