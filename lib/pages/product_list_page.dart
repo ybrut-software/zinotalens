@@ -2,6 +2,7 @@ import 'package:flutter/material.dart' hide Colors;
 import 'package:zinotalens/pages/product_view_page.dart';
 import 'package:zinotalens/pages/wishlist_page.dart';
 import 'package:zinotalens/utils/images.dart';
+import 'package:zinotalens/widgets/custom_appbar.dart';
 
 import '../utils/colors.dart';
 
@@ -17,27 +18,7 @@ class _ProductListPageState extends State<ProductListPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.backgroundColor,
-      appBar: AppBar(
-        backgroundColor: Colors.skyBlue,
-        shadowColor: Colors.transparent,
-        iconTheme: IconThemeData(color: Colors.white),
-        title: Text(
-          "Eyeglasses",
-          style: TextStyle(color: Colors.white),
-        ),
-        actions: [
-          IconButton(
-            onPressed: () {},
-            icon: Icon(Icons.search),
-            splashRadius: 20,
-          ),
-          IconButton(
-            onPressed: () {},
-            icon: Icon(Icons.shopping_cart),
-            splashRadius: 20,
-          ),
-        ],
-      ),
+      appBar: customAppBar(context, isSearchIcon: true, title: "Eyeglasses"),
       body: ListView.builder(
         padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
         itemCount: 10,

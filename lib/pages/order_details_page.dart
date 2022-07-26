@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart' hide Colors;
 import 'package:zinotalens/utils/images.dart';
+import 'package:zinotalens/widgets/custom_appbar.dart';
 
 import '../utils/colors.dart';
 import '../widgets/values.dart';
@@ -16,19 +17,7 @@ class _OrderDetailsPageState extends State<OrderDetailsPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.backgroundColor,
-      appBar: AppBar(
-        backgroundColor: Colors.skyBlue,
-        shadowColor: Colors.transparent,
-        iconTheme: IconThemeData(color: Colors.white),
-        title: Text("Order Details"),
-        actions: [
-          IconButton(
-            onPressed: () {},
-            icon: Icon(Icons.shopping_cart),
-            splashRadius: 20,
-          ),
-        ],
-      ),
+      appBar: customAppBar(context, title: "Order Details"),
       body: ListView(padding: EdgeInsets.only(top: 3, bottom: 20), children: [
         //order tracking section
         Container(

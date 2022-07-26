@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart' hide Colors;
 import 'package:zinotalens/pages/cart_view_page.dart';
-import 'package:zinotalens/utils/images.dart';
+import 'package:zinotalens/widgets/custom_appbar.dart';
 import 'package:zinotalens/widgets/product_viewpage_widgets.dart';
 
 import '../utils/colors.dart';
@@ -19,19 +19,7 @@ class _ProductViewPageState extends State<ProductViewPage> {
         ProductViewPageWidget(context);
     return Scaffold(
       backgroundColor: Colors.backgroundColor,
-      appBar: AppBar(
-        backgroundColor: Colors.skyBlue,
-        shadowColor: Colors.transparent,
-        iconTheme: IconThemeData(color: Colors.white),
-        actions: [
-          IconButton(
-            onPressed: () => Navigator.push(context,
-                MaterialPageRoute(builder: (context) => CartViewPage())),
-            icon: Icon(Icons.shopping_cart),
-            splashRadius: 20,
-          ),
-        ],
-      ),
+      appBar: customAppBar(context, title: ""),
       body: Stack(
         children: [
           ListView(padding: EdgeInsets.only(bottom: 70), children: [
