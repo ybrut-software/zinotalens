@@ -2,6 +2,7 @@ import 'package:flutter/material.dart' hide Colors;
 import 'package:zinotalens/utils/images.dart';
 
 import '../utils/colors.dart';
+import '../widgets/values.dart';
 
 class OrderDetailsPage extends StatefulWidget {
   OrderDetailsPage({Key? key}) : super(key: key);
@@ -146,7 +147,7 @@ class _OrderDetailsPageState extends State<OrderDetailsPage> {
             ],
           ),
         ),
-        SizedBox(height: 10),
+        SizedBox(height: 5),
 
         //download invoice button
         Container(
@@ -174,7 +175,7 @@ class _OrderDetailsPageState extends State<OrderDetailsPage> {
           ),
         ),
 
-        SizedBox(height: 10),
+        SizedBox(height: 5),
 
         //shipping details section
         Container(
@@ -213,7 +214,7 @@ class _OrderDetailsPageState extends State<OrderDetailsPage> {
             ],
           ),
         ),
-        SizedBox(height: 10),
+        SizedBox(height: 5),
 
         //pricing details section
         Container(
@@ -279,12 +280,4 @@ class _OrderDetailsPageState extends State<OrderDetailsPage> {
       ]),
     );
   }
-
-  TextStyle addressTextStyle() =>
-      TextStyle(fontSize: 14, color: Colors.black, height: 1.4);
-
-  BoxDecoration contentContainerDecoration() =>
-      BoxDecoration(color: Colors.white, boxShadow: [
-        BoxShadow(color: Colors.gray, offset: Offset(0, 1), blurRadius: 2)
-      ]);
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart' hide Colors;
+import 'package:zinotalens/widgets/values.dart';
 
 import '../utils/colors.dart';
 import '../utils/images.dart';
@@ -10,10 +11,7 @@ class ProductViewPageWidget {
   ProductViewPageWidget(this.context);
 
   Widget ProductImageSliderAndDesc() => Container(
-        decoration: BoxDecoration(color: Colors.white, boxShadow: [
-          BoxShadow(
-              color: Colors.gray, blurRadius: 0.5, offset: Offset(0.5, 0.5))
-        ]),
+        decoration: contentContainerDecoration(),
         child: Column(mainAxisSize: MainAxisSize.min, children: [
           Container(
             height: 340,
