@@ -57,6 +57,7 @@ Widget OrderItemViewholder(BuildContext context) => ElevatedButton(
           Divider(
             color: Colors.gray.withOpacity(0.3),
             thickness: 1.5,
+            height: 2,
           )
         ],
       ),
