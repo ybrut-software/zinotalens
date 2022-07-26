@@ -4,7 +4,7 @@ import 'package:zinotalens/utils/images.dart';
 import 'package:zinotalens/widgets/category_items.dart';
 import 'package:zinotalens/widgets/custom_appbar.dart';
 import 'package:zinotalens/widgets/image_slider.dart';
-import 'package:zinotalens/widgets/nevigation_drawer.dart';
+import 'package:zinotalens/widgets/navigation_drawer.dart';
 
 import '../utils/colors.dart';
 
