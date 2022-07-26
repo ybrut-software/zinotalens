@@ -31,7 +31,7 @@ class _OrderDetailsPageState extends State<OrderDetailsPage> {
       body: ListView(padding: EdgeInsets.only(top: 3, bottom: 20), children: [
         //order tracking section
         Container(
-          decoration: BoxDecoration(color: Colors.white),
+          decoration: contentContainerDecoration(),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -146,11 +146,39 @@ class _OrderDetailsPageState extends State<OrderDetailsPage> {
             ],
           ),
         ),
-        SizedBox(height: 5),
+        SizedBox(height: 10),
+
+        //download invoice button
+        Container(
+          padding: EdgeInsets.symmetric(horizontal: 14, vertical: 15),
+          decoration: contentContainerDecoration(),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Row(
+                children: [
+                  Icon(
+                    Icons.insert_drive_file,
+                    color: Colors.skyBlue,
+                    size: 22,
+                  ),
+                  SizedBox(width: 10),
+                  Text(
+                    "Invoice Download",
+                    style: TextStyle(fontSize: 16),
+                  )
+                ],
+              ),
+              Icon(Icons.chevron_right, color: Colors.black)
+            ],
+          ),
+        ),
+
+        SizedBox(height: 10),
 
         //shipping details section
         Container(
-          decoration: BoxDecoration(color: Colors.white),
+          decoration: contentContainerDecoration(),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -184,6 +212,69 @@ class _OrderDetailsPageState extends State<OrderDetailsPage> {
               )
             ],
           ),
+        ),
+        SizedBox(height: 10),
+
+        //pricing details section
+        Container(
+          decoration: contentContainerDecoration(),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Padding(
+                padding: EdgeInsets.symmetric(vertical: 10, horizontal: 14),
+                child: Text(
+                  "Price Details",
+                  style: TextStyle(color: Colors.gray, fontSize: 12),
+                ),
+              ),
+              Divider(color: Colors.gray.withOpacity(0.5), height: 2),
+              Container(
+                padding: EdgeInsets.symmetric(vertical: 14, horizontal: 14),
+                child: Column(
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text("List Price"),
+                        Text("₹2999",
+                            style: TextStyle(
+                                decoration: TextDecoration.lineThrough)),
+                      ],
+                    ),
+                    SizedBox(height: 10),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text("Selling Price"),
+                        Text("₹999"),
+                      ],
+                    ),
+                    SizedBox(height: 10),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text("Shipping fee"),
+                        Text("₹40"),
+                      ],
+                    )
+                  ],
+                ),
+              ),
+              Divider(color: Colors.gray.withOpacity(0.5), height: 2),
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 14, vertical: 5),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text("Total Amount"),
+                    Text("₹1039"),
+                  ],
+                ),
+              ),
+              Divider(color: Colors.gray.withOpacity(0.5), height: 2),
+            ],
+          ),
         )
       ]),
     );
@@ -191,4 +282,9 @@ class _OrderDetailsPageState extends State<OrderDetailsPage> {
 
   TextStyle addressTextStyle() =>
       TextStyle(fontSize: 14, color: Colors.black, height: 1.4);
+
+  BoxDecoration contentContainerDecoration() =>
+      BoxDecoration(color: Colors.white, boxShadow: [
+        BoxShadow(color: Colors.gray, offset: Offset(0, 1), blurRadius: 2)
+      ]);
 }
