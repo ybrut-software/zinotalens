@@ -1,0 +1,58 @@
+[
+  {
+    "priceId": "1",
+    "listingPrice": 2999.0,
+    "sellingPrice": 999.0,
+    "discountPrice": 200.0,
+    "shippingFee": 40.0
+  },
+  {
+    "priceId": "2",
+    "listingPrice": 9999.0,
+    "sellingPrice": 8999.0,
+    "discountPrice": 1000.0,
+    "shippingFee": 200.0
+  },
+  {
+    "priceId": "3",
+    "listingPrice": 299.0,
+    "sellingPrice": 99.0,
+    "discountPrice": 0.0,
+    "shippingFee": 50.0
+  },
+  {
+    "priceId": "4",
+    "listingPrice": 3999.0,
+    "sellingPrice": 1999.0,
+    "discountPrice": 0.0,
+    "shippingFee": 0.0
+  },
+  {
+    "priceId": "5",
+    "listingPrice": 299.0,
+    "sellingPrice": 199.0,
+    "discountPrice": 99.0,
+    "shippingFee": 0.0
+  },
+  {
+    "priceId": "6",
+    "listingPrice": 6999.0,
+    "sellingPrice": 5099.0,
+    "discountPrice": 0.0,
+    "shippingFee": 0.0
+  },
+  {
+    "priceId": "7",
+    "listingPrice": 4999.0,
+    "sellingPrice": 999.0,
+    "discountPrice": 400.0,
+    "shippingFee": 0.0
+  },
+  {
+    "priceId": "8",
+    "listingPrice": 5999.0,
+    "sellingPrice": 2999.0,
+    "discountPrice": 500.0,
+    "shippingFee": 51.0
+  }
+]
