@@ -1,3 +1,4 @@
+import 'package:badges/badges.dart';
 import 'package:flutter/material.dart' hide Colors;
 import 'package:zinotalens/pages/cart_view_page.dart';
 
@@ -27,9 +28,15 @@ AppBar customAppBar(BuildContext context,
             ? IconButton(
                 onPressed: () => Navigator.push(context,
                     MaterialPageRoute(builder: (context) => CartViewPage())),
-                icon: Icon(Icons.shopping_cart),
+                icon: Badge(
+                  badgeColor: Colors.iconBackgroundColor,
+                  badgeContent: Text("0"),
+                  animationType: BadgeAnimationType.scale,
+                  child: Icon(Icons.shopping_cart),
+                ),
                 splashRadius: 20,
               )
             : SizedBox(),
+        SizedBox(width: 10)
       ],
     );

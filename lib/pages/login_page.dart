@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart' hide Colors;
 import 'package:zinotalens/pages/home_page.dart';
 import 'package:zinotalens/widgets/login_custom_clipper.dart';
+import 'package:zinotalens/widgets/login_widgets.dart';
 
 import '../utils/colors.dart';
 
@@ -21,38 +22,7 @@ class _LoginPageState extends State<LoginPage> {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              Container(
-                height: 230,
-                child: Stack(
-                  children: [
-                    ClipPath(
-                      clipper: LoginCustomClipper(),
-                      child: Container(
-                        decoration:
-                            BoxDecoration(color: Colors.iconBackgroundColor),
-                      ),
-                    ),
-                    Align(
-                      alignment: Alignment(0, 0.7),
-                      child: ClipOval(
-                        child: Container(
-                          height: 70,
-                          width: 70,
-                          decoration: BoxDecoration(
-                              color: Colors.skyBlue,
-                              shape: BoxShape.circle,
-                              border:
-                                  Border.all(color: Colors.white, width: 1.5)),
-                          child: Center(
-                            child: Icon(Icons.person,
-                                color: Colors.white, size: 40),
-                          ),
-                        ),
-                      ),
-                    )
-                  ],
-                ),
-              ),
+              customShape(),
               Text(
                 "Your Mobile Number",
                 style: TextStyle(
@@ -118,10 +88,7 @@ class _LoginPageState extends State<LoginPage> {
                     shadowColor: MaterialStateProperty.all(Colors.transparent)),
               ),
               SizedBox(height: 250),
-              Text(
-                "© Zinota software PVT. LTD",
-                style: TextStyle(fontSize: 12, color: Colors.gray),
-              )
+              loginFooter()
             ],
           ),
         ),
