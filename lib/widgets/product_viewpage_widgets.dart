@@ -1,22 +1,27 @@
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart' hide Colors;
 import 'package:zinotalens/widgets/values.dart';
 
 import '../utils/colors.dart';
-import '../utils/images.dart';
 
 class ProductViewPageWidget {
   final BuildContext context;
 
   ProductViewPageWidget(this.context);
 
-  Widget ProductImageSliderAndDesc() => Container(
+  Widget ProductImageSliderAndDesc(
+          {required String photo,
+          required String title,
+          double? rating,
+          int? stockQuantity,
+          required int sellingPrice,
+          int? listingPrice}) =>
+      Container(
         decoration: contentContainerDecoration(),
         child: Column(mainAxisSize: MainAxisSize.min, children: [
           Container(
             height: 340,
             child: Image.asset(
-              frontFrame,
+              photo,
               fit: BoxFit.cover,
             ),
           ),
@@ -33,7 +38,7 @@ class ProductViewPageWidget {
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       Text(
-                        "Vincent Chase",
+                        "$title",
                         style: TextStyle(fontSize: 14, color: Colors.black),
                       ),
                       SizedBox(height: 5),
@@ -55,13 +60,13 @@ class ProductViewPageWidget {
                       RichText(
                         textScaleFactor: 1.1,
                         text: TextSpan(
-                            text: "₹999  ",
+                            text: "₹$sellingPrice  ",
                             style: TextStyle(
                                 color: Colors.black,
                                 fontWeight: FontWeight.w500),
                             children: [
                               TextSpan(
-                                  text: "₹2999",
+                                  text: "₹$listingPrice",
                                   style: TextStyle(
                                       color: Colors.gray,
                                       decoration: TextDecoration.lineThrough))
@@ -85,7 +90,7 @@ class ProductViewPageWidget {
                               borderRadius: BorderRadius.circular(3)),
                           child: Row(
                             children: [
-                              Text("4.7",
+                              Text("$rating",
                                   style: TextStyle(
                                       color: Colors.white, fontSize: 14)),
                               SizedBox(width: 3),
@@ -94,7 +99,7 @@ class ProductViewPageWidget {
                           ),
                         ),
                         SizedBox(width: 3),
-                        Text("(159)")
+                        Text("($stockQuantity)")
                       ],
                     )
                   ],
@@ -234,7 +239,8 @@ class ProductViewPageWidget {
         child: Icon(icon, color: Colors.gray),
       );
 
-  Widget AboutProduct() => Container(
+  Widget AboutProduct({String? description, required String productId}) =>
+      Container(
         padding: EdgeInsets.symmetric(horizontal: 10, vertical: 15),
         decoration: BoxDecoration(color: Colors.white, boxShadow: [
           BoxShadow(
@@ -253,7 +259,7 @@ class ProductViewPageWidget {
               ),
               SizedBox(height: 5),
               Text(
-                "Black Full Rim Rectangle ZinotaLens Air Flex LA E12852-C1 Eyeglasses",
+                "$description",
                 style: TextStyle(
                     height: 1.5,
                     color: Colors.black,
@@ -262,7 +268,7 @@ class ProductViewPageWidget {
               ),
               SizedBox(height: 5),
               Text(
-                "Product ID: 152369 \nStyle: Standard",
+                "Product ID: $productId \nStyle: Standard",
                 style: TextStyle(
                     height: 1.5,
                     color: Colors.gray,

@@ -76,16 +76,16 @@ class Price {
     this.shippingFee,
   });
 
-  int? listingPrice;
-  int? sellingPrice;
-  int? discountPrice;
-  int? shippingFee;
+  double? listingPrice;
+  double? sellingPrice;
+  double? discountPrice;
+  double? shippingFee;
 
   factory Price.fromJson(Map<String, dynamic> json) => Price(
-        listingPrice: json["listingPrice"],
-        sellingPrice: json["sellingPrice"],
-        discountPrice: json["discountPrice"],
-        shippingFee: json["shippingFee"],
+        listingPrice: json["listingPrice"].toDouble(),
+        sellingPrice: json["sellingPrice"].toDouble(),
+        discountPrice: json["discountPrice"].toDouble(),
+        shippingFee: json["shippingFee"].toDouble(),
       );
 
   Map<String, dynamic> toJson() => {

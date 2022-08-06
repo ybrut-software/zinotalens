@@ -2,14 +2,21 @@ import 'package:flutter/material.dart' hide Colors;
 
 import '../pages/product_view_page.dart';
 import '../utils/colors.dart';
-import '../utils/images.dart';
 
-Widget productViewHolder(BuildContext context) => Container(
+Widget productViewHolder(BuildContext context,
+        {required String productId,
+        required String title,
+        double? rating,
+        int? listingPrice,
+        required String photo,
+        required int sellingPrice}) =>
+    Container(
       margin: EdgeInsets.only(bottom: 10),
       child: ElevatedButton(
         onPressed: () => Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => ProductViewPage()),
+          MaterialPageRoute(
+              builder: (context) => ProductViewPage(productId: productId)),
         ),
         style: ButtonStyle(
             overlayColor:
@@ -33,7 +40,7 @@ Widget productViewHolder(BuildContext context) => Container(
                       Row(children: [
                         Icon(Icons.star, color: Colors.gray, size: 14),
                         SizedBox(width: 2),
-                        Text("4.7",
+                        Text("$rating",
                             style: TextStyle(color: Colors.gray, fontSize: 12))
                       ]),
                       IconButton(
@@ -50,7 +57,7 @@ Widget productViewHolder(BuildContext context) => Container(
                     height: 125,
                     width: double.infinity,
                     child: Image.asset(
-                      sideFrame,
+                      photo,
                       fit: BoxFit.cover,
                     ),
                   )
@@ -69,7 +76,7 @@ Widget productViewHolder(BuildContext context) => Container(
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       Text(
-                        "Vincent Chase",
+                        "$title",
                         style: TextStyle(fontSize: 14, color: Colors.black),
                       ),
                       SizedBox(width: 5),
@@ -91,12 +98,12 @@ Widget productViewHolder(BuildContext context) => Container(
                   RichText(
                     textScaleFactor: 1.1,
                     text: TextSpan(
-                        text: "₹999  ",
+                        text: "₹$sellingPrice  ",
                         style: TextStyle(
                             color: Colors.black, fontWeight: FontWeight.w500),
                         children: [
                           TextSpan(
-                              text: "₹2999",
+                              text: "₹$listingPrice",
                               style: TextStyle(
                                   color: Colors.gray,
                                   decoration: TextDecoration.lineThrough))

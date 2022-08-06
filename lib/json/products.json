@@ -19,11 +19,11 @@
   },
   {
     "productId": "2",
-    "title": "Vincent Chase Polarized",
+    "title": "Chase Polarized",
     "description": "I order a Power sunglasses for the first time after year Im seeing clear picture through sunglasses and Im happy with it",
     "rating": 3.8,
     "stockQuantity": 13,
-    "photo": "assets/images/frame4.jpg",
+    "photo": "assets/images/frame2.jpg",
     "categoryId": "2",
     "price": {
       "listingPrice": 9999.0,
@@ -37,7 +37,7 @@
   },
   {
     "productId": "3",
-    "title": "Vincent Chase Polarized",
+    "title": "Vincent Polarized",
     "description": "I order a Power sunglasses for the first time after year Im seeing clear picture through sunglasses and Im happy with it",
     "rating": 2.5,
     "stockQuantity": 55,
@@ -55,11 +55,11 @@
   },
   {
     "productId": "4",
-    "title": "Vincent Chase Polarized",
+    "title": "Vincent Chase",
     "description": "I order a Power sunglasses for the first time after year Im seeing clear picture through sunglasses and Im happy with it",
     "rating": 4.2,
     "stockQuantity": 13,
-    "photo": "assets/images/frame4.jpg",
+    "photo": "assets/images/frame2.jpg",
     "categoryId": "4",
     "price": {
       "listingPrice": 3999.0,
@@ -95,7 +95,7 @@
     "description": "I order a Power sunglasses for the first time after year Im seeing clear picture through sunglasses and Im happy with it",
     "rating": 3.6,
     "stockQuantity": 98,
-    "photo": "assets/images/frame4.jpg",
+    "photo": "assets/images/frame2.jpg",
     "categoryId": "6",
     "price": {
       "listingPrice": 6999.0,
@@ -131,7 +131,7 @@
     "description": "I order a Power sunglasses for the first time after year Im seeing clear picture through sunglasses and Im happy with it",
     "rating": 4.0,
     "stockQuantity": 223,
-    "photo": "assets/images/frame4.jpg",
+    "photo": "assets/images/frame2.jpg",
     "categoryId": "8",
     "price": {
       "listingPrice": 5999.0,
