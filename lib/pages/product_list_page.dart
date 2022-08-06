@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart' hide Colors;
+import 'package:provider/provider.dart';
 import 'package:zinotalens/model/productlist_model.dart';
-import 'package:zinotalens/pages/product_view_page.dart';
-import 'package:zinotalens/pages/wishlist_page.dart';
-import 'package:zinotalens/utils/images.dart';
+import 'package:zinotalens/provider/product_list_provider.dart';
 import 'package:zinotalens/widgets/custom_appbar.dart';
 import 'package:zinotalens/widgets/product_viewholder.dart';
 
@@ -16,23 +15,24 @@ class ProductListPage extends StatefulWidget {
 }
 
 class _ProductListPageState extends State<ProductListPage> {
-  List<ProductListModel> productList = [];
   @override
   void initState() {
-    fetchProductList();
+    Provider.of<ProductListProvider>(context, listen: false).getProductList();
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
+
+    final productProvider = Provider.of<ProductListProvider>(context);
     return Scaffold(
       backgroundColor: Colors.backgroundColor,
       appBar: customAppBar(context, isSearchIcon: true, title: "Eyeglasses"),
       body: ListView.builder(
         padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-        itemCount: productList.length,
+        itemCount: productProvider.productsLength,
         itemBuilder: ((context, index) {
-          ProductListModel products = productList[index];
+          ProductListModel products = productProvider.productList[index];
           return productViewHolder(context,
               productId: products.productId!,
               title: products.title!,
@@ -43,13 +43,5 @@ class _ProductListPageState extends State<ProductListPage> {
         }),
       ),
     );
-  }
-
-  void fetchProductList() async {
-    var rawJson = await DefaultAssetBundle.of(context)
-        .loadString('lib/json/products.json');
-    setState(() {
-      productList = productListModelFromJson(rawJson);
-    });
   }
 }
