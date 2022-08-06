@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart' hide Colors;
+import 'package:provider/provider.dart';
 import 'package:zinotalens/pages/cart_view_page.dart';
+import 'package:zinotalens/provider/product_details_provider.dart';
 import 'package:zinotalens/widgets/custom_appbar.dart';
 import 'package:zinotalens/widgets/product_viewpage_widgets.dart';
 
@@ -16,10 +18,10 @@ class ProductViewPage extends StatefulWidget {
 }
 
 class _ProductViewPageState extends State<ProductViewPage> {
-  ProductListModel product = ProductListModel();
   @override
   void initState() {
-    fetchProductDetails();
+    Provider.of<ProductDetailsProvider>(context, listen: false)
+        .getProductDetail(productId: widget.productId);
     super.initState();
   }
 
@@ -27,6 +29,7 @@ class _ProductViewPageState extends State<ProductViewPage> {
   Widget build(BuildContext context) {
     ProductViewPageWidget productViewPageWidget =
         ProductViewPageWidget(context);
+    final product = Provider.of<ProductDetailsProvider>(context).product;
     return Scaffold(
       backgroundColor: Colors.backgroundColor,
       appBar: customAppBar(context, title: ""),
@@ -75,16 +78,5 @@ class _ProductViewPageState extends State<ProductViewPage> {
         ],
       ),
     );
-  }
-
-  void fetchProductDetails() async {
-    var rawJson = await DefaultAssetBundle.of(context)
-        .loadString('lib/json/products.json');
-
-    List<ProductListModel> productList = productListModelFromJson(rawJson);
-    setState(() {
-      product = productList[productList
-          .indexWhere((element) => element.productId == widget.productId)];
-    });
   }
 }
