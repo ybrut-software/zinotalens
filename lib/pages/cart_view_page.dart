@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart' hide Colors;
+import 'package:provider/provider.dart';
+import 'package:zinotalens/main.dart';
+import 'package:zinotalens/model/product_addcart_model.dart';
+import 'package:zinotalens/provider/product_cart_provider.dart';
 import 'package:zinotalens/widgets/cart_item_viewholder.dart';
 import 'package:zinotalens/widgets/cart_page_widgets.dart';
 
@@ -12,6 +16,12 @@ class CartViewPage extends StatefulWidget {
 }
 
 class _CartViewPageState extends State<CartViewPage> {
+  @override
+  void initState() {
+    Provider.of<ProductCartProvider>(context, listen: false).getCartItems();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

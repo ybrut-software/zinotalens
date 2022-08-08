@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:zinotalens/main.dart';
+import 'package:zinotalens/model/product_addcart_model.dart';
 
 import '../model/productlist_model.dart';
 
@@ -17,4 +19,16 @@ Future<ProductListModel> fetchProductDetails(BuildContext context,
 
   return productList[
       productList.indexWhere((element) => element.productId == productId)];
+}
+
+void addCartItem({required ProductAddCartModel productCart}) async {
+  databaseHelper.insertProduct(productCart);
+}
+
+Future<List<ProductAddCartModel>> fetchCartItems() async {
+  List<ProductAddCartModel> cartProducts =
+      await databaseHelper.getProductCartList();
+
+  print("cart products : $cartProducts");
+  return cartProducts;
 }

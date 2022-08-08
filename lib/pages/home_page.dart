@@ -1,5 +1,7 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart' hide Colors;
+import 'package:provider/provider.dart';
+import 'package:zinotalens/provider/product_cart_provider.dart';
 import 'package:zinotalens/utils/images.dart';
 import 'package:zinotalens/widgets/category_items.dart';
 import 'package:zinotalens/widgets/custom_appbar.dart';
@@ -17,6 +19,12 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   List<String> sliderImages = [banner1, banner2, banner3, banner4, banner2];
+
+  @override
+  void initState() {
+    Provider.of<ProductCartProvider>(context, listen: false).getCartItems();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {

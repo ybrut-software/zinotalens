@@ -10,6 +10,16 @@ final product_quantity = 'quantity';
 
 class DatabaseHelper {
   static Database? _database;
+  static DatabaseHelper? _databaseHelper;
+
+  DatabaseHelper._createInstance();
+
+  factory DatabaseHelper() {
+    if (_databaseHelper == null) {
+      _databaseHelper = DatabaseHelper._createInstance();
+    }
+    return _databaseHelper!;
+  }
 
   Future<Database> get database async {
     if (_database == null) {
@@ -51,5 +61,11 @@ class DatabaseHelper {
     });
 
     return productAddCartModelList;
+  }
+
+  void clearCart() async {
+    var db = await this.database;
+    db.delete(table_name);
+    print("delete cart");
   }
 }

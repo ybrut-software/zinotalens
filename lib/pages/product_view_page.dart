@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart' hide Colors;
 import 'package:provider/provider.dart';
+import 'package:zinotalens/main.dart';
+import 'package:zinotalens/model/product_addcart_model.dart';
 import 'package:zinotalens/pages/cart_view_page.dart';
+import 'package:zinotalens/provider/product_cart_provider.dart';
 import 'package:zinotalens/provider/product_details_provider.dart';
 import 'package:zinotalens/widgets/custom_appbar.dart';
 import 'package:zinotalens/widgets/product_viewpage_widgets.dart';
-
-import '../model/productlist_model.dart';
 import '../utils/colors.dart';
 
 class ProductViewPage extends StatefulWidget {
@@ -30,6 +31,7 @@ class _ProductViewPageState extends State<ProductViewPage> {
     ProductViewPageWidget productViewPageWidget =
         ProductViewPageWidget(context);
     final product = Provider.of<ProductDetailsProvider>(context).product;
+    final cart = Provider.of<ProductCartProvider>(context);
     return Scaffold(
       backgroundColor: Colors.backgroundColor,
       appBar: customAppBar(context, title: ""),
@@ -57,7 +59,9 @@ class _ProductViewPageState extends State<ProductViewPage> {
             left: 0.0,
             right: 0.0,
             child: ElevatedButton(
-                onPressed: () {},
+                onPressed: () => cart.addCartItemProvider(
+                    productId: product.productId!,
+                    price: product.price!.sellingPrice!),
                 style: ButtonStyle(
                   backgroundColor: MaterialStateProperty.all(Colors.skyBlue),
                   shadowColor: MaterialStateProperty.all(Colors.transparent),

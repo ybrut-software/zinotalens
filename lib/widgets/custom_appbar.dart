@@ -1,6 +1,10 @@
 import 'package:badges/badges.dart';
 import 'package:flutter/material.dart' hide Colors;
+import 'package:provider/provider.dart';
+import 'package:zinotalens/main.dart';
+import 'package:zinotalens/model/product_addcart_model.dart';
 import 'package:zinotalens/pages/cart_view_page.dart';
+import 'package:zinotalens/provider/product_cart_provider.dart';
 
 import '../utils/colors.dart';
 
@@ -19,7 +23,10 @@ AppBar customAppBar(BuildContext context,
       actions: [
         isSearchIcon
             ? IconButton(
-                onPressed: () {},
+                onPressed: () {
+                  //delete cart data just for testing purpose
+                  databaseHelper.clearCart();
+                },
                 icon: Icon(Icons.search),
                 splashRadius: 20,
               )
@@ -30,7 +37,10 @@ AppBar customAppBar(BuildContext context,
                     MaterialPageRoute(builder: (context) => CartViewPage())),
                 icon: Badge(
                   badgeColor: Colors.iconBackgroundColor,
-                  badgeContent: Text("0"),
+                  badgeContent: Text(
+                    "${Provider.of<ProductCartProvider>(context).cartItemList.length}",
+                    style: TextStyle(fontSize: 10),
+                  ),
                   animationType: BadgeAnimationType.scale,
                   child: Icon(Icons.shopping_cart),
                 ),
