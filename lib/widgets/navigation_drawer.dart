@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart' hide Colors;
+import 'package:zinotalens/pages/myaddress_page.dart';
 import 'package:zinotalens/pages/myorder_page.dart';
 import 'package:zinotalens/pages/notification_page.dart';
 import 'package:zinotalens/pages/wishlist_page.dart';
@@ -84,7 +85,13 @@ Widget navigationDrawer(BuildContext context) => Drawer(
                   width: double.infinity,
                   height: 50,
                   child: ElevatedButton.icon(
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.pop(context);
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => MyAddressPage()));
+                      },
                       style: buttonStyle(),
                       icon: icon(Icons.domain),
                       label: Padding(
