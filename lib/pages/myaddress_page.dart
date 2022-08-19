@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart' hide Colors;
+import 'package:zinotalens/pages/add_address_page.dart';
 import 'package:zinotalens/widgets/custom_appbar.dart';
 import 'package:zinotalens/widgets/values.dart';
 
@@ -25,22 +26,30 @@ class _MyAddressPageState extends State<MyAddressPage> {
           Container(
             padding: EdgeInsets.symmetric(horizontal: 10, vertical: 20),
             decoration: contentContainerDecoration(),
-            child: Row(
-              children: [
-                Icon(
-                  Icons.add,
-                  size: 20,
-                  color: Colors.skyBlue,
-                ),
-                SizedBox(width: 10),
-                Text(
-                  "Add a new address",
-                  style: TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.w600,
-                      color: Colors.skyBlue),
-                )
-              ],
+            child: GestureDetector(
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => AddDeliveryAddressPage()));
+              },
+              child: Row(
+                children: [
+                  Icon(
+                    Icons.add,
+                    size: 20,
+                    color: Colors.skyBlue,
+                  ),
+                  SizedBox(width: 10),
+                  Text(
+                    "Add a new address",
+                    style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.w600,
+                        color: Colors.skyBlue),
+                  )
+                ],
+              ),
             ),
           ),
 

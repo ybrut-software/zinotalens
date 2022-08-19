@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart' hide Colors;
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import 'package:zinotalens/database/database_helper.dart';
@@ -6,6 +6,7 @@ import 'package:zinotalens/pages/login_page.dart';
 import 'package:zinotalens/provider/product_cart_provider.dart';
 import 'package:zinotalens/provider/product_details_provider.dart';
 import 'package:zinotalens/provider/product_list_provider.dart';
+import 'package:zinotalens/utils/colors.dart';
 
 //init local database
 DatabaseHelper databaseHelper = DatabaseHelper();
@@ -22,6 +23,8 @@ void main() {
           ListenableProvider(create: (context) => ProductCartProvider())
         ],
         child: MaterialApp(
+          theme: ThemeData(
+              colorScheme: ColorScheme.light(primary: Colors.skyBlue)),
           title: "ZinotaLens",
           debugShowCheckedModeBanner: false,
           home: LoginPage(),

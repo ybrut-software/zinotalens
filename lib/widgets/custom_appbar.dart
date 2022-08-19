@@ -2,7 +2,6 @@ import 'package:badges/badges.dart';
 import 'package:flutter/material.dart' hide Colors;
 import 'package:provider/provider.dart';
 import 'package:zinotalens/main.dart';
-import 'package:zinotalens/model/product_addcart_model.dart';
 import 'package:zinotalens/pages/cart_view_page.dart';
 import 'package:zinotalens/provider/product_cart_provider.dart';
 
@@ -11,6 +10,7 @@ import '../utils/colors.dart';
 AppBar customAppBar(BuildContext context,
         {String title = "ZinotaLens",
         bool isSearchIcon = false,
+        bool leadingIconClose = false,
         bool isCartIcon = true}) =>
     AppBar(
       backgroundColor: Colors.skyBlue,
@@ -20,6 +20,9 @@ AppBar customAppBar(BuildContext context,
         title,
         style: TextStyle(color: Colors.white),
       ),
+      leading: leadingIconClose
+          ? IconButton(onPressed: () => Navigator.pop(context), icon: Icon(Icons.close))
+          : null,
       actions: [
         isSearchIcon
             ? IconButton(
