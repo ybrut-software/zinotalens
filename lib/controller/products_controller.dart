@@ -1,24 +1,16 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:zinotalens/main.dart';
 import 'package:zinotalens/model/product_addcart_model.dart';
+import 'package:zinotalens/services/api_client.dart';
 
 import '../model/productlist_model.dart';
 
-Future<List<ProductListModel>> fetchProductList(BuildContext context) async {
-  var rawJson =
-      await DefaultAssetBundle.of(context).loadString('lib/json/products.json');
-  return productListModelFromJson(rawJson);
-}
-
-Future<ProductListModel> fetchProductDetails(BuildContext context,
-    {required String productId}) async {
-  var rawJson =
-      await DefaultAssetBundle.of(context).loadString('lib/json/products.json');
-
-  List<ProductListModel> productList = productListModelFromJson(rawJson);
-
-  return productList[
-      productList.indexWhere((element) => element.productId == productId)];
+Future<List<Product>> fetchProductList(BuildContext context) async {
+  var rawJson = await ApiClient.getServices().fetchProductListApi();
+  ProductListModel productListModel = jsonDecode(rawJson);
+  return productListModel.product!;
 }
 
 void addCartItem({required ProductAddCartModel productCart}) async {

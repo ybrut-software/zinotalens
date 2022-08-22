@@ -7,10 +7,10 @@ class ProductListProvider extends ChangeNotifier {
   ProductListProvider(this.context);
 
   final context;
-  List<ProductListModel> _productList = [];
+  List<Product> _productList = [];
 
   int get productsLength => _productList.length;
-  List<ProductListModel> get productList => _productList;
+  List<Product> get productList => _productList;
 
   void getProductList() async {
     try {

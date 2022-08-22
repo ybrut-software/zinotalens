@@ -2,6 +2,7 @@ import 'package:flutter/material.dart' hide Colors;
 import 'package:provider/provider.dart';
 import 'package:zinotalens/model/productlist_model.dart';
 import 'package:zinotalens/provider/product_list_provider.dart';
+import 'package:zinotalens/utils/images.dart';
 import 'package:zinotalens/widgets/custom_appbar.dart';
 import 'package:zinotalens/widgets/product_viewholder.dart';
 
@@ -23,7 +24,6 @@ class _ProductListPageState extends State<ProductListPage> {
 
   @override
   Widget build(BuildContext context) {
-
     final productProvider = Provider.of<ProductListProvider>(context);
     return Scaffold(
       backgroundColor: Colors.backgroundColor,
@@ -32,14 +32,14 @@ class _ProductListPageState extends State<ProductListPage> {
         padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
         itemCount: productProvider.productsLength,
         itemBuilder: ((context, index) {
-          ProductListModel products = productProvider.productList[index];
+          Product products = productProvider.productList[index];
           return productViewHolder(context,
               productId: products.productId!,
               title: products.title!,
-              rating: products.rating,
-              photo: products.photo!,
-              sellingPrice: products.price!.sellingPrice!.toInt(),
-              listingPrice: products.price?.listingPrice?.toInt());
+              rating: products.averageRating?.toDouble(),
+              photo: frontFrame,
+              sellingPrice: products.salesPrice!,
+              listingPrice: products.price);
         }),
       ),
     );
