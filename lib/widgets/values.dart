@@ -9,3 +9,14 @@ BoxDecoration contentContainerDecoration() =>
 
 TextStyle addressTextStyle() =>
     TextStyle(fontSize: 14, color: Colors.black, height: 1.4);
+
+InputDecoration textFormFieldDecoration({String? labelText}) => InputDecoration(
+      labelText: "$labelText",
+      isDense: true,
+      border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(3),
+          borderSide: BorderSide(width: 0.5)),
+      focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(3),
+          borderSide: BorderSide(width: 1.0, color: Colors.skyBlue)),
+    );

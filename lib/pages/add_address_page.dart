@@ -2,6 +2,8 @@ import 'package:flutter/material.dart' hide Colors;
 import 'package:zinotalens/utils/colors.dart';
 import 'package:zinotalens/widgets/custom_appbar.dart';
 
+import '../widgets/values.dart';
+
 class AddDeliveryAddressPage extends StatefulWidget {
   AddDeliveryAddressPage({Key? key}) : super(key: key);
 
@@ -26,25 +28,25 @@ class _AddDeliveryAddressPageState extends State<AddDeliveryAddressPage> {
               TextFormField(
                 keyboardType: TextInputType.text,
                 decoration:
-                    textFieldDecoration(labelText: "Full Name (Required)*"),
+                    textFormFieldDecoration(labelText: "Full Name (Required)*"),
               ),
               SizedBox(height: 20),
               TextFormField(
                 keyboardType: TextInputType.number,
-                decoration:
-                    textFieldDecoration(labelText: "Phone number (Required)*"),
+                decoration: textFormFieldDecoration(
+                    labelText: "Phone number (Required)*"),
               ),
               SizedBox(height: 20),
               TextFormField(
                 keyboardType: TextInputType.number,
-                decoration: textFieldDecoration(
+                decoration: textFormFieldDecoration(
                     labelText: "Alternate Phone number (Optional)"),
               ),
               SizedBox(height: 20),
               TextFormField(
                 keyboardType: TextInputType.number,
                 decoration:
-                    textFieldDecoration(labelText: "Pincode (Required)*"),
+                    textFormFieldDecoration(labelText: "Pincode (Required)*"),
               ),
               SizedBox(height: 20),
               //state and city
@@ -54,27 +56,27 @@ class _AddDeliveryAddressPageState extends State<AddDeliveryAddressPage> {
                       child: TextFormField(
                     keyboardType: TextInputType.text,
                     decoration:
-                        textFieldDecoration(labelText: "State (Required)*"),
+                        textFormFieldDecoration(labelText: "State (Required)*"),
                   )),
                   SizedBox(width: 10),
                   Expanded(
                       child: TextFormField(
                     keyboardType: TextInputType.text,
                     decoration:
-                        textFieldDecoration(labelText: "City (Required)*"),
+                        textFormFieldDecoration(labelText: "City (Required)*"),
                   ))
                 ],
               ),
               SizedBox(height: 20),
               TextFormField(
                 keyboardType: TextInputType.text,
-                decoration: textFieldDecoration(
+                decoration: textFormFieldDecoration(
                     labelText: "House No., Building Name (Required)*"),
               ),
               SizedBox(height: 20),
               TextFormField(
                 keyboardType: TextInputType.text,
-                decoration: textFieldDecoration(
+                decoration: textFormFieldDecoration(
                     labelText: "Road name, Area, Colony (Required)*"),
               ),
               SizedBox(height: 40),
@@ -100,15 +102,4 @@ class _AddDeliveryAddressPageState extends State<AddDeliveryAddressPage> {
       ),
     );
   }
-
-  InputDecoration textFieldDecoration({String? labelText}) => InputDecoration(
-        labelText: "$labelText",
-        isDense: true,
-        border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(3),
-            borderSide: BorderSide(width: 0.5)),
-        focusedBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(3),
-            borderSide: BorderSide(width: 1.0, color: Colors.skyBlue)),
-      );
 }
