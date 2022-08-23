@@ -5,6 +5,7 @@ import 'package:zinotalens/provider/product_list_provider.dart';
 import 'package:zinotalens/utils/images.dart';
 import 'package:zinotalens/widgets/custom_appbar.dart';
 import 'package:zinotalens/widgets/product_viewholder.dart';
+import 'package:zinotalens/widgets/progress_indicator.dart';
 
 import '../utils/colors.dart';
 
@@ -28,19 +29,24 @@ class _ProductListPageState extends State<ProductListPage> {
     return Scaffold(
       backgroundColor: Colors.backgroundColor,
       appBar: customAppBar(context, isSearchIcon: true, title: "Eyeglasses"),
-      body: ListView.builder(
-        padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-        itemCount: productProvider.productsLength,
-        itemBuilder: ((context, index) {
-          Product products = productProvider.productList[index];
-          return productViewHolder(context,
-              productId: products.productId!,
-              title: products.title!,
-              rating: products.averageRating?.toDouble(),
-              photo: frontFrame,
-              sellingPrice: products.salesPrice!,
-              listingPrice: products.price);
-        }),
+      body: RefreshIndicator(
+        onRefresh: () => productProvider.getProductList(),
+        child: productProvider.isDataLoad
+            ? circularProgressIndicator()
+            : ListView.builder(
+                padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+                itemCount: productProvider.productsLength,
+                itemBuilder: ((context, index) {
+                  Product products = productProvider.productList[index];
+                  return productViewHolder(context,
+                      productId: products.productId!,
+                      title: products.title!,
+                      rating: products.averageRating?.toDouble(),
+                      photo: sideFrame,
+                      sellingPrice: products.salesPrice!,
+                      listingPrice: products.price);
+                }),
+              ),
       ),
     );
   }

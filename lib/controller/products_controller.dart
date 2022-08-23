@@ -9,7 +9,7 @@ import '../model/productlist_model.dart';
 
 Future<List<Product>> fetchProductList(BuildContext context) async {
   var rawJson = await ApiClient.getServices().fetchProductListApi();
-  ProductListModel productListModel = jsonDecode(rawJson);
+  ProductListModel productListModel = productListModelFromJson(rawJson);
   return productListModel.product!;
 }
 

@@ -12,7 +12,7 @@ class ProductDetailsProvider extends ChangeNotifier {
   ProductListModel get product => _product;
 
   void getProductDetail({required String productId}) async {
-    _product = await fetchProductDetails(context, productId: productId);
+    // _product = await fetchProductDetails(context, productId: productId);
     notifyListeners();
   }
 }

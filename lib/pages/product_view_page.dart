@@ -38,19 +38,19 @@ class _ProductViewPageState extends State<ProductViewPage> {
       body: Stack(
         children: [
           ListView(padding: EdgeInsets.only(bottom: 70), children: [
-            productViewPageWidget.ProductImageSliderAndDesc(
-                photo: product.photo!,
-                title: product.title!,
-                rating: product.rating,
-                stockQuantity: product.stockQuantity,
-                sellingPrice: product.price!.sellingPrice!.toInt(),
-                listingPrice: product.price?.listingPrice?.toInt()),
+            // productViewPageWidget.ProductImageSliderAndDesc(
+            //     photo: product.photo!,
+            //     title: product.title!,
+            //     rating: product.rating,
+            //     stockQuantity: product.stockQuantity,
+            //     sellingPrice: product.price!.sellingPrice!.toInt(),
+            //     listingPrice: product.price?.listingPrice?.toInt()),
             SizedBox(height: 5),
             productViewPageWidget.DeliveryOptionsView(),
             SizedBox(height: 5),
-            productViewPageWidget.AboutProduct(
-                description: product.description,
-                productId: product.productId!),
+            // productViewPageWidget.AboutProduct(
+            //     description: product.description,
+            //     productId: product.productId!),
             SizedBox(height: 5),
             productViewPageWidget.ProductSpecification()
           ]),
@@ -59,9 +59,10 @@ class _ProductViewPageState extends State<ProductViewPage> {
             left: 0.0,
             right: 0.0,
             child: ElevatedButton(
-                onPressed: () => cart.addCartItemProvider(
-                    productId: product.productId!,
-                    price: product.price!.sellingPrice!),
+                onPressed: () {},
+                // cart.addCartItemProvider(
+                //     productId: product.productId!,
+                //     price: product.price!.sellingPrice!),
                 style: ButtonStyle(
                   backgroundColor: MaterialStateProperty.all(Colors.skyBlue),
                   shadowColor: MaterialStateProperty.all(Colors.transparent),

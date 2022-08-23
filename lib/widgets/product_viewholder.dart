@@ -75,9 +75,11 @@ Widget productViewHolder(BuildContext context,
                   Row(
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      Text(
-                        "$title",
-                        style: TextStyle(fontSize: 14, color: Colors.black),
+                      Expanded(
+                        child: Text(
+                          "$title",
+                          style: TextStyle(fontSize: 14, color: Colors.black, overflow: TextOverflow.ellipsis),
+                        ),
                       ),
                       SizedBox(width: 5),
                       Container(
