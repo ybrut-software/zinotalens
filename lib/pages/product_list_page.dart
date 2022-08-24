@@ -44,7 +44,7 @@ class _ProductListPageState extends State<ProductListPage> {
                       rating: products.averageRating?.toDouble(),
                       photo: sideFrame,
                       sellingPrice: products.salesPrice!,
-                      listingPrice: products.price);
+                      listingPrice: products.listPrice);
                 }),
               ),
       ),
