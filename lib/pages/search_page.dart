@@ -69,6 +69,7 @@ class _SearchPageState extends State<SearchPage> {
                       return productViewHolder(context,
                           productId: "productId",
                           title: product.title!,
+                          size: "test",
                           photo: sideFrame,
                           sellingPrice: product.salesPrice!,
                           rating: product.averageRating?.toDouble(),

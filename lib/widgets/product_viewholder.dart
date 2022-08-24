@@ -8,6 +8,7 @@ Widget productViewHolder(BuildContext context,
         required String title,
         double? rating,
         int? listingPrice,
+        required String size,
         required String photo,
         required int sellingPrice}) =>
     Container(
@@ -88,7 +89,7 @@ Widget productViewHolder(BuildContext context,
                         decoration:
                             BoxDecoration(color: Colors.gray.withOpacity(0.4)),
                         child: Text(
-                          "Extra Wide",
+                          "$size",
                           style: TextStyle(
                               fontSize: 12,
                               color: Colors.black,

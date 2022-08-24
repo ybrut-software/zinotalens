@@ -41,6 +41,7 @@ class _ProductListPageState extends State<ProductListPage> {
                   return productViewHolder(context,
                       productId: products.productId!,
                       title: products.title!,
+                      size: products.specifications!.size!,
                       rating: products.averageRating?.toDouble(),
                       photo: sideFrame,
                       sellingPrice: products.salesPrice!,
