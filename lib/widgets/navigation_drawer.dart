@@ -213,7 +213,7 @@ Widget profileViewHolder() => Container(
         shape: BoxShape.circle,
         image: DecorationImage(image: AssetImage(profilePlaceHolder)),
       ),
-      child: ClipOval(
-        child: Image(image: AssetImage(roshan)),
-      ),
+      // child: ClipOval(
+      //   child: Image(image: AssetImage()),
+      // ),
     );

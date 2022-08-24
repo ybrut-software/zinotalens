@@ -1,5 +1,4 @@
 const profilePlaceHolder = 'assets/images/profile_place_holder.png';
-const roshan = 'assets/images/roshan.jpeg';
 const sideFrame = 'assets/images/frame2.jpg';
 const frontFrame = 'assets/images/frame4.jpg';
 const banner1 = 'assets/images/banner1.webp';
