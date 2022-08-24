@@ -1,18 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:zinotalens/controller/products_controller.dart';
-import 'package:zinotalens/model/productlist_model.dart';
+import 'package:zinotalens/model/product_details_model.dart';
 
 class ProductDetailsProvider extends ChangeNotifier {
-  //not necessary to pass context
-  ProductDetailsProvider(this.context);
-  final context;
+  Product _product = Product();
+  bool _isDataLoad = true;
 
-  ProductListModel _product = ProductListModel();
-
-  ProductListModel get product => _product;
+  Product get getProduct => _product;
+  bool get isDataLoad => _isDataLoad;
 
   void getProductDetail({required String productId}) async {
-    // _product = await fetchProductDetails(context, productId: productId);
+    try {
+      _product = await fetchProductDetails(productId);
+      _isDataLoad = false;
+    } catch (e) {
+      print("error no 823: $e");
+      _isDataLoad = false;
+    }
     notifyListeners();
   }
 }

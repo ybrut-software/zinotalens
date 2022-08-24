@@ -67,9 +67,9 @@ class _SearchPageState extends State<SearchPage> {
                     itemBuilder: (context, index) {
                       Product product = provider.products[index];
                       return productViewHolder(context,
-                          productId: "productId",
+                          productId: product.productId!,
                           title: product.title!,
-                          size: "test",
+                          size: product.specifications!.size!,
                           photo: sideFrame,
                           sellingPrice: product.salesPrice!,
                           rating: product.averageRating?.toDouble(),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart' hide Colors;
+import 'package:zinotalens/model/product_details_model.dart';
 import 'package:zinotalens/widgets/values.dart';
 
 import '../utils/colors.dart';
@@ -13,6 +14,8 @@ class ProductViewPageWidget {
           required String title,
           double? rating,
           int? stockQuantity,
+          String? frameSize,
+          String? frameWidth,
           required int sellingPrice,
           int? listingPrice}) =>
       Container(
@@ -28,9 +31,9 @@ class ProductViewPageWidget {
           Divider(thickness: 1.2, color: Colors.gray.withOpacity(0.1)),
           Container(
             width: double.infinity,
-            height: 130,
             padding: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
             child: Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Expanded(
                   child: Column(
@@ -39,6 +42,8 @@ class ProductViewPageWidget {
                     children: [
                       Text(
                         "$title",
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
                         style: TextStyle(fontSize: 14, color: Colors.black),
                       ),
                       SizedBox(height: 5),
@@ -48,12 +53,12 @@ class ProductViewPageWidget {
                       ),
                       SizedBox(height: 5),
                       Text(
-                        "Frame Width: 138mm",
+                        "Frame Width: ${frameWidth}mm",
                         style: TextStyle(fontSize: 14, color: Colors.gray),
                       ),
                       SizedBox(height: 5),
                       Text(
-                        "Frame Size: Medium",
+                        "Frame Size: $frameSize",
                         style: TextStyle(fontSize: 14, color: Colors.gray),
                       ),
                       SizedBox(height: 5),
@@ -75,33 +80,26 @@ class ProductViewPageWidget {
                     ],
                   ),
                 ),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  mainAxisAlignment: MainAxisAlignment.start,
+                Row(
+                  mainAxisSize: MainAxisSize.min,
                   children: [
-                    Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Container(
-                          padding:
-                              EdgeInsets.symmetric(vertical: 4, horizontal: 5),
-                          decoration: BoxDecoration(
-                              color: Colors.skyBlue,
-                              borderRadius: BorderRadius.circular(3)),
-                          child: Row(
-                            children: [
-                              Text("$rating",
-                                  style: TextStyle(
-                                      color: Colors.white, fontSize: 14)),
-                              SizedBox(width: 3),
-                              Icon(Icons.star, color: Colors.white, size: 14)
-                            ],
-                          ),
-                        ),
-                        SizedBox(width: 3),
-                        Text("($stockQuantity)")
-                      ],
-                    )
+                    Container(
+                      padding: EdgeInsets.symmetric(vertical: 4, horizontal: 5),
+                      decoration: BoxDecoration(
+                          color: Colors.skyBlue,
+                          borderRadius: BorderRadius.circular(3)),
+                      child: Row(
+                        children: [
+                          Text("$rating",
+                              style:
+                                  TextStyle(color: Colors.white, fontSize: 14)),
+                          SizedBox(width: 3),
+                          Icon(Icons.star, color: Colors.white, size: 14)
+                        ],
+                      ),
+                    ),
+                    SizedBox(width: 3),
+                    Text("($stockQuantity)")
                   ],
                 )
               ],
@@ -110,7 +108,7 @@ class ProductViewPageWidget {
         ]),
       );
 
-  Widget DeliveryOptionsView() => Container(
+  Widget DeliveryOptionsView({String? warrantyTime}) => Container(
         padding: EdgeInsets.symmetric(horizontal: 10, vertical: 15),
         decoration: BoxDecoration(color: Colors.white, boxShadow: [
           BoxShadow(
@@ -193,7 +191,7 @@ class ProductViewPageWidget {
             SizedBox(height: 5),
             CommitmentsView(
                 title: "Warranty",
-                description: "1 Year Manufacturer Warranty",
+                description: "$warrantyTime Manufacturer Warranty",
                 icon: Icons.verified_user)
           ],
         ),
@@ -239,7 +237,10 @@ class ProductViewPageWidget {
         child: Icon(icon, color: Colors.gray),
       );
 
-  Widget AboutProduct({String? description, required String productId}) =>
+  Widget AboutProduct(
+          {String? description,
+          required String productId,
+          String? frameStyle}) =>
       Container(
         padding: EdgeInsets.symmetric(horizontal: 10, vertical: 15),
         decoration: BoxDecoration(color: Colors.white, boxShadow: [
@@ -268,7 +269,7 @@ class ProductViewPageWidget {
               ),
               SizedBox(height: 5),
               Text(
-                "Product ID: $productId \nStyle: Standard",
+                "Product ID: $productId \nStyle: $frameStyle",
                 style: TextStyle(
                     height: 1.5,
                     color: Colors.gray,
@@ -278,7 +279,8 @@ class ProductViewPageWidget {
             ]),
       );
 
-  Widget ProductSpecification() => Container(
+  Widget ProductSpecification({required Specifications specifications}) =>
+      Container(
         padding: EdgeInsets.symmetric(horizontal: 10, vertical: 15),
         decoration: BoxDecoration(color: Colors.white, boxShadow: [
           BoxShadow(
@@ -298,13 +300,21 @@ class ProductViewPageWidget {
             SizedBox(height: 10),
             Table(
               children: [
-                tableRow(column1_text: "Frame Width", column2_text: "134 mm"),
-                tableRow(column1_text: "Weight", column2_text: "14 gm"),
+                tableRow(
+                    column1_text: "Frame Width",
+                    column2_text: "${specifications.width} mm"),
+                tableRow(
+                    column1_text: "Weight",
+                    column2_text: "${specifications.weight} gm"),
                 tableRow(
                     column1_text: "Material",
-                    column2_text: "Ultem (Vintage Regular)"),
-                tableRow(column1_text: "Collection", column2_text: "Air Flex"),
-                tableRow(column1_text: "Height", column2_text: "35 mm"),
+                    column2_text: "${specifications.material}"),
+                tableRow(
+                    column1_text: "Collection",
+                    column2_text: "${specifications.collections}"),
+                tableRow(
+                    column1_text: "Height",
+                    column2_text: "${specifications.height} mm"),
               ],
             ),
             SizedBox(height: 10),

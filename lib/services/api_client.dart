@@ -15,4 +15,7 @@ abstract class ApiClient {
 
   @GET('/api/search')
   Future<String> searchProductsApi(@Query('key') String searchValue);
+
+  @GET('/api/products/{product_id}')
+  Future<String> fetchProductDetailApi(@Path('product_id') String productId);
 }

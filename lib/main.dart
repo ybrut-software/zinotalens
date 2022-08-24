@@ -19,9 +19,9 @@ void main() {
       designSize: Size(360, 780),
       builder: (context, widget) => MultiProvider(
         providers: [
-          ListenableProvider(create: (context) => ProductListProvider(context)),
+          ListenableProvider(create: (context) => ProductListProvider()),
           ListenableProvider(
-              create: (context) => ProductDetailsProvider(context)),
+              create: (context) => ProductDetailsProvider()),
           ListenableProvider(create: (context) => ProductCartProvider()),
           ListenableProvider(create: (context) => ProductSearchProvider()),
         ],

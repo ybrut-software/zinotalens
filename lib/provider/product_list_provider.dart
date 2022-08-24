@@ -3,10 +3,7 @@ import 'package:zinotalens/controller/products_controller.dart';
 import 'package:zinotalens/model/productlist_model.dart';
 
 class ProductListProvider extends ChangeNotifier {
-  //not necessary to pass context
-  ProductListProvider(this._context);
 
-  final _context;
   List<Product> _productList = [];
   bool _isDataLoad = false;
 
@@ -17,7 +14,7 @@ class ProductListProvider extends ChangeNotifier {
   Future<void> getProductList() async {
     try {
       _isDataLoad = true;
-      _productList = await fetchProductList(_context);
+      _productList = await fetchProductList();
       _isDataLoad = false;
     } catch (e) {
       print("error id 12 : $e");
