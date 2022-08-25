@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart' hide Colors;
+import 'package:zinotalens/provider/product_cart_provider.dart';
 
 import '../utils/colors.dart';
 import '../utils/images.dart';
@@ -6,6 +7,9 @@ import '../utils/images.dart';
 Widget cartItemViewHolder(
         {required String title,
         required int salesPrice,
+        required int index,
+        required String productId,
+        required ProductCartProvider provider,
         String photo = sideFrame,
         int? listingPrice,
         int? quantity}) =>
@@ -106,20 +110,28 @@ Widget cartItemViewHolder(
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Icon(
-                        Icons.remove_circle_outline,
-                        size: 30,
-                        color: Colors.skyBlue,
+                      GestureDetector(
+                        onTap: () =>
+                            provider.decrementQuantity(productId, index),
+                        child: Icon(
+                          Icons.remove_circle_outline,
+                          size: 30,
+                          color: Colors.skyBlue,
+                        ),
                       ),
                       Text(
                         "$quantity",
                         style: TextStyle(
                             fontSize: 18, fontWeight: FontWeight.w600),
                       ),
-                      Icon(
-                        Icons.add_circle_outline,
-                        size: 30,
-                        color: Colors.skyBlue,
+                      GestureDetector(
+                        onTap: () =>
+                            provider.increaseQuantity(productId, index),
+                        child: Icon(
+                          Icons.add_circle_outline,
+                          size: 30,
+                          color: Colors.skyBlue,
+                        ),
                       ),
                     ],
                   ))

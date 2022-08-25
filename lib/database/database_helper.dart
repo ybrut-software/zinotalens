@@ -52,6 +52,20 @@ class DatabaseHelper {
     print(res);
   }
 
+  void deleteProduct(String productId) async {
+    var db = await this.database;
+    var res = db.delete(table_name, where: "$product_id = '$productId'");
+    print(res);
+  }
+
+  void updateQuantity(
+      {required String productId, required int quantity}) async {
+    var db = await this.database;
+    var res = await db.update(table_name, {product_quantity: quantity},
+        where: "$product_id = '$productId'");
+    print(res);
+  }
+
   Future<List<ProductAddCartModel>> getProductCartList() async {
     List<ProductAddCartModel> productAddCartModelList = [];
 

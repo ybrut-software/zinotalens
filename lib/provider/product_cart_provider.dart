@@ -31,6 +31,27 @@ class ProductCartProvider extends ChangeNotifier {
     return total;
   }
 
+  void increaseQuantity(String productId, int index) {
+    ProductAddCartModel product = _cartItems.elementAt(index);
+    int quantity = product.productQuantity! + 1;
+    if (quantity <= 5)
+      databaseHelper.updateQuantity(productId: productId, quantity: quantity);
+
+    getCartItems();
+  }
+
+  void decrementQuantity(String productId, int index) {
+    ProductAddCartModel product = _cartItems.elementAt(index);
+    int quantity = product.productQuantity! - 1;
+    if (quantity == 0) {
+      _cartItems.removeAt(index);
+      databaseHelper.deleteProduct(productId);
+    } else
+      databaseHelper.updateQuantity(productId: productId, quantity: quantity);
+
+    getCartItems();
+  }
+
   void clearCartDataProvider() {
     databaseHelper.clearCartTable();
     _cartItems.clear();

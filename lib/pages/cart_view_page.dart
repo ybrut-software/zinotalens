@@ -49,6 +49,9 @@ class _CartViewPageState extends State<CartViewPage> {
                         ProductAddCartModel product =
                             provider.cartItemList[index];
                         return cartItemViewHolder(
+                            index: index,
+                            provider: provider,
+                            productId: product.productId!,
                             title: product.productTitle!,
                             photo: sideFrame,
                             listingPrice: product.productListingPrice,
