@@ -3,7 +3,13 @@ import 'package:flutter/material.dart' hide Colors;
 import '../utils/colors.dart';
 import '../utils/images.dart';
 
-Widget CartItemViewHolder() => Container(
+Widget cartItemViewHolder(
+        {required String title,
+        required int salesPrice,
+        String photo = sideFrame,
+        int? listingPrice,
+        int? quantity}) =>
+    Container(
       margin: EdgeInsets.symmetric(horizontal: 10),
       padding: EdgeInsets.all(10),
       decoration: BoxDecoration(
@@ -22,7 +28,7 @@ Widget CartItemViewHolder() => Container(
               child: Container(
                 height: 90,
                 color: Colors.gray,
-                child: Image(image: AssetImage(sideFrame), fit: BoxFit.cover),
+                child: Image(image: AssetImage(photo), fit: BoxFit.cover),
               ),
             ),
             SizedBox(width: 10),
@@ -35,9 +41,13 @@ Widget CartItemViewHolder() => Container(
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text("ZinotaLens Air Eyeglasses"),
-                      Text("+ Anti-Fog Zero Power",
-                          style: TextStyle(color: Colors.gray)),
+                      Text(
+                        title,
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                      // Text("+ Anti-Fog Zero Power",
+                      //     style: TextStyle(color: Colors.gray)),
                     ],
                   ),
                 )),
@@ -47,7 +57,7 @@ Widget CartItemViewHolder() => Container(
           Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
             Text("Regular Price"),
             Text(
-              "₹2999",
+              "₹$listingPrice",
               style: TextStyle(
                   decoration: TextDecoration.lineThrough,
                   color: Colors.gray,
@@ -61,7 +71,7 @@ Widget CartItemViewHolder() => Container(
               style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
             ),
             Text(
-              "₹999",
+              "₹$salesPrice",
               style: TextStyle(
                   color: Colors.black,
                   fontWeight: FontWeight.w600,
@@ -102,7 +112,7 @@ Widget CartItemViewHolder() => Container(
                         color: Colors.skyBlue,
                       ),
                       Text(
-                        "1",
+                        "$quantity",
                         style: TextStyle(
                             fontSize: 18, fontWeight: FontWeight.w600),
                       ),

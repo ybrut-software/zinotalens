@@ -19,9 +19,21 @@ class ProductCartProvider extends ChangeNotifier {
   }
 
   void addCartItemProvider(
-      {required String productId, required double price, int? quantity}) async {
+      {required String productId,
+      required int sellingPrice,
+      int? listingPrice,
+      required String title,
+      required String size,
+      required String photo,
+      int quantity = 1}) async {
     ProductAddCartModel productCart = ProductAddCartModel(
-        product_id: productId, product_price: price, product_quantity: 1);
+        productId: productId,
+        productTitle: title,
+        productPhoto: photo,
+        productSize: size,
+        productListingPrice: listingPrice,
+        productSellingPrice: sellingPrice,
+        productQuantity: quantity);
     try {
       addCartItem(productCart: productCart);
       _cartItems.add(productCart);

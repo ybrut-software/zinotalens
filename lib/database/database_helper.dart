@@ -5,8 +5,12 @@ final database_name = 'zinotalens.db';
 final database_version = 1;
 final table_name = 'product_table';
 final product_id = 'product_id';
-final product_price = 'price';
+final product_listing_price = 'listing_price';
+final product_selling_price = 'selling_price';
+final product_title = 'title';
+final product_size = 'size';
 final product_quantity = 'quantity';
+final product_photo = 'photo';
 
 class DatabaseHelper {
   static Database? _database;
@@ -36,7 +40,7 @@ class DatabaseHelper {
       databasePath,
       version: database_version,
       onCreate: (db, version) => db.execute(
-          'CREATE TABLE $table_name ($product_id text primary key not null, $product_quantity integer, $product_price real )'),
+          'CREATE TABLE $table_name ($product_id text primary key not null, $product_title text, $product_selling_price integer, $product_size text, $product_photo text, $product_quantity integer, $product_listing_price integer )'),
     );
 
     return database;

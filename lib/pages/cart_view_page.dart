@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:zinotalens/main.dart';
 import 'package:zinotalens/model/product_addcart_model.dart';
 import 'package:zinotalens/provider/product_cart_provider.dart';
+import 'package:zinotalens/utils/images.dart';
 import 'package:zinotalens/widgets/cart_item_viewholder.dart';
 import 'package:zinotalens/widgets/cart_page_widgets.dart';
 
@@ -24,6 +25,7 @@ class _CartViewPageState extends State<CartViewPage> {
 
   @override
   Widget build(BuildContext context) {
+    final provider = Provider.of<ProductCartProvider>(context);
     return Scaffold(
       backgroundColor: Colors.backgroundColor,
       appBar: AppBar(
@@ -34,9 +36,23 @@ class _CartViewPageState extends State<CartViewPage> {
       body: Stack(
         children: [
           ListView(
-            padding: EdgeInsets.only(top: 5, bottom: 50),
+            padding: EdgeInsets.only(top: 5, bottom: 130),
             children: [
-              CartItemViewHolder(),
+              ListView.separated(
+                physics: NeverScrollableScrollPhysics(),
+                shrinkWrap: true,
+                itemCount: provider.cartItemLength,
+                itemBuilder: (context, index) {
+                  ProductAddCartModel product = provider.cartItemList[index];
+                  return cartItemViewHolder(
+                      title: product.productTitle!,
+                      photo: sideFrame,
+                      listingPrice: product.productListingPrice,
+                      salesPrice: product.productSellingPrice!,
+                      quantity: product.productQuantity);
+                },
+                separatorBuilder: (context, index) => SizedBox(height: 10),
+              ),
               SizedBox(height: 10),
               cartPriceDetails(),
             ],
@@ -68,7 +84,9 @@ class _CartViewPageState extends State<CartViewPage> {
                     Container(
                       width: double.infinity,
                       child: ElevatedButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            databaseHelper.clearCart();
+                          },
                           style: ButtonStyle(
                             backgroundColor:
                                 MaterialStateProperty.all(Colors.skyBlue),

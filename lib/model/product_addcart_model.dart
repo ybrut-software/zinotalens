@@ -1,20 +1,38 @@
 class ProductAddCartModel {
-  String? product_id;
-  int? product_quantity;
-  double? product_price;
+  String? productId;
+  String? productTitle;
+  String? productSize;
+  String? productPhoto;
+  int? productQuantity;
+  int? productListingPrice;
+  int? productSellingPrice;
 
   ProductAddCartModel(
-      {this.product_id, this.product_price, this.product_quantity});
+      {this.productId,
+      this.productListingPrice,
+      this.productQuantity,
+      this.productSellingPrice,
+      this.productPhoto,
+      this.productSize,
+      this.productTitle});
 
   factory ProductAddCartModel.fromMap(Map<String, dynamic> map) =>
       ProductAddCartModel(
-          product_id: map["product_id"],
-          product_price: map["price"],
-          product_quantity: map["quantity"]);
+          productId: map["product_id"],
+          productListingPrice: map["listing_price"],
+          productQuantity: map["quantity"],
+          productSellingPrice: map["selling_price"],
+          productPhoto: map["photo"],
+          productSize: map["size"],
+          productTitle: map["title"]);
 
   Map<String, dynamic> toMap() => {
-        "product_id": product_id,
-        "price": product_price,
-        "quantity": product_quantity
+        "product_id": productId,
+        "listing_price": productListingPrice,
+        "quantity": productQuantity,
+        "selling_price": productSellingPrice,
+        "photo": productPhoto,
+        "size": productSize,
+        "title": productTitle
       };
 }

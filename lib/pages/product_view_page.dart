@@ -50,7 +50,8 @@ class _ProductViewPageState extends State<ProductViewPage> {
                       sellingPrice: product.salesPrice!,
                       listingPrice: product.listPrice),
                   SizedBox(height: 5),
-                  productViewPageWidget.DeliveryOptionsView(warrantyTime: product.specifications?.warranty),
+                  productViewPageWidget.DeliveryOptionsView(
+                      warrantyTime: product.specifications?.warranty),
                   SizedBox(height: 5),
                   productViewPageWidget.AboutProduct(
                       description: product.description,
@@ -65,10 +66,14 @@ class _ProductViewPageState extends State<ProductViewPage> {
                   left: 0.0,
                   right: 0.0,
                   child: ElevatedButton(
-                      onPressed: () {},
-                      // cart.addCartItemProvider(
-                      //     productId: product.productId!,
-                      //     price: product.price!.sellingPrice!),
+                      onPressed: () => cart.addCartItemProvider(
+                          productId: product.productId!,
+                          title: product.title!,
+                          photo: sideFrame,
+                          quantity: 1,
+                          size: product.specifications!.size!,
+                          listingPrice: product.listPrice,
+                          sellingPrice: product.salesPrice!),
                       style: ButtonStyle(
                         backgroundColor:
                             MaterialStateProperty.all(Colors.skyBlue),
