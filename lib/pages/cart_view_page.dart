@@ -59,7 +59,7 @@ class _CartViewPageState extends State<CartViewPage> {
                           SizedBox(height: 10),
                     ),
                     SizedBox(height: 10),
-                    cartPriceDetails(),
+                    cartPriceDetails(totalPrice: provider.getTotalPrice),
                   ],
                 ),
           Positioned(
@@ -80,7 +80,7 @@ class _CartViewPageState extends State<CartViewPage> {
                           Text("Total (incl. GST)",
                               style: TextStyle(
                                   fontSize: 16, fontWeight: FontWeight.w600)),
-                          Text("₹1198",
+                          Text("₹${provider.getTotalPrice}",
                               style: TextStyle(
                                   fontSize: 16, fontWeight: FontWeight.w600)),
                         ],

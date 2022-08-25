@@ -2,7 +2,7 @@ import 'package:flutter/material.dart' hide Colors;
 
 import '../utils/colors.dart';
 
-Widget cartPriceDetails() => Container(
+Widget cartPriceDetails({int? totalPrice}) => Container(
       padding: EdgeInsets.all(10),
       decoration: BoxDecoration(color: Colors.white, boxShadow: [
         BoxShadow(color: Colors.gray, blurRadius: 0.5, offset: Offset(0.5, 0.5))
@@ -24,7 +24,7 @@ Widget cartPriceDetails() => Container(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text("Total Price"),
-                      Text("₹999", style: TextStyle(color: Colors.gray))
+                      Text("₹$totalPrice", style: TextStyle(color: Colors.gray))
                     ]),
                 SizedBox(height: 10),
                 Row(
