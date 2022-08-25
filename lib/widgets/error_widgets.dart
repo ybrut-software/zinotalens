@@ -23,3 +23,16 @@ Widget noSearchResultWidget() => Center(
         ),
       ),
     );
+
+Widget errorWidget({required String errorMsg}) => Center(
+        child: Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Container(height: 100, width: 100, child: Image.asset(error_icon)),
+        SizedBox(height: 10),
+        Text(
+          errorMsg,
+          style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
+        ),
+      ],
+    ));
