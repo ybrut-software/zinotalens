@@ -6,6 +6,7 @@ import 'package:zinotalens/provider/product_cart_provider.dart';
 import 'package:zinotalens/utils/images.dart';
 import 'package:zinotalens/widgets/cart_item_viewholder.dart';
 import 'package:zinotalens/widgets/cart_page_widgets.dart';
+import 'package:zinotalens/widgets/error_widgets.dart';
 
 import '../utils/colors.dart';
 
@@ -35,28 +36,32 @@ class _CartViewPageState extends State<CartViewPage> {
       ),
       body: Stack(
         children: [
-          ListView(
-            padding: EdgeInsets.only(top: 5, bottom: 130),
-            children: [
-              ListView.separated(
-                physics: NeverScrollableScrollPhysics(),
-                shrinkWrap: true,
-                itemCount: provider.cartItemLength,
-                itemBuilder: (context, index) {
-                  ProductAddCartModel product = provider.cartItemList[index];
-                  return cartItemViewHolder(
-                      title: product.productTitle!,
-                      photo: sideFrame,
-                      listingPrice: product.productListingPrice,
-                      salesPrice: product.productSellingPrice!,
-                      quantity: product.productQuantity);
-                },
-                separatorBuilder: (context, index) => SizedBox(height: 10),
-              ),
-              SizedBox(height: 10),
-              cartPriceDetails(),
-            ],
-          ),
+          provider.cartItemLength == 0
+              ? emptyCartWidget()
+              : ListView(
+                  padding: EdgeInsets.only(top: 5, bottom: 130),
+                  children: [
+                    ListView.separated(
+                      physics: NeverScrollableScrollPhysics(),
+                      shrinkWrap: true,
+                      itemCount: provider.cartItemLength,
+                      itemBuilder: (context, index) {
+                        ProductAddCartModel product =
+                            provider.cartItemList[index];
+                        return cartItemViewHolder(
+                            title: product.productTitle!,
+                            photo: sideFrame,
+                            listingPrice: product.productListingPrice,
+                            salesPrice: product.productSellingPrice!,
+                            quantity: product.productQuantity);
+                      },
+                      separatorBuilder: (context, index) =>
+                          SizedBox(height: 10),
+                    ),
+                    SizedBox(height: 10),
+                    cartPriceDetails(),
+                  ],
+                ),
           Positioned(
               bottom: 0.0,
               left: 0.0,
@@ -85,7 +90,7 @@ class _CartViewPageState extends State<CartViewPage> {
                       width: double.infinity,
                       child: ElevatedButton(
                           onPressed: () {
-                            databaseHelper.clearCart();
+                            provider.clearCartDataProvider();
                           },
                           style: ButtonStyle(
                             backgroundColor:

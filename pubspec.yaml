@@ -84,6 +84,7 @@ flutter:
     - assets/images/sun_glasses_icon.png
     - assets/images/search_icon.png
     - assets/images/error_icon.png
+    - assets/images/empty_cart_icon.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

@@ -12,3 +12,4 @@ const reading_eyeglasses_icon = 'assets/images/reading_eyeglasses_icon.png';
 const sun_glasses_icon = 'assets/images/sun_glasses_icon.png';
 const search_icon = 'assets/images/search_icon.png';
 const error_icon = 'assets/images/error_icon.png';
+const empty_cart_icon = 'assets/images/empty_cart_icon.png';

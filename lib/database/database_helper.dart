@@ -67,7 +67,7 @@ class DatabaseHelper {
     return productAddCartModelList;
   }
 
-  void clearCart() async {
+  void clearCartTable() async {
     var db = await this.database;
     db.delete(table_name);
     print("delete cart");

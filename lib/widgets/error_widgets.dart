@@ -36,3 +36,22 @@ Widget errorWidget({required String errorMsg}) => Center(
         ),
       ],
     ));
+
+Widget emptyCartWidget() => Center(
+        child: Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Container(height: 100, width: 100, child: Image.asset(empty_cart_icon)),
+        SizedBox(height: 10),
+        Text(
+          "Your cart is empty!",
+          style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
+        ),
+        SizedBox(height: 5),
+        Text(
+          "Add item to it now",
+          textAlign: TextAlign.center,
+          style: TextStyle(fontSize: 14, fontWeight: FontWeight.w400),
+        )
+      ],
+    ));

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:zinotalens/controller/products_controller.dart';
+import 'package:zinotalens/main.dart';
 import 'package:zinotalens/model/product_addcart_model.dart';
 
 class ProductCartProvider extends ChangeNotifier {
@@ -15,6 +16,12 @@ class ProductCartProvider extends ChangeNotifier {
     } catch (e) {
       print("error no 456 : $e");
     }
+    notifyListeners();
+  }
+
+  void clearCartDataProvider() {
+    databaseHelper.clearCartTable();
+    _cartItems.clear();
     notifyListeners();
   }
 
