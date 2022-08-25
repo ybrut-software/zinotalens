@@ -322,7 +322,7 @@ class ProductViewPageWidget {
               alignment: Alignment.center,
               child: ElevatedButton(
                 onPressed: () {
-                  showBottomSlider();
+                  showBottomSlider(specifications);
                 },
                 style: ButtonStyle(
                   backgroundColor: MaterialStateProperty.all(Colors.white),
@@ -343,7 +343,7 @@ class ProductViewPageWidget {
         ),
       );
 
-  void showBottomSlider() => showModalBottomSheet(
+  void showBottomSlider(Specifications spec) => showModalBottomSheet(
       isScrollControlled: true,
       context: context,
       builder: (context) {
@@ -374,47 +374,79 @@ class ProductViewPageWidget {
             ),
             body: Container(
               decoration: BoxDecoration(color: Colors.white),
-              child: ListView.builder(
+              child: ListView(
                 padding: EdgeInsets.only(top: 5, bottom: 10),
                 controller: scrollController,
-                itemCount: 30,
-                itemBuilder: (context, index) => Container(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 16),
-                        child: Row(
-                          children: [
-                            Expanded(
-                                flex: 3,
-                                child: Text(
-                                  "Model No.",
-                                  textAlign: TextAlign.start,
-                                  style: TextStyle(color: Colors.gray),
-                                )),
-                            Expanded(
-                                flex: 7,
-                                child: Text(
-                                  "HP E10014L",
-                                  textAlign: TextAlign.start,
-                                ))
-                          ],
-                        ),
-                      ),
-                      Divider(
-                        thickness: 1,
-                        color: Colors.gray.withOpacity(0.2),
-                      )
-                    ],
-                  ),
-                ),
+                children: [
+                  specificationsRow(key: "Model No", value: spec.modelNo),
+                  specificationsRow(key: "Shape", value: spec.shape),
+                  specificationsRow(key: "Size", value: spec.size),
+                  specificationsRow(key: "Width", value: "${spec.width} mm"),
+                  specificationsRow(key: "Height", value: "${spec.height} mm"),
+                  specificationsRow(key: "Dimension", value: spec.dimensions),
+                  specificationsRow(key: "Color", value: spec.color),
+                  specificationsRow(key: "Weight", value: "${spec.weight} gm"),
+                  specificationsRow(
+                      key: "Weight group", value: spec.weightGroup),
+                  specificationsRow(key: "Material", value: spec.material),
+                  specificationsRow(
+                      key: "frame material", value: spec.frameMaterial),
+                  specificationsRow(
+                      key: "temple material", value: spec.templeMaterial),
+                  specificationsRow(
+                      key: "prescription type", value: spec.prescriptionType),
+                  specificationsRow(
+                      key: "frame style 1", value: spec.frameStyle1),
+                  specificationsRow(
+                      key: "frame style 2", value: spec.frameStyle2),
+                  specificationsRow(
+                      key: "collections", value: spec.collections),
+                  specificationsRow(key: "warranty", value: spec.warranty),
+                  specificationsRow(key: "gender", value: spec.gender),
+                  specificationsRow(key: "condition", value: spec.condition),
+                  specificationsRow(
+                      key: "temple color", value: spec.templeColor),
+                ],
               ),
             ),
           ),
         );
       });
+
+  Widget specificationsRow({required String? key, required String? value}) =>
+      Container(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 16),
+              child: Row(
+                children: [
+                  Expanded(
+                      flex: 3,
+                      child: Text(
+                        "$key",
+                        textAlign: TextAlign.start,
+                        style: TextStyle(color: Colors.gray),
+                      )),
+                  SizedBox(width: 10),
+                  Expanded(
+                      flex: 7,
+                      child: Text(
+                        "$value",
+                        textAlign: TextAlign.start,
+                      ))
+                ],
+              ),
+            ),
+            Divider(
+              thickness: 1,
+              color: Colors.gray.withOpacity(0.2),
+            )
+          ],
+        ),
+      );
 
   TableRow tableRow(
           {required String column1_text, required String column2_text}) =>

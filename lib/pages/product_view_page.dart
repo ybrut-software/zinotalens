@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart' hide Colors;
 import 'package:provider/provider.dart';
-import 'package:zinotalens/controller/products_controller.dart';
 import 'package:zinotalens/provider/product_cart_provider.dart';
 import 'package:zinotalens/provider/product_details_provider.dart';
 import 'package:zinotalens/utils/images.dart';
