@@ -10,6 +10,14 @@ abstract class ApiClient {
     return ApiClient(dio);
   }
 
+  // *AUTHENTICATION
+  @POST('/api/auth/login')
+  Future<String> loginApi(@Body() String body);
+
+  @POST('/api/auth/verify/otp')
+  Future<String> verifyOtpApi(@Body() String body);
+
+  // *PRODUCTS
   @GET('/api/products')
   Future<String> fetchProductListApi();
 
