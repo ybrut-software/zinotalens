@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart' hide Colors;
+import 'package:flutter/services.dart';
 import 'package:zinotalens/pages/home_page.dart';
+import 'package:zinotalens/pages/otp_page.dart';
 import 'package:zinotalens/widgets/login_custom_clipper.dart';
 import 'package:zinotalens/widgets/login_widgets.dart';
 
@@ -22,7 +24,7 @@ class _LoginPageState extends State<LoginPage> {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              customShape(),
+              customShape(icon: Icons.person),
               Text(
                 "Your Mobile Number",
                 style: TextStyle(
@@ -36,6 +38,10 @@ class _LoginPageState extends State<LoginPage> {
                 child: TextFormField(
                   keyboardType: TextInputType.number,
                   cursorColor: Colors.skyBlue,
+                  minLines: 1,
+                  maxLength: 10,
+                  autofocus: false,
+                  inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                   decoration: InputDecoration(
                     labelText: "Enter mobile number",
                     labelStyle: TextStyle(color: Colors.skyBlue),
@@ -52,13 +58,16 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                 ),
               ),
-              SizedBox(height: 25),
+              SizedBox(height: 20),
               Container(
                 width: double.infinity,
                 height: 40,
                 padding: EdgeInsets.symmetric(horizontal: 14),
                 child: ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => OtpPage()));
+                  },
                   child: Text(
                     "CONTINUE",
                     style: TextStyle(color: Colors.white),

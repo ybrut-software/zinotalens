@@ -35,6 +35,7 @@ class _SearchPageState extends State<SearchPage> {
             cursorColor: Colors.skyBlue,
             keyboardType: TextInputType.text,
             autofocus: true,
+            textInputAction: TextInputAction.search,
             onChanged: (string) {
               provider.setIsDataLoad = true;
               provider.searchProductsResult(string.trim());

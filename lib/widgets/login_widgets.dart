@@ -3,7 +3,7 @@ import 'package:flutter/material.dart' hide Colors;
 import '../utils/colors.dart';
 import 'login_custom_clipper.dart';
 
-Widget customShape() => Container(
+Widget customShape({required IconData icon}) => Container(
       height: 230,
       child: Stack(
         children: [
@@ -24,7 +24,7 @@ Widget customShape() => Container(
                     shape: BoxShape.circle,
                     border: Border.all(color: Colors.white, width: 1.5)),
                 child: Center(
-                  child: Icon(Icons.person, color: Colors.white, size: 40),
+                  child: Icon(icon, color: Colors.white, size: 40),
                 ),
               ),
             ),
