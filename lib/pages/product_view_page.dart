@@ -6,6 +6,7 @@ import 'package:zinotalens/utils/images.dart';
 import 'package:zinotalens/widgets/custom_appbar.dart';
 import 'package:zinotalens/widgets/product_viewpage_widgets.dart';
 import 'package:zinotalens/widgets/progress_indicator.dart';
+import '../model/product_addcart_model.dart';
 import '../utils/colors.dart';
 
 class ProductViewPage extends StatefulWidget {
@@ -66,21 +67,32 @@ class _ProductViewPageState extends State<ProductViewPage> {
                   left: 0.0,
                   right: 0.0,
                   child: ElevatedButton(
-                      onPressed: () => cart.addCartItemProvider(
-                          productId: product.productId!,
-                          title: product.title!,
-                          photo: sideFrame,
-                          quantity: 1,
-                          size: product.specifications!.size!,
-                          listingPrice: product.listPrice,
-                          sellingPrice: product.salesPrice!),
+                      onPressed: () {
+                        ProductAddCartModel productCart = ProductAddCartModel(
+                            productId: product.productId!,
+                            productTitle: product.title!,
+                            productPhoto: sideFrame,
+                            productSize: product.specifications!.size!,
+                            productListingPrice: product.listPrice,
+                            productSellingPrice: product.salesPrice!,
+                            productQuantity: 1);
+                        if (cart.isProductInCart(productObj: productCart))
+                          cart.addCartItemProvider(productCart: productCart);
+                        else {
+                          final snackBar = SnackBar(
+                              content: Text("Item is already in cart!"));
+                          ScaffoldMessenger.of(context)
+                              .showSnackBar(snackBar);
+                        }
+                      },
                       style: ButtonStyle(
                         backgroundColor:
                             MaterialStateProperty.all(Colors.skyBlue),
                         shadowColor:
                             MaterialStateProperty.all(Colors.transparent),
-                        shape: MaterialStateProperty.all(RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(5))),
+                        shape: MaterialStateProperty.all(
+                            RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(5))),
                       ),
                       child: Padding(
                         padding: EdgeInsets.all(18),

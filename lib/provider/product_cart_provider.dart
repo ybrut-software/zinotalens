@@ -59,22 +59,7 @@ class ProductCartProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  void addCartItemProvider(
-      {required String productId,
-      required int sellingPrice,
-      int? listingPrice,
-      required String title,
-      required String size,
-      required String photo,
-      int quantity = 1}) async {
-    ProductAddCartModel productCart = ProductAddCartModel(
-        productId: productId,
-        productTitle: title,
-        productPhoto: photo,
-        productSize: size,
-        productListingPrice: listingPrice,
-        productSellingPrice: sellingPrice,
-        productQuantity: quantity);
+  void addCartItemProvider({required ProductAddCartModel productCart}) async {
     try {
       addCartItem(productCart: productCart);
       _cartItems.add(productCart);
@@ -82,5 +67,16 @@ class ProductCartProvider extends ChangeNotifier {
       print("error no 789 : $e");
     }
     notifyListeners();
+  }
+
+  bool isProductInCart({required ProductAddCartModel productObj}) {
+    bool check = true;
+    for (var product in _cartItems) {
+      if (product.productId == productObj.productId)
+        check = false;
+      else
+        check = true;
+    }
+    return check;
   }
 }
