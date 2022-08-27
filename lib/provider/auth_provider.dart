@@ -9,29 +9,55 @@ class AuthProvider extends ChangeNotifier {
   String _authToken = "";
 
   bool get isSentOtp => _isSentOtp;
-  String get authToken => _authToken;
+  String get getAuthToken => _authToken;
 
-  void loginProvider({required String contactNo}) async {
-    try {
-      _isSentOtp = await login(contactNo: contactNo);
-    } catch (e) {
-      print("error no 582: $e");
-    }
+  bool _loginProgress = false;
+  bool _verifyProgress = false;
+
+  bool get getLoginProgress => _loginProgress;
+  bool get getVerifyProgress => _verifyProgress;
+
+  set setLoginProgress(bool loginProgress) {
+    _loginProgress = loginProgress;
     notifyListeners();
   }
 
-  void verifyOtpProvider(
+  set setVerifyProgress(bool verifyProgress) {
+    _verifyProgress = verifyProgress;
+    notifyListeners();
+  }
+
+  Future<bool> loginProvider({required String contactNo}) async {
+    try {
+      _isSentOtp = await login(contactNo: contactNo);
+      _loginProgress = false;
+    } catch (e) {
+      print("error no 582: $e");
+      _loginProgress = false;
+      _isSentOtp = false;
+    }
+    notifyListeners();
+    return _isSentOtp;
+  }
+
+  Future<bool> verifyOtpProvider(
       {required String contactNo, required String otp}) async {
+    bool _success = false;
     try {
       _verifiedResponse = await verifyOtp(contactNo: contactNo, otp: otp);
       if (_verifiedResponse.success!) {
+        _success = _verifiedResponse.success!;
         TempStorage.setAuthToken(_verifiedResponse.token!);
         _authToken = _verifiedResponse.token!;
       }
+      _verifyProgress = false;
     } catch (e) {
       print("error no 486: $e");
+      _verifyProgress = false;
+      _success = false;
     }
     notifyListeners();
+    return _success;
   }
 
   void getAuthTokenProvider() async {

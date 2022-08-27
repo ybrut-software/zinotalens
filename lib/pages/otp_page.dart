@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart' hide Colors;
-import 'package:flutter/services.dart';
+import 'package:provider/provider.dart';
+import 'package:zinotalens/pages/home_page.dart';
+import 'package:zinotalens/provider/auth_provider.dart';
 import 'package:zinotalens/widgets/otp_input_widget.dart';
+import 'package:zinotalens/widgets/progress_indicator.dart';
 
 import '../utils/colors.dart';
 import '../widgets/login_widgets.dart';
 
 class OtpPage extends StatefulWidget {
-  OtpPage({Key? key}) : super(key: key);
+  final contactNo;
+  OtpPage(this.contactNo, {Key? key}) : super(key: key);
 
   @override
   State<OtpPage> createState() => _OtpPageState();
@@ -21,6 +25,7 @@ class _OtpPageState extends State<OtpPage> {
   final TextEditingController _field6 = TextEditingController();
   @override
   Widget build(BuildContext context) {
+    final provider = Provider.of<AuthProvider>(context);
     return SafeArea(
       child: Scaffold(
         backgroundColor: Colors.white,
@@ -72,11 +77,26 @@ class _OtpPageState extends State<OtpPage> {
                         _field4.text +
                         _field5.text +
                         _field6.text;
+                    provider.setVerifyProgress = true;
+                    if (otp.length == 6)
+                      provider
+                          .verifyOtpProvider(
+                              contactNo: widget.contactNo, otp: otp)
+                          .then((value) {
+                        if (value)
+                          Navigator.pushAndRemoveUntil(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => HomePage()),
+                              (route) => false);
+                      });
                   },
-                  child: Text(
-                    "SUBMIT",
-                    style: TextStyle(color: Colors.white),
-                  ),
+                  child: provider.getVerifyProgress
+                      ? buttonProgressIndicator()
+                      : Text(
+                          "SUBMIT",
+                          style: TextStyle(color: Colors.white),
+                        ),
                   style: ButtonStyle(
                       shape: MaterialStateProperty.all(RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(5))),

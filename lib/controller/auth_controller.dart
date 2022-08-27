@@ -5,7 +5,8 @@ import 'package:zinotalens/services/api_client.dart';
 
 Future<bool> login({required String contactNo}) async {
   Map<String, dynamic> body = {"contact": contactNo};
-  var resjson = await ApiClient.getServices().loginApi(body.toString());
+  String reqjson = jsonEncode(body);
+  var resjson = await ApiClient.getServices().loginApi(reqjson);
   Map<String, dynamic> res = jsonDecode(resjson);
   bool success = res["success"];
   bool next = res["next"];
@@ -15,7 +16,8 @@ Future<bool> login({required String contactNo}) async {
 Future<AuthVerificationModel> verifyOtp(
     {required String contactNo, required String otp}) async {
   Map<String, dynamic> body = {"contact": contactNo, "OTP": otp};
-  var resjson = await ApiClient.getServices().verifyOtpApi(body.toString());
+  String reqjson = jsonEncode(body);
+  var resjson = await ApiClient.getServices().verifyOtpApi(reqjson);
   AuthVerificationModel authVerificationModel =
       authVerificationModelFromJson(resjson);
   return authVerificationModel;
