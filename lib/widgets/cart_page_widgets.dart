@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart' hide Colors;
+import 'package:zinotalens/model/address_list_model.dart';
 import 'package:zinotalens/utils/style.dart';
 
 import '../utils/colors.dart';
@@ -46,7 +47,8 @@ Widget cartPriceDetails({int? totalPrice}) => Container(
       ),
     );
 
-Widget selectedAddressWidget(BuildContext context) => Container(
+Widget selectedAddressWidget(BuildContext context, Address address) =>
+    Container(
       padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
       decoration: contentContainerDecoration(),
       child: Row(
@@ -54,6 +56,7 @@ Widget selectedAddressWidget(BuildContext context) => Container(
           Expanded(
               flex: 8,
               child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   Row(
@@ -61,14 +64,14 @@ Widget selectedAddressWidget(BuildContext context) => Container(
                       Expanded(
                           flex: 6,
                           child: Text(
-                            "Deliver to: Roshan Nahak",
+                            "Deliver to: ${address.fullName}",
                             overflow: TextOverflow.ellipsis,
                             maxLines: 1,
                           )),
                       Expanded(
                           flex: 4,
                           child: Text(
-                            ", 497557",
+                            ", ${address.postalCode}",
                             maxLines: 1,
                             style: TextStyle(fontWeight: FontWeight.bold),
                           )),
@@ -76,7 +79,7 @@ Widget selectedAddressWidget(BuildContext context) => Container(
                   ),
                   SizedBox(height: 5),
                   Text(
-                    "Bada sahi, Radha krishan tample, palyama, baghla",
+                    "${address.streetAddress1}, ${address.streetAddress2}",
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                     style: TextStyle(color: Colors.gray),

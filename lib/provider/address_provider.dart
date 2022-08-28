@@ -8,6 +8,10 @@ class AddressProvider extends ChangeNotifier {
   bool _isSaveAddrLoader = false;
   bool _isFetchAddrLoader = true;
 
+  Address _defaultAddress = Address();
+
+  Address get defaultAddress => _defaultAddress;
+
   bool get isSaveAddrLoader => _isSaveAddrLoader;
   set setSaveAddrLoader(bool _isSaveAddrLoader) {
     this._isSaveAddrLoader = _isSaveAddrLoader;
@@ -22,11 +26,25 @@ class AddressProvider extends ChangeNotifier {
   void getAddressListProvider({required String token}) async {
     try {
       _addresses = await fetchAddressList(token);
+      makeDefaultAddress();
       _isFetchAddrLoader = false;
     } catch (e) {
       print("error no 297: $e");
       _isFetchAddrLoader = false;
     }
+    notifyListeners();
+  }
+
+  void makeDefaultAddress() {
+    if (getAddressesLength > 0) {
+      for(var address in _addresses){
+        address.selected = false;
+      }
+      _addresses.last.selected = true;
+      _defaultAddress =
+          _addresses.where((element) => element.selected == true).single;
+    }
+    notifyListeners();
   }
 
   void saveAddressProvider(BuildContext context,
@@ -35,6 +53,7 @@ class AddressProvider extends ChangeNotifier {
       bool _isAddressSaved = await saveAddress(token, addressObj);
       if (_isAddressSaved) {
         _addresses.add(addressObj);
+        makeDefaultAddress();
         showSnackBarMessage(context, "Address saved Successfully!");
       }
       _isSaveAddrLoader = false;

@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:zinotalens/model/product_addcart_model.dart';
 import 'package:zinotalens/pages/add_address_page.dart';
 import 'package:zinotalens/provider/address_provider.dart';
+import 'package:zinotalens/provider/auth_provider.dart';
 import 'package:zinotalens/provider/product_cart_provider.dart';
 import 'package:zinotalens/utils/images.dart';
 import 'package:zinotalens/widgets/cart_item_viewholder.dart';
@@ -22,6 +23,8 @@ class _CartViewPageState extends State<CartViewPage> {
   @override
   void initState() {
     Provider.of<ProductCartProvider>(context, listen: false).getCartItems();
+    Provider.of<AddressProvider>(context, listen: false).getAddressListProvider(
+        token: Provider.of<AuthProvider>(context, listen: false).getAuthToken);
     super.initState();
   }
 
@@ -43,7 +46,9 @@ class _CartViewPageState extends State<CartViewPage> {
               : ListView(
                   padding: EdgeInsets.only(bottom: 130),
                   children: [
-                    selectedAddressWidget(context),
+                    if (addressProvider.getAddressesLength != 0)
+                      selectedAddressWidget(
+                          context, addressProvider.defaultAddress),
                     SizedBox(height: 10),
                     ListView.separated(
                       physics: NeverScrollableScrollPhysics(),

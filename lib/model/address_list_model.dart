@@ -62,6 +62,11 @@ class Address {
   DateTime? createdAt;
   DateTime? updatedAt;
   int? v;
+  bool selected = false;
+
+  set setSelected(bool selected) {
+    this.selected = selected;
+  }
 
   factory Address.fromJson(Map<String, dynamic> json) => Address(
         id: json["_id"],
