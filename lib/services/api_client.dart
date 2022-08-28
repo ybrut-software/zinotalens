@@ -26,4 +26,16 @@ abstract class ApiClient {
 
   @GET('/api/products/{product_id}')
   Future<String> fetchProductDetailApi(@Path('product_id') String productId);
+
+  // *ADDRESS
+  @GET('/api/addresses')
+  Future<String> fetchAddressesApi(@Header('x-auth-token') String token);
+
+  @POST('/api/addresses')
+  Future<String> saveAddressApi(
+      @Header('x-auth-token') String token, @Body() String body);
+
+  @DELETE('/api/addresses/{addrId}')
+  Future<String> deleteAddressApi(
+      @Header('x-auth-token') String token, @Path('addrId') String addressId);
 }

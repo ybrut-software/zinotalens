@@ -55,3 +55,8 @@ Widget emptyCartWidget() => Center(
         )
       ],
     ));
+
+showSnackBarMessage(BuildContext context, String msg) {
+  final snackBar = SnackBar(content: Text(msg));
+  ScaffoldMessenger.of(context).showSnackBar(snackBar);
+}

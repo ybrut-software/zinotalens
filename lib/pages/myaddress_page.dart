@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart' hide Colors;
+import 'package:provider/provider.dart';
 import 'package:zinotalens/pages/add_address_page.dart';
+import 'package:zinotalens/provider/address_provider.dart';
+import 'package:zinotalens/provider/auth_provider.dart';
 import 'package:zinotalens/widgets/custom_appbar.dart';
-import 'package:zinotalens/widgets/values.dart';
+import 'package:zinotalens/utils/style.dart';
+import 'package:zinotalens/widgets/error_widgets.dart';
+import 'package:zinotalens/widgets/progress_indicator.dart';
 
 import '../utils/colors.dart';
 import '../widgets/address_view_holder.dart';
@@ -15,7 +20,15 @@ class MyAddressPage extends StatefulWidget {
 
 class _MyAddressPageState extends State<MyAddressPage> {
   @override
+  void initState() {
+    Provider.of<AddressProvider>(context, listen: false).getAddressListProvider(
+        token: Provider.of<AuthProvider>(context, listen: false).getAuthToken);
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
+    final provider = Provider.of<AddressProvider>(context);
     return Scaffold(
       backgroundColor: Colors.backgroundColor,
       appBar: customAppBar(context,
@@ -55,10 +68,17 @@ class _MyAddressPageState extends State<MyAddressPage> {
 
           //address view holder
           Expanded(
-            child: ListView.builder(
-                padding: EdgeInsets.only(top: 10),
-                itemCount: 3,
-                itemBuilder: (context, index) => addressViewHolder()),
+            child: provider.IsFetchAddrLoader
+                ? circularProgressIndicator()
+                : provider.getAddressesLength == 0
+                    ? errorWidget(errorMsg: "Empty!")
+                    : ListView.builder(
+                        padding: EdgeInsets.only(top: 10),
+                        itemCount: provider.getAddressesLength,
+                        itemBuilder: (context, index) => addressViewHolder(
+                            context,
+                            index: index,
+                            addressObj: provider.getAddresses[index])),
           ),
         ],
       ),

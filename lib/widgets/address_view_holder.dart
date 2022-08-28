@@ -1,7 +1,14 @@
-import 'package:flutter/material.dart';
-import 'package:zinotalens/widgets/values.dart';
 
-Widget addressViewHolder() => Container(
+import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:zinotalens/model/address_list_model.dart';
+import 'package:zinotalens/provider/address_provider.dart';
+import 'package:zinotalens/provider/auth_provider.dart';
+import 'package:zinotalens/utils/style.dart';
+
+Widget addressViewHolder(BuildContext context,
+        {required int index, required Address addressObj}) =>
+    Container(
       margin: EdgeInsets.only(bottom: 5),
       padding: EdgeInsets.only(left: 10, right: 10, bottom: 16),
       decoration: contentContainerDecoration(),
@@ -11,31 +18,33 @@ Widget addressViewHolder() => Container(
         children: [
           Align(
             alignment: Alignment.topRight,
-            child: _buildPopupMenu(),
+            child: _buildPopupMenu(context, index, addressObj.id!),
           ),
           Text(
-            "Roshan Nahak",
+            addressObj.fullName!,
             style: TextStyle(fontSize: 16),
           ),
           SizedBox(height: 12),
           Text(
-            "SC-MQ, QN-157, tulsi mandir odiya daffai, Government Girls Higher Secondary School,",
+            "${addressObj.streetAddress1}, ${addressObj.streetAddress2}",
             style: addressTextStyle(),
           ),
           Text(
-            "Dumanhill, Chirimiri, Chhattisgarh - 497557",
+            "${addressObj.city}, ${addressObj.state}, ${addressObj.country} - ${addressObj.postalCode}",
             style: addressTextStyle(),
           ),
           SizedBox(height: 10),
           Text(
-            "8319312145",
+            addressObj.contact.toString(),
             style: addressTextStyle(),
           )
         ],
       ),
     );
 
-_buildPopupMenu() {
+_buildPopupMenu(BuildContext context, int index, String addressId) {
+  final provider = Provider.of<AddressProvider>(context);
+  final token = Provider.of<AuthProvider>(context).getAuthToken;
   return Container(
     height: 20,
     width: 14,
@@ -51,6 +60,8 @@ _buildPopupMenu() {
             textStyle: TextStyle(fontSize: 12, color: Colors.black)),
         PopupMenuItem(
             child: Text("Remove"),
+            onTap: () => provider.deleteAddressProvider(context,
+                token: token, addressId: addressId, index: index),
             height: 30,
             textStyle: TextStyle(fontSize: 12, color: Colors.black)),
       ],

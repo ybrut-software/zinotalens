@@ -1,6 +1,8 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart' hide Colors;
 import 'package:provider/provider.dart';
+import 'package:zinotalens/provider/address_provider.dart';
+import 'package:zinotalens/provider/auth_provider.dart';
 import 'package:zinotalens/provider/product_cart_provider.dart';
 import 'package:zinotalens/utils/images.dart';
 import 'package:zinotalens/widgets/category_items.dart';
@@ -22,8 +24,16 @@ class _HomePageState extends State<HomePage> {
 
   @override
   void initState() {
-    Provider.of<ProductCartProvider>(context, listen: false).getCartItems();
+    initProviders();
     super.initState();
+  }
+
+  void initProviders() {
+    Provider.of<ProductCartProvider>(context, listen: false).getCartItems();
+    String token =
+        Provider.of<AuthProvider>(context, listen: false).getAuthToken;
+    Provider.of<AddressProvider>(context, listen: false)
+        .getAddressListProvider(token: token);
   }
 
   @override

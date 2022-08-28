@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart' hide Colors;
 
-import '../utils/colors.dart';
+import 'colors.dart';
 
 BoxDecoration contentContainerDecoration() =>
     BoxDecoration(color: Colors.white, boxShadow: [
@@ -13,6 +13,7 @@ TextStyle addressTextStyle() =>
 InputDecoration textFormFieldDecoration({String? labelText}) => InputDecoration(
       labelText: "$labelText",
       isDense: true,
+      counterText: "",
       border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(3),
           borderSide: BorderSide(width: 0.5)),

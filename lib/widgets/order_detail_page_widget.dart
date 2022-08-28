@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart' hide Colors;
-import 'package:zinotalens/widgets/values.dart';
+import 'package:zinotalens/utils/style.dart';
 
 import '../utils/colors.dart';
 import '../utils/images.dart';
