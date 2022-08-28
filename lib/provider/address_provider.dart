@@ -37,13 +37,22 @@ class AddressProvider extends ChangeNotifier {
 
   void makeDefaultAddress() {
     if (getAddressesLength > 0) {
-      for(var address in _addresses){
-        address.selected = false;
-      }
-      _addresses.last.selected = true;
+      _addresses.first.selected = true;
       _defaultAddress =
           _addresses.where((element) => element.selected == true).single;
     }
+    notifyListeners();
+  }
+
+  void changeSelectedAddr(Address address, int index) {
+    for (var address in _addresses) {
+      address.selected = false;
+    }
+    address.selected = true;
+    _addresses.removeAt(index);
+    _addresses.insert(0, address);
+    _defaultAddress =
+        _addresses.where((element) => element.selected == true).single;
     notifyListeners();
   }
 
