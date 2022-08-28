@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart' hide Colors;
 import 'package:provider/provider.dart';
-import 'package:zinotalens/main.dart';
 import 'package:zinotalens/model/product_addcart_model.dart';
+import 'package:zinotalens/pages/add_address_page.dart';
+import 'package:zinotalens/provider/address_provider.dart';
 import 'package:zinotalens/provider/product_cart_provider.dart';
 import 'package:zinotalens/utils/images.dart';
 import 'package:zinotalens/widgets/cart_item_viewholder.dart';
@@ -27,6 +28,7 @@ class _CartViewPageState extends State<CartViewPage> {
   @override
   Widget build(BuildContext context) {
     final provider = Provider.of<ProductCartProvider>(context);
+    final addressProvider = Provider.of<AddressProvider>(context);
     return Scaffold(
       backgroundColor: Colors.backgroundColor,
       appBar: AppBar(
@@ -39,8 +41,10 @@ class _CartViewPageState extends State<CartViewPage> {
           provider.cartItemLength == 0
               ? emptyCartWidget()
               : ListView(
-                  padding: EdgeInsets.only(top: 5, bottom: 130),
+                  padding: EdgeInsets.only(bottom: 130),
                   children: [
+                    selectedAddressWidget(context),
+                    SizedBox(height: 10),
                     ListView.separated(
                       physics: NeverScrollableScrollPhysics(),
                       shrinkWrap: true,
@@ -91,29 +95,55 @@ class _CartViewPageState extends State<CartViewPage> {
                     ),
                     Container(
                       width: double.infinity,
-                      child: ElevatedButton(
-                          onPressed: () {
-                            provider.clearCartDataProvider();
-                          },
-                          style: ButtonStyle(
-                            backgroundColor:
-                                MaterialStateProperty.all(Colors.skyBlue),
-                            shadowColor:
-                                MaterialStateProperty.all(Colors.transparent),
-                            shape: MaterialStateProperty.all(
-                                RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(5))),
-                          ),
-                          child: Padding(
-                            padding: EdgeInsets.all(18),
-                            child: Text(
-                              "SELECT ADDRESS",
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.w500),
-                            ),
-                          )),
+                      child: addressProvider.getAddressesLength == 0
+                          ? ElevatedButton(
+                              onPressed: () => Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                          AddDeliveryAddressPage())),
+                              style: ButtonStyle(
+                                backgroundColor:
+                                    MaterialStateProperty.all(Colors.skyBlue),
+                                shadowColor: MaterialStateProperty.all(
+                                    Colors.transparent),
+                                shape: MaterialStateProperty.all(
+                                    RoundedRectangleBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(5))),
+                              ),
+                              child: Padding(
+                                padding: EdgeInsets.all(18),
+                                child: Text(
+                                  "ADD ADDRESS",
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.w500),
+                                ),
+                              ))
+                          : ElevatedButton(
+                              onPressed: () {},
+                              style: ButtonStyle(
+                                backgroundColor:
+                                    MaterialStateProperty.all(Colors.skyBlue),
+                                shadowColor: MaterialStateProperty.all(
+                                    Colors.transparent),
+                                shape: MaterialStateProperty.all(
+                                    RoundedRectangleBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(5))),
+                              ),
+                              child: Padding(
+                                padding: EdgeInsets.all(18),
+                                child: Text(
+                                  "PLACE ORDER",
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.w500),
+                                ),
+                              )),
                     ),
                   ],
                 ),
