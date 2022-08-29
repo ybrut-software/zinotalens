@@ -110,4 +110,19 @@ class AddressProvider extends ChangeNotifier {
     }
     notifyListeners();
   }
+
+  void updateAddressProvider(
+      {required String token,
+      required String addressId,
+      required int index,
+      required BuildContext context,
+      required Address addressObj}) async {
+    try {
+      bool _isUpdated = await updateAddress(token, addressId);
+      if (_isUpdated) {}
+    } catch (e) {
+      print("error no 466: $e");
+    }
+    notifyListeners();
+  }
 }

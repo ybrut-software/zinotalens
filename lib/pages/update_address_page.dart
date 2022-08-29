@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart' hide Colors;
 import 'package:provider/provider.dart';
-import 'package:uuid/uuid.dart';
-import 'package:zinotalens/model/address_list_model.dart';
 import 'package:zinotalens/model/single_address_model.dart';
 import 'package:zinotalens/provider/address_provider.dart';
 import 'package:zinotalens/provider/auth_provider.dart';
@@ -9,6 +7,7 @@ import 'package:zinotalens/utils/colors.dart';
 import 'package:zinotalens/widgets/custom_appbar.dart';
 import 'package:zinotalens/widgets/progress_indicator.dart';
 
+import '../model/address_list_model.dart';
 import '../utils/style.dart';
 
 class UpdateDeliveryAddressPage extends StatefulWidget {
@@ -23,23 +22,21 @@ class UpdateDeliveryAddressPage extends StatefulWidget {
 class _UpdateDeliveryAddressPageState extends State<UpdateDeliveryAddressPage> {
   final formKey = GlobalKey<FormState>();
 
-  String fullName = "";
-  String contact1 = "";
-  String contact2 = "";
-  String pinCode = "";
-  String country = "";
-  String state = "";
-  String city = "";
-  String address1 = "";
-  String address2 = "";
+  TextEditingController fullNameController = TextEditingController();
+  TextEditingController contact1Controller = TextEditingController();
+  TextEditingController contact2Controller = TextEditingController();
+  TextEditingController pincodeController = TextEditingController();
+  TextEditingController stateController = TextEditingController();
+  TextEditingController cityController = TextEditingController();
+  TextEditingController countryController = TextEditingController();
+  TextEditingController address1Controller = TextEditingController();
+  TextEditingController address2Controller = TextEditingController();
 
   @override
   void initState() {
-    Provider.of<AddressProvider>(context, listen: false)
-        .fetchSingleAddressProvider(
-            token:
-                Provider.of<AuthProvider>(context, listen: false).getAuthToken,
-            addressId: widget.addressId);
+        Provider.of<AddressProvider>(context, listen: false).fetchSingleAddressProvider(
+        token: Provider.of<AuthProvider>(context, listen: false).getAuthToken,
+        addressId: widget.addressId);
 
     super.initState();
   }
@@ -49,17 +46,6 @@ class _UpdateDeliveryAddressPageState extends State<UpdateDeliveryAddressPage> {
     final addressProvider = Provider.of<AddressProvider>(context);
     final token = Provider.of<AuthProvider>(context).getAuthToken;
     SingleAddress address = addressProvider.singleAddress;
-
-    if (address.id == widget.addressId) {
-      fullName = address.fullName!;
-      contact1 = address.contact.toString();
-      pinCode = address.postalCode!;
-      country = address.country!;
-      state = address.state!;
-      city = address.city!;
-      address1 = address.streetAddress1!;
-      address2 = address.streetAddress2!;
-    }
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: customAppBar(context,
@@ -76,7 +62,7 @@ class _UpdateDeliveryAddressPageState extends State<UpdateDeliveryAddressPage> {
                     children: [
                       TextFormField(
                         keyboardType: TextInputType.text,
-                        controller: TextEditingController(text: fullName),
+                        controller: fullNameController..text = address.fullName!,
                         validator: (value) {
                           if (value!.isEmpty) return "required";
                           return null;
@@ -86,7 +72,7 @@ class _UpdateDeliveryAddressPageState extends State<UpdateDeliveryAddressPage> {
                       ),
                       SizedBox(height: 20),
                       TextFormField(
-                        controller: TextEditingController(text: contact1),
+                        controller: contact1Controller..text = address.contact.toString(),
                         keyboardType: TextInputType.number,
                         validator: (value) {
                           if (value!.isEmpty) return "required";
@@ -98,7 +84,7 @@ class _UpdateDeliveryAddressPageState extends State<UpdateDeliveryAddressPage> {
                       ),
                       SizedBox(height: 20),
                       TextFormField(
-                        controller: TextEditingController(text: contact2),
+                        controller: contact2Controller,
                         keyboardType: TextInputType.number,
                         maxLength: 10,
                         decoration: textFormFieldDecoration(
@@ -106,7 +92,7 @@ class _UpdateDeliveryAddressPageState extends State<UpdateDeliveryAddressPage> {
                       ),
                       SizedBox(height: 20),
                       TextFormField(
-                        controller: TextEditingController(text: pinCode),
+                        controller: pincodeController..text = address.postalCode!,
                         keyboardType: TextInputType.number,
                         maxLength: 6,
                         validator: (value) {
@@ -119,7 +105,7 @@ class _UpdateDeliveryAddressPageState extends State<UpdateDeliveryAddressPage> {
                       SizedBox(height: 20),
                       //country
                       TextFormField(
-                        controller: TextEditingController(text: country),
+                        controller: countryController..text = address.country!,
                         keyboardType: TextInputType.text,
                         validator: (value) {
                           if (value!.isEmpty) return "required";
@@ -134,7 +120,7 @@ class _UpdateDeliveryAddressPageState extends State<UpdateDeliveryAddressPage> {
                         children: [
                           Expanded(
                               child: TextFormField(
-                            controller: TextEditingController(text: state),
+                            controller: stateController..text = address.state!,
                             keyboardType: TextInputType.text,
                             validator: (value) {
                               if (value!.isEmpty) return "required";
@@ -146,7 +132,7 @@ class _UpdateDeliveryAddressPageState extends State<UpdateDeliveryAddressPage> {
                           SizedBox(width: 10),
                           Expanded(
                               child: TextFormField(
-                            controller: TextEditingController(text: city),
+                            controller: cityController..text = address.city!,
                             keyboardType: TextInputType.text,
                             validator: (value) {
                               if (value!.isEmpty) return "required";
@@ -159,7 +145,7 @@ class _UpdateDeliveryAddressPageState extends State<UpdateDeliveryAddressPage> {
                       ),
                       SizedBox(height: 20),
                       TextFormField(
-                        controller: TextEditingController(text: address1),
+                        controller: address1Controller..text = address.streetAddress1!,
                         keyboardType: TextInputType.text,
                         validator: (value) {
                           if (value!.isEmpty) return "required";
@@ -170,7 +156,7 @@ class _UpdateDeliveryAddressPageState extends State<UpdateDeliveryAddressPage> {
                       ),
                       SizedBox(height: 20),
                       TextFormField(
-                        controller: TextEditingController(text: address2),
+                        controller: address2Controller..text = address.streetAddress2!,
                         keyboardType: TextInputType.text,
                         validator: (value) {
                           if (value!.isEmpty) return "required";
@@ -187,15 +173,19 @@ class _UpdateDeliveryAddressPageState extends State<UpdateDeliveryAddressPage> {
                         child: ElevatedButton(
                             onPressed: () {
                               if (formKey.currentState!.validate()) {
+                                print(
+                                    "${fullNameController.text}, ${pincodeController.text}, ${contact1Controller.text}");
                                 Address address = Address(
-                                    fullName: fullName.trim(),
-                                    contact: int.parse(contact1),
-                                    postalCode: pinCode,
-                                    country: country.trim(),
-                                    state: state.trim(),
-                                    city: city.trim(),
-                                    streetAddress1: address1.trim(),
-                                    streetAddress2: address2.trim());
+                                    fullName: fullNameController.text.trim(),
+                                    contact: int.parse(contact1Controller.text),
+                                    postalCode: pincodeController.text.trim(),
+                                    country: countryController.text.trim(),
+                                    state: stateController.text.trim(),
+                                    city: cityController.text.trim(),
+                                    streetAddress1:
+                                        address1Controller.text.trim(),
+                                    streetAddress2:
+                                        address2Controller.text.trim());
                               }
                             },
                             style: ButtonStyle(
@@ -218,5 +208,24 @@ class _UpdateDeliveryAddressPageState extends State<UpdateDeliveryAddressPage> {
               ),
             ),
     );
+  }
+
+  getAddressData(addressProvider) {
+    
+
+    SingleAddress address = addressProvider.singleAddress;
+
+    if (address.id == widget.addressId) {
+      fullNameController = TextEditingController(text: address.fullName);
+      contact1Controller =
+          TextEditingController(text: address.contact.toString());
+      contact2Controller = TextEditingController();
+      pincodeController = TextEditingController(text: address.postalCode);
+      stateController = TextEditingController(text: address.state);
+      cityController = TextEditingController(text: address.city);
+      countryController = TextEditingController(text: address.country);
+      address1Controller = TextEditingController(text: address.streetAddress1);
+      address2Controller = TextEditingController(text: address.streetAddress2);
+    }
   }
 }

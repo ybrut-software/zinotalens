@@ -25,7 +25,15 @@ Future<bool> deleteAddress(String token, String addressId) async {
 }
 
 Future<SingleAddress> fetchSingleAddress(String token, String addressId) async {
-  var resJson = await ApiClient.getServices().fetchSingleAddressApi(token, addressId);
+  var resJson =
+      await ApiClient.getServices().fetchSingleAddressApi(token, addressId);
   SingleAddressModel singleAddressModel = singleAddressModelFromJson(resJson);
   return singleAddressModel.address!; //response["address"];
+}
+
+Future<bool> updateAddress(String token, String addressId) async {
+  var resJson =
+      await ApiClient.getServices().updateAddressApi(token, addressId);
+  Map<String, dynamic> response = jsonDecode(resJson);
+  return response["success"];
 }
