@@ -38,4 +38,12 @@ abstract class ApiClient {
   @DELETE('/api/addresses/{addrId}')
   Future<String> deleteAddressApi(
       @Header('x-auth-token') String token, @Path('addrId') String addressId);
+
+  @GET('/api/addresses/{addrId}')
+  Future<String> fetchSingleAddressApi(
+      @Header('x-auth-token') String token, @Path('addrId') String addressId);
+
+  @PUT('/api/addresses/{addrId}')
+  Future<String> updateAddressApi(
+      @Header('x-auth-token') String token, @Path('addrId') String addressId);
 }

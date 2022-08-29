@@ -1,7 +1,7 @@
-
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:zinotalens/model/address_list_model.dart';
+import 'package:zinotalens/pages/update_address_page.dart';
 import 'package:zinotalens/provider/address_provider.dart';
 import 'package:zinotalens/provider/auth_provider.dart';
 import 'package:zinotalens/utils/style.dart';
@@ -53,9 +53,17 @@ _buildPopupMenu(BuildContext context, int index, String addressId) {
       icon: Icon(Icons.more_vert),
       splashRadius: 10,
       iconSize: 16,
+      onSelected: (value) {
+        if (value == 0)
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => UpdateDeliveryAddressPage(addressId)));
+      },
       itemBuilder: (context) => [
         PopupMenuItem(
             child: Text("Edit"),
+            value: 0,
             height: 30,
             textStyle: TextStyle(fontSize: 12, color: Colors.black)),
         PopupMenuItem(

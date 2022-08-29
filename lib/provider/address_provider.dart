@@ -1,16 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:zinotalens/controller/address_controller.dart';
 import 'package:zinotalens/model/address_list_model.dart';
+import 'package:zinotalens/model/single_address_model.dart';
 import 'package:zinotalens/widgets/error_widgets.dart';
 
 class AddressProvider extends ChangeNotifier {
   List<Address> _addresses = [];
   bool _isSaveAddrLoader = false;
   bool _isFetchAddrLoader = true;
+  bool _isSingleAddrLoader = true;
 
   Address _defaultAddress = Address();
+  SingleAddress _singleAddress = SingleAddress();
 
   Address get defaultAddress => _defaultAddress;
+  SingleAddress get singleAddress => _singleAddress;
+
+  bool get isSingleAddrLoader => _isSingleAddrLoader;
+  set setSingleAddrLoader(bool _isSingleAddrLoader) {
+    this._isSingleAddrLoader = _isSingleAddrLoader;
+    notifyListeners();
+  }
 
   bool get isSaveAddrLoader => _isSaveAddrLoader;
   set setSaveAddrLoader(bool _isSaveAddrLoader) {
@@ -85,6 +95,18 @@ class AddressProvider extends ChangeNotifier {
       }
     } catch (e) {
       print("error no 176: $e");
+    }
+    notifyListeners();
+  }
+
+  void fetchSingleAddressProvider(
+      {required String token, required String addressId}) async {
+    try {
+      _singleAddress = await fetchSingleAddress(token, addressId);
+      _isSingleAddrLoader = false;
+    } catch (e) {
+      print("error no 476: $e");
+      _isSingleAddrLoader = false;
     }
     notifyListeners();
   }

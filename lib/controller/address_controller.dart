@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:zinotalens/model/address_list_model.dart';
+import 'package:zinotalens/model/single_address_model.dart';
 import 'package:zinotalens/services/api_client.dart';
 
 Future<List<Address>> fetchAddressList(String token) async {
@@ -21,4 +22,10 @@ Future<bool> deleteAddress(String token, String addressId) async {
       await ApiClient.getServices().deleteAddressApi(token, addressId);
   Map<String, dynamic> response = jsonDecode(resJson);
   return response["success"];
+}
+
+Future<SingleAddress> fetchSingleAddress(String token, String addressId) async {
+  var resJson = await ApiClient.getServices().fetchSingleAddressApi(token, addressId);
+  SingleAddressModel singleAddressModel = singleAddressModelFromJson(resJson);
+  return singleAddressModel.address!; //response["address"];
 }
