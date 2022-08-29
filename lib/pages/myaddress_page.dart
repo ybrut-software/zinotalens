@@ -33,7 +33,7 @@ class _MyAddressPageState extends State<MyAddressPage> {
       backgroundColor: Colors.backgroundColor,
       appBar: customAppBar(context,
           title: "My Addresses", isSearchIcon: false, isCartIcon: false),
-      body: Column(
+      body: ListView(
         children: [
           //add address button
           Container(
@@ -66,20 +66,30 @@ class _MyAddressPageState extends State<MyAddressPage> {
             ),
           ),
 
-          //address view holder
-          Expanded(
-            child: provider.IsFetchAddrLoader
-                ? circularProgressIndicator()
-                : provider.getAddressesLength == 0
-                    ? errorWidget(errorMsg: "Empty!")
-                    : ListView.builder(
-                        padding: EdgeInsets.only(top: 10),
-                        itemCount: provider.getAddressesLength,
-                        itemBuilder: (context, index) => addressViewHolder(
-                            context,
-                            index: index,
-                            addressObj: provider.getAddresses[index])),
+          SizedBox(height: 20),
+
+          Padding(
+            padding: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+            child: Text(
+              "${provider.getAddressesLength} SAVED ADDRESSES",
+              style: TextStyle(
+                  color: Colors.gray, fontSize: 11, fontWeight: FontWeight.w500),
+            ),
           ),
+
+          //address view holder
+          provider.IsFetchAddrLoader
+              ? circularProgressIndicator()
+              : provider.getAddressesLength == 0
+                  ? errorWidget(errorMsg: "Empty!")
+                  : ListView.builder(
+                      shrinkWrap: true,
+                      physics: NeverScrollableScrollPhysics(),
+                      itemCount: provider.getAddressesLength,
+                      itemBuilder: (context, index) => addressViewHolder(
+                          context,
+                          index: index,
+                          addressObj: provider.getAddresses[index])),
         ],
       ),
     );
