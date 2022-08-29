@@ -157,12 +157,12 @@ class _ApiClient implements ApiClient {
   }
 
   @override
-  Future<String> updateAddressApi(token, addressId) async {
+  Future<String> updateAddressApi(token, addressId, addressObj) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{r'x-auth-token': token};
     _headers.removeWhere((k, v) => v == null);
-    final _data = <String, dynamic>{};
+    final _data = addressObj;
     final _result = await _dio.fetch<String>(_setStreamType<String>(
         Options(method: 'PUT', headers: _headers, extra: _extra)
             .compose(_dio.options, '/api/addresses/${addressId}',

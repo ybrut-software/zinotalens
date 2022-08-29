@@ -31,9 +31,11 @@ Future<SingleAddress> fetchSingleAddress(String token, String addressId) async {
   return singleAddressModel.address!; //response["address"];
 }
 
-Future<bool> updateAddress(String token, String addressId) async {
+Future<bool> updateAddress(
+    String token, String addressId, Address addressObj) async {
+  var reqJson = jsonEncode(addressObj.toJson());
   var resJson =
-      await ApiClient.getServices().updateAddressApi(token, addressId);
+      await ApiClient.getServices().updateAddressApi(token, addressId, reqJson);
   Map<String, dynamic> response = jsonDecode(resJson);
   return response["success"];
 }

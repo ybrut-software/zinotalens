@@ -45,5 +45,5 @@ abstract class ApiClient {
 
   @PUT('/api/addresses/{addrId}')
   Future<String> updateAddressApi(
-      @Header('x-auth-token') String token, @Path('addrId') String addressId);
+      @Header('x-auth-token') String token, @Path('addrId') String addressId, @Body() String addressObj);
 }

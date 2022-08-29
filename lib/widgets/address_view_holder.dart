@@ -58,7 +58,8 @@ _buildPopupMenu(BuildContext context, int index, String addressId) {
           Navigator.push(
               context,
               MaterialPageRoute(
-                  builder: (context) => UpdateDeliveryAddressPage(addressId)));
+                  builder: (context) =>
+                      UpdateDeliveryAddressPage(addressId, index)));
       },
       itemBuilder: (context) => [
         PopupMenuItem(

@@ -6,9 +6,17 @@ import 'package:zinotalens/widgets/error_widgets.dart';
 
 class AddressProvider extends ChangeNotifier {
   List<Address> _addresses = [];
+
   bool _isSaveAddrLoader = false;
   bool _isFetchAddrLoader = true;
   bool _isSingleAddrLoader = true;
+  bool _isUpdateLoader = false;
+
+  bool get isUpdateLoader => _isUpdateLoader;
+  set setIsUpdateLoader(bool _isUpdateLoader) {
+    this._isUpdateLoader = _isUpdateLoader;
+    notifyListeners();
+  }
 
   Address _defaultAddress = Address();
   SingleAddress _singleAddress = SingleAddress();
@@ -118,10 +126,16 @@ class AddressProvider extends ChangeNotifier {
       required BuildContext context,
       required Address addressObj}) async {
     try {
-      bool _isUpdated = await updateAddress(token, addressId);
-      if (_isUpdated) {}
+      bool _isUpdated = await updateAddress(token, addressId, addressObj);
+      if (_isUpdated) {
+        _addresses[index] = addressObj;
+        Navigator.pop(context);
+        showSnackBarMessage(context, "Address updated Successfully!");
+      }
+      _isUpdateLoader = false;
     } catch (e) {
       print("error no 466: $e");
+      _isUpdateLoader = false;
     }
     notifyListeners();
   }

@@ -12,7 +12,9 @@ import '../utils/style.dart';
 
 class UpdateDeliveryAddressPage extends StatefulWidget {
   final addressId;
-  UpdateDeliveryAddressPage(this.addressId, {Key? key}) : super(key: key);
+  final index;
+  UpdateDeliveryAddressPage(this.addressId, this.index, {Key? key})
+      : super(key: key);
 
   @override
   State<UpdateDeliveryAddressPage> createState() =>
@@ -34,9 +36,11 @@ class _UpdateDeliveryAddressPageState extends State<UpdateDeliveryAddressPage> {
 
   @override
   void initState() {
-        Provider.of<AddressProvider>(context, listen: false).fetchSingleAddressProvider(
-        token: Provider.of<AuthProvider>(context, listen: false).getAuthToken,
-        addressId: widget.addressId);
+    Provider.of<AddressProvider>(context, listen: false)
+        .fetchSingleAddressProvider(
+            token:
+                Provider.of<AuthProvider>(context, listen: false).getAuthToken,
+            addressId: widget.addressId);
 
     super.initState();
   }
@@ -62,7 +66,8 @@ class _UpdateDeliveryAddressPageState extends State<UpdateDeliveryAddressPage> {
                     children: [
                       TextFormField(
                         keyboardType: TextInputType.text,
-                        controller: fullNameController..text = address.fullName!,
+                        controller: fullNameController
+                          ..text = address.fullName!,
                         validator: (value) {
                           if (value!.isEmpty) return "required";
                           return null;
@@ -72,7 +77,8 @@ class _UpdateDeliveryAddressPageState extends State<UpdateDeliveryAddressPage> {
                       ),
                       SizedBox(height: 20),
                       TextFormField(
-                        controller: contact1Controller..text = address.contact.toString(),
+                        controller: contact1Controller
+                          ..text = address.contact.toString(),
                         keyboardType: TextInputType.number,
                         validator: (value) {
                           if (value!.isEmpty) return "required";
@@ -92,7 +98,8 @@ class _UpdateDeliveryAddressPageState extends State<UpdateDeliveryAddressPage> {
                       ),
                       SizedBox(height: 20),
                       TextFormField(
-                        controller: pincodeController..text = address.postalCode!,
+                        controller: pincodeController
+                          ..text = address.postalCode!,
                         keyboardType: TextInputType.number,
                         maxLength: 6,
                         validator: (value) {
@@ -145,7 +152,8 @@ class _UpdateDeliveryAddressPageState extends State<UpdateDeliveryAddressPage> {
                       ),
                       SizedBox(height: 20),
                       TextFormField(
-                        controller: address1Controller..text = address.streetAddress1!,
+                        controller: address1Controller
+                          ..text = address.streetAddress1!,
                         keyboardType: TextInputType.text,
                         validator: (value) {
                           if (value!.isEmpty) return "required";
@@ -156,7 +164,8 @@ class _UpdateDeliveryAddressPageState extends State<UpdateDeliveryAddressPage> {
                       ),
                       SizedBox(height: 20),
                       TextFormField(
-                        controller: address2Controller..text = address.streetAddress2!,
+                        controller: address2Controller
+                          ..text = address.streetAddress2!,
                         keyboardType: TextInputType.text,
                         validator: (value) {
                           if (value!.isEmpty) return "required";
@@ -173,9 +182,9 @@ class _UpdateDeliveryAddressPageState extends State<UpdateDeliveryAddressPage> {
                         child: ElevatedButton(
                             onPressed: () {
                               if (formKey.currentState!.validate()) {
-                                print(
-                                    "${fullNameController.text}, ${pincodeController.text}, ${contact1Controller.text}");
+                                addressProvider.setIsUpdateLoader = true;
                                 Address address = Address(
+                                    id: widget.addressId,
                                     fullName: fullNameController.text.trim(),
                                     contact: int.parse(contact1Controller.text),
                                     postalCode: pincodeController.text.trim(),
@@ -186,6 +195,12 @@ class _UpdateDeliveryAddressPageState extends State<UpdateDeliveryAddressPage> {
                                         address1Controller.text.trim(),
                                     streetAddress2:
                                         address2Controller.text.trim());
+                                addressProvider.updateAddressProvider(
+                                    token: token,
+                                    addressId: widget.addressId,
+                                    index: widget.index,
+                                    context: context,
+                                    addressObj: address);
                               }
                             },
                             style: ButtonStyle(
@@ -195,7 +210,7 @@ class _UpdateDeliveryAddressPageState extends State<UpdateDeliveryAddressPage> {
                                             BorderRadius.circular(0))),
                                 shadowColor: MaterialStateProperty.all(
                                     Colors.transparent)),
-                            child: addressProvider.isSaveAddrLoader
+                            child: addressProvider.isUpdateLoader
                                 ? buttonProgressIndicator()
                                 : Text(
                                     "Update Address",
@@ -211,8 +226,6 @@ class _UpdateDeliveryAddressPageState extends State<UpdateDeliveryAddressPage> {
   }
 
   getAddressData(addressProvider) {
-    
-
     SingleAddress address = addressProvider.singleAddress;
 
     if (address.id == widget.addressId) {
