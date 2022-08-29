@@ -27,15 +27,3 @@ Future<productDetail.Product> fetchProductDetails(String productId) async {
       productDetail.productDetailsModelFromJson(jsonData);
   return productDetailsModel.product!;
 }
-
-void addCartItem({required ProductAddCartModel productCart}) async {
-  databaseHelper.insertProduct(productCart);
-}
-
-Future<List<ProductAddCartModel>> fetchCartItems() async {
-  List<ProductAddCartModel> cartProducts =
-      await databaseHelper.getProductCartList();
-
-  print("cart products : $cartProducts");
-  return cartProducts;
-}

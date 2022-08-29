@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:zinotalens/controller/products_controller.dart';
+import 'package:zinotalens/controller/address_controller.dart';
 import 'package:zinotalens/main.dart';
 import 'package:zinotalens/model/product_addcart_model.dart';
+
+import '../controller/cart_controller.dart';
 
 class ProductCartProvider extends ChangeNotifier {
   List<ProductAddCartModel> _cartItems = [];
@@ -78,5 +80,24 @@ class ProductCartProvider extends ChangeNotifier {
         check = true;
     }
     return check;
+  }
+
+  bool _isCartSavedLoader = false;
+  bool get isCartSavedLoader => _isCartSavedLoader;
+  set setIsCartSavedLoader(bool _isCartSavedLoader) {
+    this._isCartSavedLoader = _isCartSavedLoader;
+    notifyListeners();
+  }
+
+  void saveCartProvider(String token) async {
+    try {
+      bool _isCartSaved = await saveCart(token, _cartItems);
+      if (_isCartSaved) {}
+      _isCartSavedLoader = false;
+    } catch (e) {
+      print("error no 235: $e");
+      _isCartSavedLoader = false;
+    }
+    notifyListeners();
   }
 }

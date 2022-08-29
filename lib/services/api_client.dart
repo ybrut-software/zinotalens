@@ -44,6 +44,11 @@ abstract class ApiClient {
       @Header('x-auth-token') String token, @Path('addrId') String addressId);
 
   @PUT('/api/addresses/{addrId}')
-  Future<String> updateAddressApi(
-      @Header('x-auth-token') String token, @Path('addrId') String addressId, @Body() String addressObj);
+  Future<String> updateAddressApi(@Header('x-auth-token') String token,
+      @Path('addrId') String addressId, @Body() String addressObj);
+
+  // *CART
+  @POST('/api/cart')
+  Future<String> saveCartApi(
+      @Header('x-auth-token') String token, @Body() String cartBody);
 }

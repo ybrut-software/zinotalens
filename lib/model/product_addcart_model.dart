@@ -1,3 +1,10 @@
+import 'dart:convert';
+
+List<ProductAddCartModel> productAddCartModelFromMap(String str) => List<ProductAddCartModel>.from(json.decode(str).map((x) => ProductAddCartModel.fromMap(x)));
+
+String productAddCartModelToMap(List<ProductAddCartModel> data) => json.encode(List<dynamic>.from(data.map((x) => x.toMap())));
+
+
 class ProductAddCartModel {
   String? productId;
   String? productTitle;

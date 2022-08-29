@@ -9,6 +9,7 @@ import 'package:zinotalens/utils/images.dart';
 import 'package:zinotalens/widgets/cart_item_viewholder.dart';
 import 'package:zinotalens/widgets/cart_page_widgets.dart';
 import 'package:zinotalens/widgets/error_widgets.dart';
+import 'package:zinotalens/widgets/progress_indicator.dart';
 
 import '../utils/colors.dart';
 
@@ -32,6 +33,7 @@ class _CartViewPageState extends State<CartViewPage> {
   Widget build(BuildContext context) {
     final provider = Provider.of<ProductCartProvider>(context);
     final addressProvider = Provider.of<AddressProvider>(context);
+    final token = Provider.of<AuthProvider>(context).getAuthToken;
     return Scaffold(
       backgroundColor: Colors.backgroundColor,
       appBar: AppBar(
@@ -128,7 +130,10 @@ class _CartViewPageState extends State<CartViewPage> {
                                 ),
                               ))
                           : ElevatedButton(
-                              onPressed: () {},
+                              onPressed: () {
+                                provider.setIsCartSavedLoader = true;
+                                provider.saveCartProvider(token);
+                              },
                               style: ButtonStyle(
                                 backgroundColor:
                                     MaterialStateProperty.all(Colors.skyBlue),
@@ -141,13 +146,15 @@ class _CartViewPageState extends State<CartViewPage> {
                               ),
                               child: Padding(
                                 padding: EdgeInsets.all(18),
-                                child: Text(
-                                  "PLACE ORDER",
-                                  style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 14,
-                                      fontWeight: FontWeight.w500),
-                                ),
+                                child: provider.isCartSavedLoader
+                                    ? buttonProgressIndicator()
+                                    : Text(
+                                        "PLACE ORDER",
+                                        style: TextStyle(
+                                            color: Colors.white,
+                                            fontSize: 14,
+                                            fontWeight: FontWeight.w500),
+                                      ),
                               )),
                     ),
                   ],
