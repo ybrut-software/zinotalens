@@ -3,7 +3,6 @@ import 'package:zinotalens/controller/products_controller.dart';
 import 'package:zinotalens/model/productlist_model.dart';
 
 class ProductListProvider extends ChangeNotifier {
-
   List<Product> _productList = [];
   bool _isDataLoad = false;
 

@@ -7,6 +7,7 @@ import 'package:zinotalens/widgets/custom_appbar.dart';
 import 'package:zinotalens/widgets/error_widgets.dart';
 import 'package:zinotalens/widgets/product_viewpage_widgets.dart';
 import 'package:zinotalens/widgets/progress_indicator.dart';
+import '../controller/image_controller.dart';
 import '../model/product_addcart_model.dart';
 import '../utils/colors.dart';
 
@@ -43,7 +44,7 @@ class _ProductViewPageState extends State<ProductViewPage> {
               children: [
                 ListView(padding: EdgeInsets.only(bottom: 70), children: [
                   productViewPageWidget.ProductImageSliderAndDesc(
-                      photo: frontFrame,
+                      photo: fetchImageController(photoUrl: product.photos![0]),
                       title: product.title!,
                       frameSize: product.specifications?.size,
                       frameWidth: product.specifications?.width,
@@ -72,7 +73,7 @@ class _ProductViewPageState extends State<ProductViewPage> {
                         ProductAddCartModel productCart = ProductAddCartModel(
                             productId: product.productId!,
                             productTitle: product.title!,
-                            productPhoto: sideFrame,
+                            productPhoto: product.photos![0],
                             productSize: product.specifications!.size!,
                             productListingPrice: product.listPrice,
                             productSellingPrice: product.salesPrice!,

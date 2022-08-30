@@ -13,3 +13,4 @@ const sun_glasses_icon = 'assets/images/sun_glasses_icon.png';
 const search_icon = 'assets/images/search_icon.png';
 const error_icon = 'assets/images/error_icon.png';
 const empty_cart_icon = 'assets/images/empty_cart_icon.png';
+const image_placeholder= 'assets/images/image_placeholder.png';

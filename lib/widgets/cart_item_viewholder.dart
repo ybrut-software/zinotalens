@@ -10,7 +10,7 @@ Widget cartItemViewHolder(
         required int index,
         required String productId,
         required ProductCartProvider provider,
-        String photo = sideFrame,
+        required String photo,
         int? listingPrice,
         int? quantity}) =>
     Container(
@@ -30,10 +30,11 @@ Widget cartItemViewHolder(
             Expanded(
               flex: 4,
               child: Container(
-                height: 90,
-                color: Colors.gray,
-                child: Image(image: AssetImage(photo), fit: BoxFit.cover),
-              ),
+                  height: 90,
+                  decoration: BoxDecoration(
+                      image: DecorationImage(
+                          scale: 1.5, image: AssetImage(image_placeholder))),
+                  child: Image.network(photo)),
             ),
             SizedBox(width: 10),
             Expanded(

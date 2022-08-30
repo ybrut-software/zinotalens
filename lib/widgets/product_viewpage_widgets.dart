@@ -3,6 +3,7 @@ import 'package:zinotalens/model/product_details_model.dart';
 import 'package:zinotalens/utils/style.dart';
 
 import '../utils/colors.dart';
+import '../utils/images.dart';
 
 class ProductViewPageWidget {
   final BuildContext context;
@@ -23,9 +24,12 @@ class ProductViewPageWidget {
         child: Column(mainAxisSize: MainAxisSize.min, children: [
           Container(
             height: 340,
-            child: Image.asset(
+            decoration: BoxDecoration(
+                image: DecorationImage(
+                    scale: 1.5, image: AssetImage(image_placeholder))),
+            child: Image.network(
               photo,
-              fit: BoxFit.cover,
+              
             ),
           ),
           Divider(thickness: 1.2, color: Colors.gray.withOpacity(0.1)),

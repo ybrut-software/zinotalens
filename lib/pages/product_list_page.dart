@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart' hide Colors;
 import 'package:provider/provider.dart';
+import 'package:zinotalens/controller/image_controller.dart';
 import 'package:zinotalens/model/productlist_model.dart';
 import 'package:zinotalens/provider/product_list_provider.dart';
 import 'package:zinotalens/utils/images.dart';
@@ -46,7 +47,8 @@ class _ProductListPageState extends State<ProductListPage> {
                           title: products.title!,
                           size: products.specifications!.size!,
                           rating: products.averageRating?.toDouble(),
-                          photo: sideFrame,
+                          photo: fetchImageController(
+                              photoUrl: products.photos![0]),
                           sellingPrice: products.salesPrice!,
                           listingPrice: products.listPrice);
                     }),

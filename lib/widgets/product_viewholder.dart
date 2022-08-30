@@ -2,6 +2,7 @@ import 'package:flutter/material.dart' hide Colors;
 
 import '../pages/product_view_page.dart';
 import '../utils/colors.dart';
+import '../utils/images.dart';
 
 Widget productViewHolder(BuildContext context,
         {required String productId,
@@ -57,7 +58,10 @@ Widget productViewHolder(BuildContext context,
                   Container(
                     height: 125,
                     width: double.infinity,
-                    child: Image.asset(
+                    decoration: BoxDecoration(
+                        image: DecorationImage(
+                            scale: 1.5, image: AssetImage(image_placeholder))),
+                    child: Image.network(
                       photo,
                       fit: BoxFit.cover,
                     ),
@@ -79,7 +83,10 @@ Widget productViewHolder(BuildContext context,
                       Expanded(
                         child: Text(
                           "$title",
-                          style: TextStyle(fontSize: 14, color: Colors.black, overflow: TextOverflow.ellipsis),
+                          style: TextStyle(
+                              fontSize: 14,
+                              color: Colors.black,
+                              overflow: TextOverflow.ellipsis),
                         ),
                       ),
                       SizedBox(width: 5),
