@@ -47,8 +47,7 @@ class _ProductListPageState extends State<ProductListPage> {
                           title: products.title!,
                           size: products.specifications!.size!,
                           rating: products.averageRating?.toDouble(),
-                          photo: fetchImageController(
-                              photoUrl: products.photos![0]),
+                          photo: products.photos![0],
                           sellingPrice: products.salesPrice!,
                           listingPrice: products.listPrice);
                     }),

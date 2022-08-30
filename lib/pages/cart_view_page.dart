@@ -134,7 +134,8 @@ class _CartViewPageState extends State<CartViewPage> {
                           : ElevatedButton(
                               onPressed: () {
                                 provider.setIsCartSavedLoader = true;
-                                provider.saveCartProvider(token);
+                                provider.saveCartProvider(
+                                    token: token, context: context);
                               },
                               style: ButtonStyle(
                                 backgroundColor:

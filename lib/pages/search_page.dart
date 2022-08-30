@@ -71,7 +71,7 @@ class _SearchPageState extends State<SearchPage> {
                           productId: product.productId!,
                           title: product.title!,
                           size: product.specifications!.size!,
-                          photo: sideFrame,
+                          photo: product.photos![0],
                           sellingPrice: product.salesPrice!,
                           rating: product.averageRating?.toDouble(),
                           listingPrice: product.listPrice);

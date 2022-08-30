@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:zinotalens/controller/address_controller.dart';
 import 'package:zinotalens/main.dart';
 import 'package:zinotalens/model/product_addcart_model.dart';
+import 'package:zinotalens/pages/payment_options_page.dart';
 
 import '../controller/cart_controller.dart';
 
@@ -89,10 +90,14 @@ class ProductCartProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  void saveCartProvider(String token) async {
+  void saveCartProvider(
+      {required String token, required BuildContext context}) async {
     try {
       bool _isCartSaved = await saveCart(token, _cartItems);
-      if (_isCartSaved) {}
+      if (_isCartSaved) {
+        Navigator.push(context,
+            MaterialPageRoute(builder: (context) => PaymentOptionsPage()));
+      }
       _isCartSavedLoader = false;
     } catch (e) {
       print("error no 235: $e");

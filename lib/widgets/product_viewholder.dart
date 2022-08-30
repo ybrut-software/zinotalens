@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart' hide Colors;
 
+import '../controller/image_controller.dart';
 import '../pages/product_view_page.dart';
 import '../utils/colors.dart';
 import '../utils/images.dart';
@@ -62,7 +63,7 @@ Widget productViewHolder(BuildContext context,
                         image: DecorationImage(
                             scale: 1.5, image: AssetImage(image_placeholder))),
                     child: Image.network(
-                      photo,
+                      fetchImageController(photoUrl: photo),
                       fit: BoxFit.cover,
                     ),
                   )
