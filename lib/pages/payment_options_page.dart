@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart' hide Colors;
 import 'package:provider/provider.dart';
+import 'package:zinotalens/pages/payment_page.dart';
 import 'package:zinotalens/provider/payment_provider.dart';
 import 'package:zinotalens/provider/product_cart_provider.dart';
 import 'package:zinotalens/utils/style.dart';
@@ -93,7 +94,10 @@ class _PaymentOptionsPageState extends State<PaymentOptionsPage> {
                           style: ButtonStyle(
                               shadowColor: MaterialStateProperty.all(
                                   Colors.transparent)),
-                          onPressed: () {},
+                          onPressed: () => Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => PaymentPage())),
                           child: Text("CONTINUE")),
                     ))
                   ],
