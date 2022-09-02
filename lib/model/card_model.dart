@@ -11,23 +11,27 @@ String cardModelToJson(CardModel data) => json.encode(data.toJson());
 class CardModel {
     CardModel({
         this.cardNumber,
-        this.expiryDate,
+        this.expiryMonth,
+        this.expiryYear,
         this.cvvCode,
     });
 
     String? cardNumber;
-    String? expiryDate;
+    String? expiryMonth;
+    String? expiryYear;
     String? cvvCode;
 
     factory CardModel.fromJson(Map<String, dynamic> json) => CardModel(
-        cardNumber: json["cardNumber"],
-        expiryDate: json["expiryDate"],
-        cvvCode: json["cvvCode"],
+        cardNumber: json["number"],
+        expiryMonth: json["exp_month"],
+        expiryYear: json["exp_year"],
+        cvvCode: json["cvc"],
     );
 
-    Map<String, dynamic> toJson() => {
-        "cardNumber": cardNumber,
-        "expiryDate": expiryDate,
-        "cvvCode": cvvCode,
+    Map<String, String> toJson() => {
+        "number": cardNumber!,
+        "exp_month": expiryMonth!,
+        "exp_year" : expiryYear!,
+        "cvc": cvvCode!,
     };
 }

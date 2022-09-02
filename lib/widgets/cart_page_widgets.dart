@@ -150,6 +150,7 @@ void showBottomSlider(BuildContext context) {
                   Address address = provider.getAddresses[index];
                   print(address.selected);
                   return ListTile(
+                    onTap: () => provider.changeSelectedAddr(address, index),
                     contentPadding: EdgeInsets.zero,
                     title: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -172,9 +173,7 @@ void showBottomSlider(BuildContext context) {
                     leading: Radio(
                         value: true,
                         groupValue: address.selected,
-                        onChanged: (value) {
-                          provider.changeSelectedAddr(address, index);
-                        }),
+                        onChanged: (value) {}),
                   );
                 },
                 separatorBuilder: (context, index) => SizedBox(height: 5),

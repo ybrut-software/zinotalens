@@ -9,7 +9,9 @@ part of 'api_client.dart';
 // ignore_for_file: unnecessary_brace_in_string_interps,no_leading_underscores_for_local_identifiers
 
 class _ApiClient implements ApiClient {
-  _ApiClient(this._dio, {this.baseUrl});
+  _ApiClient(this._dio, {this.baseUrl}) {
+    baseUrl ??= 'https://zinota-lens-backend.herokuapp.com';
+  }
 
   final Dio _dio;
 
@@ -182,6 +184,29 @@ class _ApiClient implements ApiClient {
             .compose(_dio.options, '/api/cart',
                 queryParameters: queryParameters, data: _data)
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = _result.data!;
+    return value;
+  }
+
+  @override
+  Future<String> paymentIntentApi(body) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{
+      r'Authorization':
+          'Bearer sk_test_51LW3BZSBstzmOfTL8N9hZAoRsWMC8e9nqGcP8monpbNYUh1LGUqWbXErBEkG3Cx1Cm9NlS34fEffkZhUtgsg9Ght0074rB9VIc',
+      r'Content-Type': 'application/x-www-form-urlencoded'
+    };
+    _headers.removeWhere((k, v) => v == null);
+    final _data = body;
+    final _result = await _dio.fetch<String>(_setStreamType<String>(Options(
+            method: 'POST',
+            headers: _headers,
+            extra: _extra,
+            contentType: 'application/x-www-form-urlencoded')
+        .compose(_dio.options, 'https://api.stripe.com/v1/payment_intents',
+            queryParameters: queryParameters, data: _data)
+        .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
     final value = _result.data!;
     return value;
   }

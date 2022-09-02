@@ -1,57 +1,66 @@
 import 'package:dio/dio.dart';
-import 'package:retrofit/http.dart';
+import 'package:retrofit/http.dart' as r;
 part 'api_client.g.dart';
 
-final baseUrl = "https://zinota-lens-backend.herokuapp.com";
+const String baseUrl = "https://zinota-lens-backend.herokuapp.com";
 
-@RestApi() //baseUrl: 'https://zinota-lens-backend.herokuapp.com'
+@r.RestApi(baseUrl: baseUrl) //baseUrl: 'https://zinota-lens-backend.herokuapp.com'
 abstract class ApiClient {
   factory ApiClient(Dio dio) = _ApiClient;
   static ApiClient getServices() {
     final dio = Dio();
-    dio.options = BaseOptions(baseUrl: baseUrl);
+    // dio.options = BaseOptions(baseUrl: baseUrl);
     return ApiClient(dio);
   }
 
   // *AUTHENTICATION
-  @POST('/api/auth/login')
-  Future<String> loginApi(@Body() String body);
+  @r.POST('/api/auth/login')
+  Future<String> loginApi(@r.Body() String body);
 
-  @POST('/api/auth/verify/otp')
-  Future<String> verifyOtpApi(@Body() String body);
+  @r.POST('/api/auth/verify/otp')
+  Future<String> verifyOtpApi(@r.Body() String body);
 
   // *PRODUCTS
-  @GET('/api/products')
+  @r.GET('/api/products')
   Future<String> fetchProductListApi();
 
-  @GET('/api/search')
-  Future<String> searchProductsApi(@Query('key') String searchValue);
+  @r.GET('/api/search')
+  Future<String> searchProductsApi(@r.Query('key') String searchValue);
 
-  @GET('/api/products/{product_id}')
-  Future<String> fetchProductDetailApi(@Path('product_id') String productId);
+  @r.GET('/api/products/{product_id}')
+  Future<String> fetchProductDetailApi(@r.Path('product_id') String productId);
 
   // *ADDRESS
-  @GET('/api/addresses')
-  Future<String> fetchAddressesApi(@Header('x-auth-token') String token);
+  @r.GET('/api/addresses')
+  Future<String> fetchAddressesApi(@r.Header('x-auth-token') String token);
 
-  @POST('/api/addresses')
+  @r.POST('/api/addresses')
   Future<String> saveAddressApi(
-      @Header('x-auth-token') String token, @Body() String body);
+      @r.Header('x-auth-token') String token, @r.Body() String body);
 
-  @DELETE('/api/addresses/{addrId}')
-  Future<String> deleteAddressApi(
-      @Header('x-auth-token') String token, @Path('addrId') String addressId);
+  @r.DELETE('/api/addresses/{addrId}')
+  Future<String> deleteAddressApi(@r.Header('x-auth-token') String token,
+      @r.Path('addrId') String addressId);
 
-  @GET('/api/addresses/{addrId}')
-  Future<String> fetchSingleAddressApi(
-      @Header('x-auth-token') String token, @Path('addrId') String addressId);
+  @r.GET('/api/addresses/{addrId}')
+  Future<String> fetchSingleAddressApi(@r.Header('x-auth-token') String token,
+      @r.Path('addrId') String addressId);
 
-  @PUT('/api/addresses/{addrId}')
-  Future<String> updateAddressApi(@Header('x-auth-token') String token,
-      @Path('addrId') String addressId, @Body() String addressObj);
+  @r.PUT('/api/addresses/{addrId}')
+  Future<String> updateAddressApi(@r.Header('x-auth-token') String token,
+      @r.Path('addrId') String addressId, @r.Body() String addressObj);
 
   // *CART
-  @POST('/api/cart')
+  @r.POST('/api/cart')
   Future<String> saveCartApi(
-      @Header('x-auth-token') String token, @Body() String cartBody);
+      @r.Header('x-auth-token') String token, @r.Body() String cartBody);
+
+  // *PAYMENT
+  @r.POST('https://api.stripe.com/v1/payment_intents')
+  @r.Headers(<String, dynamic>{
+    'Authorization':
+        'Bearer sk_test_51LW3BZSBstzmOfTL8N9hZAoRsWMC8e9nqGcP8monpbNYUh1LGUqWbXErBEkG3Cx1Cm9NlS34fEffkZhUtgsg9Ght0074rB9VIc',
+    'Content-Type': 'application/x-www-form-urlencoded'
+  })
+  Future<String> paymentIntentApi(@r.Body() String body);
 }
