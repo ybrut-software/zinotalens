@@ -84,6 +84,7 @@ class _LoginPageState extends State<LoginPage> {
                   child: ElevatedButton(
                     onPressed: () async {
                       if (formKey.currentState!.validate()) {
+                        FocusScope.of(context).unfocus();
                         provider.setLoginProgress = true;
                         provider
                             .loginProvider(
