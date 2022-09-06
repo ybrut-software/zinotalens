@@ -14,6 +14,7 @@ class ProductListProvider extends ChangeNotifier {
     try {
       _isDataLoad = true;
       _productList = await fetchProductList();
+      _productList.reversed;
       _isDataLoad = false;
     } catch (e) {
       print("error id 12 : $e");
