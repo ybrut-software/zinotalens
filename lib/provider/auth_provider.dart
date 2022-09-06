@@ -64,4 +64,10 @@ class AuthProvider extends ChangeNotifier {
     _authToken = await TempStorage.getAuthToken();
     notifyListeners();
   }
+
+  void clearTokenProvider() {
+    TempStorage.removePreferences();
+    _authToken = "";
+    notifyListeners();
+  }
 }

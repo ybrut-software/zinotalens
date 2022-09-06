@@ -1,173 +1,201 @@
 import 'package:flutter/material.dart' hide Colors;
+import 'package:provider/provider.dart';
+import 'package:zinotalens/pages/login_page.dart';
 import 'package:zinotalens/pages/myaddress_page.dart';
 import 'package:zinotalens/pages/myorder_page.dart';
 import 'package:zinotalens/pages/notification_page.dart';
 import 'package:zinotalens/pages/wishlist_page.dart';
+import 'package:zinotalens/provider/auth_provider.dart';
 import 'package:zinotalens/utils/images.dart';
 
 import '../utils/colors.dart';
 
-Widget navigationDrawer(BuildContext context) => Drawer(
-      child: ListView(
-        children: [
-          drawerHeader(),
-          Container(
-            width: double.infinity,
-            decoration: BoxDecoration(color: Colors.white),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Container(
-                  width: double.infinity,
-                  height: 50,
-                  child: ElevatedButton.icon(
-                      onPressed: () {
-                        Navigator.pop(context);
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => MyOrderPage()));
-                      },
-                      style: buttonStyle(),
-                      icon: icon(Icons.shopping_bag_rounded),
-                      label: Padding(
-                        padding: EdgeInsets.only(left: 14),
-                        child: Text(
-                          "My Order",
-                          style: textStyle(),
-                        ),
-                      )),
-                ),
-                Container(
-                  width: double.infinity,
-                  height: 50,
-                  child: ElevatedButton.icon(
-                      onPressed: () {
-                        Navigator.pop(context);
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => NotificationPage()));
-                      },
-                      style: buttonStyle(),
-                      icon: icon(Icons.notifications),
-                      label: Padding(
-                        padding: EdgeInsets.only(left: 14),
-                        child: Text(
-                          "Notification",
-                          style: textStyle(),
-                        ),
-                      )),
-                ),
-                Container(
-                  width: double.infinity,
-                  height: 50,
-                  child: ElevatedButton.icon(
-                      onPressed: () {
-                        Navigator.pop(context);
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => WishListPage()));
-                      },
-                      style: buttonStyle(),
-                      icon: icon(Icons.favorite),
-                      label: Padding(
-                        padding: EdgeInsets.only(left: 14),
-                        child: Text(
-                          "WishList",
-                          style: textStyle(),
-                        ),
-                      )),
-                ),
-                Container(
-                  width: double.infinity,
-                  height: 50,
-                  child: ElevatedButton.icon(
-                      onPressed: () {
-                        Navigator.pop(context);
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => MyAddressPage()));
-                      },
-                      style: buttonStyle(),
-                      icon: icon(Icons.domain),
-                      label: Padding(
-                        padding: EdgeInsets.only(left: 14),
-                        child: Text(
-                          "My Address",
-                          style: textStyle(),
-                        ),
-                      )),
-                ),
-                Container(
-                  width: double.infinity,
-                  height: 50,
-                  child: ElevatedButton.icon(
-                      onPressed: () {},
-                      style: buttonStyle(),
-                      icon: icon(Icons.assignment),
-                      label: Padding(
-                        padding: EdgeInsets.only(left: 14),
-                        child: Text(
-                          "My Prescriptions",
-                          style: textStyle(),
-                        ),
-                      )),
-                ),
-                Container(
-                  width: double.infinity,
-                  height: 50,
-                  child: ElevatedButton.icon(
-                      onPressed: () {},
-                      style: buttonStyle(),
-                      icon: icon(Icons.question_mark),
-                      label: Padding(
-                        padding: EdgeInsets.only(left: 14),
-                        child: Text(
-                          "FAQ",
-                          style: textStyle(),
-                        ),
-                      )),
-                ),
-                Container(
-                  width: double.infinity,
-                  height: 50,
-                  child: ElevatedButton.icon(
-                      onPressed: () {},
-                      style: buttonStyle(),
-                      icon: icon(Icons.contact_support_sharp),
-                      label: Padding(
-                        padding: EdgeInsets.only(left: 14),
-                        child: Text(
-                          "Contact us",
-                          style: textStyle(),
-                        ),
-                      )),
-                ),
-                Container(
-                  width: double.infinity,
-                  height: 50,
-                  child: ElevatedButton.icon(
-                      onPressed: () {},
-                      style: buttonStyle(),
-                      icon: icon(Icons.info),
-                      label: Padding(
-                        padding: EdgeInsets.only(left: 14),
-                        child: Text(
-                          "About us",
-                          style: textStyle(),
-                        ),
-                      )),
-                ),
-              ],
-            ),
-          )
-        ],
-      ),
-    );
+Widget navigationDrawer(BuildContext context) {
+  final provider = Provider.of<AuthProvider>(context);
+  return Drawer(
+    child: ListView(
+      children: [
+        drawerHeader(),
+        Container(
+          width: double.infinity,
+          decoration: BoxDecoration(color: Colors.white),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Container(
+                width: double.infinity,
+                height: 50,
+                child: ElevatedButton.icon(
+                    onPressed: () {
+                      Navigator.pop(context);
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => MyOrderPage()));
+                    },
+                    style: buttonStyle(),
+                    icon: icon(Icons.shopping_bag_rounded),
+                    label: Padding(
+                      padding: EdgeInsets.only(left: 14),
+                      child: Text(
+                        "My Order",
+                        style: textStyle(),
+                      ),
+                    )),
+              ),
+              Container(
+                width: double.infinity,
+                height: 50,
+                child: ElevatedButton.icon(
+                    onPressed: () {
+                      Navigator.pop(context);
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => NotificationPage()));
+                    },
+                    style: buttonStyle(),
+                    icon: icon(Icons.notifications),
+                    label: Padding(
+                      padding: EdgeInsets.only(left: 14),
+                      child: Text(
+                        "Notification",
+                        style: textStyle(),
+                      ),
+                    )),
+              ),
+              Container(
+                width: double.infinity,
+                height: 50,
+                child: ElevatedButton.icon(
+                    onPressed: () {
+                      Navigator.pop(context);
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => WishListPage()));
+                    },
+                    style: buttonStyle(),
+                    icon: icon(Icons.favorite),
+                    label: Padding(
+                      padding: EdgeInsets.only(left: 14),
+                      child: Text(
+                        "WishList",
+                        style: textStyle(),
+                      ),
+                    )),
+              ),
+              Container(
+                width: double.infinity,
+                height: 50,
+                child: ElevatedButton.icon(
+                    onPressed: () {
+                      Navigator.pop(context);
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => MyAddressPage()));
+                    },
+                    style: buttonStyle(),
+                    icon: icon(Icons.domain),
+                    label: Padding(
+                      padding: EdgeInsets.only(left: 14),
+                      child: Text(
+                        "My Address",
+                        style: textStyle(),
+                      ),
+                    )),
+              ),
+              Container(
+                width: double.infinity,
+                height: 50,
+                child: ElevatedButton.icon(
+                    onPressed: () {},
+                    style: buttonStyle(),
+                    icon: icon(Icons.assignment),
+                    label: Padding(
+                      padding: EdgeInsets.only(left: 14),
+                      child: Text(
+                        "My Prescriptions",
+                        style: textStyle(),
+                      ),
+                    )),
+              ),
+              Container(
+                width: double.infinity,
+                height: 50,
+                child: ElevatedButton.icon(
+                    onPressed: () {},
+                    style: buttonStyle(),
+                    icon: icon(Icons.question_mark),
+                    label: Padding(
+                      padding: EdgeInsets.only(left: 14),
+                      child: Text(
+                        "FAQ",
+                        style: textStyle(),
+                      ),
+                    )),
+              ),
+              Container(
+                width: double.infinity,
+                height: 50,
+                child: ElevatedButton.icon(
+                    onPressed: () {},
+                    style: buttonStyle(),
+                    icon: icon(Icons.contact_support_sharp),
+                    label: Padding(
+                      padding: EdgeInsets.only(left: 14),
+                      child: Text(
+                        "Contact us",
+                        style: textStyle(),
+                      ),
+                    )),
+              ),
+              Container(
+                width: double.infinity,
+                height: 50,
+                child: ElevatedButton.icon(
+                    onPressed: () {},
+                    style: buttonStyle(),
+                    icon: icon(Icons.info),
+                    label: Padding(
+                      padding: EdgeInsets.only(left: 14),
+                      child: Text(
+                        "About us",
+                        style: textStyle(),
+                      ),
+                    )),
+              ),
+              Container(
+                width: double.infinity,
+                height: 50,
+                child: ElevatedButton.icon(
+                    onPressed: () {
+                      Navigator.pop(context);
+                      provider.clearTokenProvider();
+                      Navigator.pushAndRemoveUntil(
+                          context,
+                          MaterialPageRoute(builder: (context) => LoginPage()),
+                          (route) => false);
+                    },
+                    style: buttonStyle(),
+                    icon: icon(Icons.keyboard_backspace),
+                    label: Padding(
+                      padding: EdgeInsets.only(left: 14),
+                      child: Text(
+                        "Logout",
+                        style: textStyle(),
+                      ),
+                    )),
+              ),
+            ],
+          ),
+        )
+      ],
+    ),
+  );
+}
 
 Widget drawerHeader() => DrawerHeader(
       decoration: BoxDecoration(color: Colors.skyBlue),

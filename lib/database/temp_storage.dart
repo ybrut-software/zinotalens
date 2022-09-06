@@ -14,4 +14,10 @@ class TempStorage {
     SharedPreferences preferences = await SharedPreferences.getInstance();
     preferences.setString(authToken, token);
   }
+
+  //clear all data in shared preference
+  static removePreferences() async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    preferences.remove(authToken);
+  }
 }
