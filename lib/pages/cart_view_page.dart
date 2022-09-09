@@ -5,7 +5,6 @@ import 'package:zinotalens/pages/add_address_page.dart';
 import 'package:zinotalens/provider/address_provider.dart';
 import 'package:zinotalens/provider/auth_provider.dart';
 import 'package:zinotalens/provider/product_cart_provider.dart';
-import 'package:zinotalens/utils/images.dart';
 import 'package:zinotalens/widgets/cart_item_viewholder.dart';
 import 'package:zinotalens/widgets/cart_page_widgets.dart';
 import 'package:zinotalens/widgets/error_widgets.dart';
@@ -42,11 +41,11 @@ class _CartViewPageState extends State<CartViewPage> {
         shadowColor: Colors.transparent,
         title: Text("Cart", style: TextStyle(color: Colors.white)),
       ),
-      body: Stack(
-        children: [
-          provider.cartItemLength == 0
-              ? emptyCartWidget()
-              : ListView(
+      body: provider.cartItemLength == 0
+          ? emptyCartWidget()
+          : Stack(
+              children: [
+                ListView(
                   padding: EdgeInsets.only(bottom: 130),
                   children: [
                     if (addressProvider.getAddressesLength != 0)
@@ -78,93 +77,98 @@ class _CartViewPageState extends State<CartViewPage> {
                     cartPriceDetails(totalPrice: provider.getTotalPrice),
                   ],
                 ),
-          Positioned(
-              bottom: 0.0,
-              left: 0.0,
-              right: 0.0,
-              child: Container(
-                decoration: BoxDecoration(color: Colors.white.withOpacity(0.9)),
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Padding(
-                      padding:
-                          EdgeInsets.symmetric(horizontal: 10, vertical: 15),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                Positioned(
+                    bottom: 0.0,
+                    left: 0.0,
+                    right: 0.0,
+                    child: Container(
+                      decoration:
+                          BoxDecoration(color: Colors.white.withOpacity(0.9)),
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
                         children: [
-                          Text("Total (incl. GST)",
-                              style: TextStyle(
-                                  fontSize: 16, fontWeight: FontWeight.w600)),
-                          Text("₹${provider.getTotalPrice}",
-                              style: TextStyle(
-                                  fontSize: 16, fontWeight: FontWeight.w600)),
-                        ],
-                      ),
-                    ),
-                    Container(
-                      width: double.infinity,
-                      child: addressProvider.getAddressesLength == 0
-                          ? ElevatedButton(
-                              onPressed: () => Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) =>
-                                          AddDeliveryAddressPage())),
-                              style: ButtonStyle(
-                                backgroundColor:
-                                    MaterialStateProperty.all(Colors.skyBlue),
-                                shadowColor: MaterialStateProperty.all(
-                                    Colors.transparent),
-                                shape: MaterialStateProperty.all(
-                                    RoundedRectangleBorder(
-                                        borderRadius:
-                                            BorderRadius.circular(5))),
-                              ),
-                              child: Padding(
-                                padding: EdgeInsets.all(18),
-                                child: Text(
-                                  "ADD ADDRESS",
-                                  style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 14,
-                                      fontWeight: FontWeight.w500),
-                                ),
-                              ))
-                          : ElevatedButton(
-                              onPressed: () {
-                                provider.setIsCartSavedLoader = true;
-                                provider.saveCartProvider(
-                                    token: token, context: context);
-                              },
-                              style: ButtonStyle(
-                                backgroundColor:
-                                    MaterialStateProperty.all(Colors.skyBlue),
-                                shadowColor: MaterialStateProperty.all(
-                                    Colors.transparent),
-                                shape: MaterialStateProperty.all(
-                                    RoundedRectangleBorder(
-                                        borderRadius:
-                                            BorderRadius.circular(5))),
-                              ),
-                              child: Padding(
-                                padding: EdgeInsets.all(18),
-                                child: provider.isCartSavedLoader
-                                    ? buttonProgressIndicator()
-                                    : Text(
-                                        "PLACE ORDER",
+                          Padding(
+                            padding: EdgeInsets.symmetric(
+                                horizontal: 10, vertical: 15),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text("Total (incl. GST)",
+                                    style: TextStyle(
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.w600)),
+                                Text("₹${provider.getTotalPrice}",
+                                    style: TextStyle(
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.w600)),
+                              ],
+                            ),
+                          ),
+                          Container(
+                            width: double.infinity,
+                            child: addressProvider.getAddressesLength == 0
+                                ? ElevatedButton(
+                                    onPressed: () => Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                AddDeliveryAddressPage())),
+                                    style: ButtonStyle(
+                                      backgroundColor:
+                                          MaterialStateProperty.all(
+                                              Colors.skyBlue),
+                                      shadowColor: MaterialStateProperty.all(
+                                          Colors.transparent),
+                                      shape: MaterialStateProperty.all(
+                                          RoundedRectangleBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(5))),
+                                    ),
+                                    child: Padding(
+                                      padding: EdgeInsets.all(18),
+                                      child: Text(
+                                        "ADD ADDRESS",
                                         style: TextStyle(
                                             color: Colors.white,
                                             fontSize: 14,
                                             fontWeight: FontWeight.w500),
                                       ),
-                              )),
-                    ),
-                  ],
-                ),
-              ))
-        ],
-      ),
+                                    ))
+                                : ElevatedButton(
+                                    onPressed: () {
+                                      provider.setIsCartSavedLoader = true;
+                                      provider.saveCartProvider(
+                                          token: token, context: context);
+                                    },
+                                    style: ButtonStyle(
+                                      backgroundColor:
+                                          MaterialStateProperty.all(
+                                              Colors.skyBlue),
+                                      shadowColor: MaterialStateProperty.all(
+                                          Colors.transparent),
+                                      shape: MaterialStateProperty.all(
+                                          RoundedRectangleBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(5))),
+                                    ),
+                                    child: Padding(
+                                      padding: EdgeInsets.all(18),
+                                      child: provider.isCartSavedLoader
+                                          ? buttonProgressIndicator()
+                                          : Text(
+                                              "PLACE ORDER",
+                                              style: TextStyle(
+                                                  color: Colors.white,
+                                                  fontSize: 14,
+                                                  fontWeight: FontWeight.w500),
+                                            ),
+                                    )),
+                          ),
+                        ],
+                      ),
+                    ))
+              ],
+            ),
     );
   }
 }
