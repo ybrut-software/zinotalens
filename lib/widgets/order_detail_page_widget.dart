@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart' hide Colors;
 import 'package:zinotalens/utils/style.dart';
+import 'package:zinotalens/widgets/step_tracker.dart';
 
 import '../utils/colors.dart';
 import '../utils/images.dart';
@@ -59,10 +60,22 @@ Widget orderTrakingComponent() => Container(
             ]),
           ),
           Divider(color: Colors.gray.withOpacity(0.5), height: 2),
+
+          //tracker
           Container(
-            height: 200,
+            //height: 200,
+            padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
             decoration: BoxDecoration(color: Colors.white),
+            child: StepTracker(dotSize: 10, steps: [
+              Steps(title: Text("Order placed"), state: TrackerState.complete),
+              Steps(
+                  title: Text("Order dispatch"), state: TrackerState.complete),
+              Steps(
+                  title: Text("Out of delivery"), state: TrackerState.complete),
+              Steps(title: Text("Delivered"), state: TrackerState.disabled),
+            ]),
           ),
+
           Divider(color: Colors.gray.withOpacity(0.5), height: 2),
           orderActionButtons()
         ],
