@@ -1,18 +1,17 @@
 import 'package:flutter/material.dart' hide Colors;
+import 'package:zinotalens/model/product_addcart_model.dart';
 import 'package:zinotalens/provider/product_cart_provider.dart';
 
+import '../controller/image_controller.dart';
 import '../utils/colors.dart';
 import '../utils/images.dart';
 
-Widget cartItemViewHolder(
-        {required String title,
-        required int salesPrice,
-        required int index,
-        required String productId,
-        required ProductCartProvider provider,
-        required String photo,
-        int? listingPrice,
-        int? quantity}) =>
+Widget cartItemViewHolder({
+  required int index,
+  required ProductCartProvider provider,
+  required ProductAddCartModel product,
+  bool isOrderSummaryView = false,
+}) =>
     Container(
       margin: EdgeInsets.symmetric(horizontal: 10),
       padding: EdgeInsets.all(10),
@@ -34,7 +33,8 @@ Widget cartItemViewHolder(
                   decoration: BoxDecoration(
                       image: DecorationImage(
                           scale: 1.5, image: AssetImage(image_placeholder))),
-                  child: Image.network(photo)),
+                  child: Image.network(
+                      fetchImageController(photoUrl: product.productPhoto!))),
             ),
             SizedBox(width: 10),
             Expanded(
@@ -47,12 +47,20 @@ Widget cartItemViewHolder(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        title,
+                        product.productTitle!,
                         maxLines: 2,
                         overflow: TextOverflow.ellipsis,
                       ),
                       // Text("+ Anti-Fog Zero Power",
                       //     style: TextStyle(color: Colors.gray)),
+                      SizedBox(height: 5),
+                      isOrderSummaryView
+                          ? Text(
+                              "Qty: 1",
+                              style: TextStyle(
+                                  fontSize: 12, fontWeight: FontWeight.w500),
+                            )
+                          : SizedBox()
                     ],
                   ),
                 )),
@@ -62,7 +70,7 @@ Widget cartItemViewHolder(
           Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
             Text("Regular Price"),
             Text(
-              "₹$listingPrice",
+              "₹${product.productListingPrice}",
               style: TextStyle(
                   decoration: TextDecoration.lineThrough,
                   color: Colors.gray,
@@ -76,68 +84,75 @@ Widget cartItemViewHolder(
               style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
             ),
             Text(
-              "₹$salesPrice",
+              "₹${product.productSellingPrice}",
               style: TextStyle(
                   color: Colors.black,
                   fontWeight: FontWeight.w600,
                   fontSize: 16),
             )
           ]),
-          SizedBox(height: 5),
-          Divider(thickness: 1, color: Colors.gray.withOpacity(0.2)),
-          Row(
-            children: [
-              Expanded(
-                  flex: 7,
-                  child: Row(
-                    children: [
-                      Icon(
-                        Icons.favorite_border,
-                        color: Colors.black.withOpacity(0.7),
-                        size: 22,
-                      ),
-                      SizedBox(width: 10),
-                      Text(
-                        "WISHLIST",
-                        style: TextStyle(
-                            color: Colors.black.withOpacity(0.7),
-                            fontSize: 14,
-                            fontWeight: FontWeight.w500),
-                      )
-                    ],
-                  )),
-              Expanded(
-                  flex: 3,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      GestureDetector(
-                        onTap: () =>
-                            provider.decrementQuantity(productId, index),
-                        child: Icon(
-                          Icons.remove_circle_outline,
-                          size: 30,
-                          color: Colors.skyBlue,
-                        ),
-                      ),
-                      Text(
-                        "$quantity",
-                        style: TextStyle(
-                            fontSize: 18, fontWeight: FontWeight.w600),
-                      ),
-                      GestureDetector(
-                        onTap: () =>
-                            provider.increaseQuantity(productId, index),
-                        child: Icon(
-                          Icons.add_circle_outline,
-                          size: 30,
-                          color: Colors.skyBlue,
-                        ),
-                      ),
-                    ],
-                  ))
-            ],
-          )
+          isOrderSummaryView
+              ? SizedBox()
+              : Column(
+                  children: [
+                    SizedBox(height: 5),
+                    Divider(thickness: 1, color: Colors.gray.withOpacity(0.2)),
+                    Row(
+                      children: [
+                        Expanded(
+                            flex: 7,
+                            child: Row(
+                              children: [
+                                Icon(
+                                  Icons.favorite_border,
+                                  color: Colors.black.withOpacity(0.7),
+                                  size: 22,
+                                ),
+                                SizedBox(width: 10),
+                                Text(
+                                  "WISHLIST",
+                                  style: TextStyle(
+                                      color: Colors.black.withOpacity(0.7),
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.w500),
+                                )
+                              ],
+                            )),
+                        Expanded(
+                            flex: 3,
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                GestureDetector(
+                                  onTap: () => provider.decrementQuantity(
+                                      product.productId!, index),
+                                  child: Icon(
+                                    Icons.remove_circle_outline,
+                                    size: 30,
+                                    color: Colors.skyBlue,
+                                  ),
+                                ),
+                                Text(
+                                  "${product.productQuantity}",
+                                  style: TextStyle(
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.w600),
+                                ),
+                                GestureDetector(
+                                  onTap: () => provider.increaseQuantity(
+                                      product.productId!, index),
+                                  child: Icon(
+                                    Icons.add_circle_outline,
+                                    size: 30,
+                                    color: Colors.skyBlue,
+                                  ),
+                                ),
+                              ],
+                            ))
+                      ],
+                    )
+                  ],
+                )
         ],
       ),
     );

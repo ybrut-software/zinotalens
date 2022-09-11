@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:zinotalens/controller/address_controller.dart';
 import 'package:zinotalens/main.dart';
 import 'package:zinotalens/model/product_addcart_model.dart';
+import 'package:zinotalens/pages/order_summary_page.dart';
 import 'package:zinotalens/pages/payment_options_page.dart';
 
 import '../controller/cart_controller.dart';
@@ -96,7 +97,7 @@ class ProductCartProvider extends ChangeNotifier {
       bool _isCartSaved = await saveCart(token, _cartItems);
       if (_isCartSaved) {
         Navigator.push(context,
-            MaterialPageRoute(builder: (context) => PaymentOptionsPage()));
+            MaterialPageRoute(builder: (context) => OrderSummaryPage()));
       }
       _isCartSavedLoader = false;
     } catch (e) {

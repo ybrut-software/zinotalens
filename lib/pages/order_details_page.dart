@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart' hide Colors;
+import 'package:provider/provider.dart';
+import 'package:zinotalens/provider/address_provider.dart';
 import 'package:zinotalens/widgets/custom_appbar.dart';
 import 'package:zinotalens/widgets/order_detail_page_widget.dart';
 
@@ -14,6 +16,7 @@ class OrderDetailsPage extends StatefulWidget {
 class _OrderDetailsPageState extends State<OrderDetailsPage> {
   @override
   Widget build(BuildContext context) {
+    final addressProvider = Provider.of<AddressProvider>(context);
     return Scaffold(
       backgroundColor: Colors.backgroundColor,
       appBar: customAppBar(context, title: "Order Details"),
@@ -22,7 +25,7 @@ class _OrderDetailsPageState extends State<OrderDetailsPage> {
         SizedBox(height: 5),
         downloadInvoiceButton(),
         SizedBox(height: 5),
-        shippingAddressComponent(),
+        shippingAddressComponent(addressProvider: addressProvider),
         SizedBox(height: 5),
         orderPricingDetails()
       ]),

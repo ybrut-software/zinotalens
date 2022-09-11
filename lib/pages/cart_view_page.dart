@@ -10,7 +10,6 @@ import 'package:zinotalens/widgets/cart_page_widgets.dart';
 import 'package:zinotalens/widgets/error_widgets.dart';
 import 'package:zinotalens/widgets/progress_indicator.dart';
 
-import '../controller/image_controller.dart';
 import '../utils/colors.dart';
 
 class CartViewPage extends StatefulWidget {
@@ -60,15 +59,7 @@ class _CartViewPageState extends State<CartViewPage> {
                         ProductAddCartModel product =
                             provider.cartItemList[index];
                         return cartItemViewHolder(
-                            index: index,
-                            provider: provider,
-                            productId: product.productId!,
-                            title: product.productTitle!,
-                            photo: fetchImageController(
-                                photoUrl: product.productPhoto!),
-                            listingPrice: product.productListingPrice,
-                            salesPrice: product.productSellingPrice!,
-                            quantity: product.productQuantity);
+                            index: index, provider: provider, product: product);
                       },
                       separatorBuilder: (context, index) =>
                           SizedBox(height: 10),

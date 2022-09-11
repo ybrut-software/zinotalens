@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart' hide Colors;
+import 'package:zinotalens/model/address_list_model.dart';
+import 'package:zinotalens/provider/address_provider.dart';
 import 'package:zinotalens/utils/style.dart';
 import 'package:zinotalens/widgets/step_tracker.dart';
 
@@ -107,42 +109,65 @@ Widget downloadInvoiceButton() => Container(
       ),
     );
 
-Widget shippingAddressComponent() => Container(
-      decoration: contentContainerDecoration(),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Padding(
-            padding: EdgeInsets.symmetric(vertical: 10, horizontal: 14),
-            child: Text(
-              "Shipping Details",
-              style: TextStyle(color: Colors.gray, fontSize: 12),
-            ),
+Widget shippingAddressComponent(
+    {bool isOrderSummaryView = false,
+    required AddressProvider addressProvider}) {
+  Address address = addressProvider.defaultAddress;
+  return Container(
+    decoration: contentContainerDecoration(),
+    child: Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        isOrderSummaryView
+            ? Padding(
+                padding: EdgeInsets.only(left: 14, right: 14, top: 20),
+                child: Text(
+                  "Deliver to:",
+                  style: TextStyle(
+                      fontSize: 16,
+                      color: Colors.black,
+                      fontWeight: FontWeight.w600),
+                ),
+              )
+            : Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Padding(
+                    padding: EdgeInsets.symmetric(vertical: 10, horizontal: 14),
+                    child: Text(
+                      "Shipping Details",
+                      style: TextStyle(color: Colors.gray, fontSize: 12),
+                    ),
+                  ),
+                  Divider(color: Colors.gray.withOpacity(0.5), height: 2),
+                ],
+              ),
+        Container(
+          padding: EdgeInsets.symmetric(vertical: 14, horizontal: 14),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                "${address.fullName}",
+                style: TextStyle(color: Colors.black, fontSize: 16),
+              ),
+              SizedBox(height: 10),
+              Text(
+                "${address.streetAddress1}, ${address.streetAddress2}",
+                style: addressTextStyle(),
+              ),
+              Text("${address.city}", style: addressTextStyle()),
+              Text("${address.state} - ${address.postalCode}",
+                  style: addressTextStyle()),
+              Text("Phone number: ${address.contact}",
+                  style: addressTextStyle())
+            ],
           ),
-          Divider(color: Colors.gray.withOpacity(0.5), height: 2),
-          Container(
-            padding: EdgeInsets.symmetric(vertical: 14, horizontal: 14),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  "Roshan Nahak",
-                  style: TextStyle(color: Colors.black, fontSize: 16),
-                ),
-                SizedBox(height: 10),
-                Text(
-                  "SC-MQ, QN-157, tulsi mandir odiya daffai, Government Girls Higher Secondary School, Dumanhill",
-                  style: addressTextStyle(),
-                ),
-                Text("Chirimiri", style: addressTextStyle()),
-                Text("Chhattisgarh - 497557", style: addressTextStyle()),
-                Text("Phone number: 1234567891", style: addressTextStyle())
-              ],
-            ),
-          )
-        ],
-      ),
-    );
+        )
+      ],
+    ),
+  );
+}
 
 Widget orderPricingDetails() => Container(
       decoration: contentContainerDecoration(),
