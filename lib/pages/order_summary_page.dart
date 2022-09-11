@@ -1,5 +1,9 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart' hide Colors;
 import 'package:provider/provider.dart';
+import 'package:razorpay_flutter/razorpay_flutter.dart';
+import 'package:zinotalens/controller/payment_controller.dart';
 import 'package:zinotalens/model/product_addcart_model.dart';
 import 'package:zinotalens/provider/address_provider.dart';
 import 'package:zinotalens/widgets/cart_item_viewholder.dart';
@@ -18,6 +22,31 @@ class OrderSummaryPage extends StatefulWidget {
 }
 
 class _OrderSummaryPageState extends State<OrderSummaryPage> {
+  Razorpay _razorpay = Razorpay();
+  @override
+  void initState() {
+    _razorpay.on(Razorpay.EVENT_PAYMENT_SUCCESS, _handlePaymentSuccess);
+    _razorpay.on(Razorpay.EVENT_PAYMENT_ERROR, _handlePaymentError);
+    _razorpay.on(Razorpay.EVENT_EXTERNAL_WALLET, _handleExternalWallet);
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    _razorpay.clear();
+    super.dispose();
+  }
+
+  void _handlePaymentSuccess(PaymentSuccessResponse response) {
+    print("payment success");
+  }
+
+  void _handlePaymentError(PaymentFailureResponse response) {
+    print("payment failed");
+  }
+
+  void _handleExternalWallet(ExternalWalletResponse response) {}
+
   @override
   Widget build(BuildContext context) {
     final provider = Provider.of<ProductCartProvider>(context);
@@ -70,7 +99,8 @@ class _OrderSummaryPageState extends State<OrderSummaryPage> {
                   Expanded(
                     flex: 4,
                     child: ElevatedButton(
-                      onPressed: () {},
+                      onPressed: () => openPaymentCheckOut(
+                          razorpay: _razorpay, amount: provider.getTotalPrice),
                       child: Text(
                         "Continue",
                         style: TextStyle(fontSize: 16),
