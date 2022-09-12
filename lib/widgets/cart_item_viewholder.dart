@@ -56,7 +56,7 @@ Widget cartItemViewHolder({
                       SizedBox(height: 5),
                       isOrderSummaryView
                           ? Text(
-                              "Qty: 1",
+                              "Qty: ${product.productQuantity}",
                               style: TextStyle(
                                   fontSize: 12, fontWeight: FontWeight.w500),
                             )
