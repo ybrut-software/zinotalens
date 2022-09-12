@@ -11,6 +11,7 @@ Widget categoryItems({required int itemCount, required BuildContext context}) =>
         crossAxisCount: 3,
         childAspectRatio: 1.2,
         shrinkWrap: true,
+        physics: NeverScrollableScrollPhysics(),
         children: List.generate(itemCount, (index) {
           return Column(
             mainAxisSize: MainAxisSize.min,
