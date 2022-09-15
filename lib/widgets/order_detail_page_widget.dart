@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart' hide Colors;
 import 'package:zinotalens/model/address_list_model.dart';
-import 'package:zinotalens/provider/address_provider.dart';
+import 'package:zinotalens/model/shipment_model.dart';
 import 'package:zinotalens/utils/style.dart';
 import 'package:zinotalens/widgets/step_tracker.dart';
 
+import '../model/order_list_model.dart';
 import '../utils/colors.dart';
 import '../utils/images.dart';
 
-Widget orderTrakingComponent() => Container(
+Widget orderTrakingComponent(
+        {required Order order, required Shipment shipment}) =>
+    Container(
       decoration: contentContainerDecoration(),
       child: Column(
         mainAxisSize: MainAxisSize.min,
@@ -16,7 +19,7 @@ Widget orderTrakingComponent() => Container(
           Padding(
             padding: EdgeInsets.symmetric(vertical: 10, horizontal: 14),
             child: Text(
-              "Order ID - OD14523698723652596",
+              "Order ID - ${order.oid}",
               style: TextStyle(color: Colors.gray, fontSize: 12),
             ),
           ),
@@ -69,12 +72,32 @@ Widget orderTrakingComponent() => Container(
             padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
             decoration: BoxDecoration(color: Colors.white),
             child: StepTracker(dotSize: 10, steps: [
-              Steps(title: Text("Order placed"), state: TrackerState.complete),
               Steps(
-                  title: Text("Order dispatch"), state: TrackerState.complete),
+                  title: Text("Order placed"),
+                  state: shipment.orderPlaced!
+                      ? TrackerState.complete
+                      : TrackerState.none),
               Steps(
-                  title: Text("Out of delivery"), state: TrackerState.complete),
-              Steps(title: Text("Delivered"), state: TrackerState.disabled),
+                  title: Text("Order shipped"),
+                  state: shipment.orderShipped!
+                      ? TrackerState.complete
+                      : shipment.orderCancelled!
+                          ? TrackerState.disabled
+                          : TrackerState.none),
+              Steps(
+                  title: Text("Out for delivery"),
+                  state: shipment.outForDelivery!
+                      ? TrackerState.complete
+                      : shipment.orderCancelled!
+                          ? TrackerState.disabled
+                          : TrackerState.none),
+              Steps(
+                  title: Text("Delivered"),
+                  state: shipment.orderDelivered!
+                      ? TrackerState.complete
+                      : shipment.orderCancelled!
+                          ? TrackerState.disabled
+                          : TrackerState.none),
             ]),
           ),
 
@@ -110,9 +133,7 @@ Widget downloadInvoiceButton() => Container(
     );
 
 Widget shippingAddressComponent(
-    {bool isOrderSummaryView = false,
-    required AddressProvider addressProvider}) {
-  Address address = addressProvider.defaultAddress;
+    {bool isOrderSummaryView = false, required Address address}) {
   return Container(
     decoration: contentContainerDecoration(),
     child: Column(

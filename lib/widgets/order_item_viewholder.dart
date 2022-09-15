@@ -8,7 +8,9 @@ Widget OrderItemsViewholder(BuildContext context, Order orders) {
   List<Product> productList = orders.cart!.products!;
   return ElevatedButton(
     onPressed: () => Navigator.push(
-        context, MaterialPageRoute(builder: (context) => OrderDetailsPage())),
+        context,
+        MaterialPageRoute(
+            builder: (context) => OrderDetailsPage(orderId: orders.id))),
     style: ButtonStyle(
         overlayColor: MaterialStateProperty.all(Colors.gray.withOpacity(0.1)),
         padding: MaterialStateProperty.all(EdgeInsets.zero),

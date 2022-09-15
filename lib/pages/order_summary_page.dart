@@ -59,7 +59,7 @@ class _OrderSummaryPageState extends State<OrderSummaryPage> {
           padding: EdgeInsets.only(bottom: 130),
           children: [
             shippingAddressComponent(
-                isOrderSummaryView: true, addressProvider: addressProvider),
+                isOrderSummaryView: true, address: addressProvider.defaultAddress),
             SizedBox(height: 10),
             ListView.separated(
                 shrinkWrap: true,

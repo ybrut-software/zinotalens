@@ -59,4 +59,12 @@ abstract class ApiClient {
   //orders
   @r.GET('/api/orders')
   Future<String> ordersListApi(@r.Header('x-auth-token') String token);
+
+  @r.GET('/api/orders/{order_id}')
+  Future<String> orderDetailApi(@r.Header('x-auth-token') String token,
+      @r.Path('order_id') String orderId);
+
+  @r.GET('/api/shipments/{shipment_id}')
+  Future<String> shippingDetailApi(@r.Header('x-auth-token') String token,
+      @r.Path('shipment_id') String shippingId);
 }
