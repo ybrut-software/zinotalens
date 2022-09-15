@@ -1,10 +1,10 @@
 import 'package:dio/dio.dart';
-import 'package:retrofit/http.dart' as r;
+import 'package:retrofit/http.dart';
 part 'api_client.g.dart';
 
 const String baseUrl = "https://zinota-lens-backend.herokuapp.com";
 
-@r.RestApi(
+@RestApi(
     baseUrl: baseUrl) //baseUrl: 'https://zinota-lens-backend.herokuapp.com'
 abstract class ApiClient {
   factory ApiClient(Dio dio) = _ApiClient;
@@ -15,56 +15,56 @@ abstract class ApiClient {
   }
 
   // *AUTHENTICATION
-  @r.POST('/api/auth/login')
-  Future<String> loginApi(@r.Body() String body);
+  @POST('/api/auth/login')
+  Future<String> loginApi(@Body() String body);
 
-  @r.POST('/api/auth/verify/otp')
-  Future<String> verifyOtpApi(@r.Body() String body);
+  @POST('/api/auth/verify/otp')
+  Future<String> verifyOtpApi(@Body() String body);
 
   // *PRODUCTS
-  @r.GET('/api/products')
+  @GET('/api/products')
   Future<String> fetchProductListApi();
 
-  @r.GET('/api/search')
-  Future<String> searchProductsApi(@r.Query('key') String searchValue);
+  @GET('/api/search')
+  Future<String> searchProductsApi(@Query('key') String searchValue);
 
-  @r.GET('/api/products/{product_id}')
-  Future<String> fetchProductDetailApi(@r.Path('product_id') String productId);
+  @GET('/api/products/{product_id}')
+  Future<String> fetchProductDetailApi(@Path('product_id') String productId);
 
   // *ADDRESS
-  @r.GET('/api/addresses')
-  Future<String> fetchAddressesApi(@r.Header('x-auth-token') String token);
+  @GET('/api/addresses')
+  Future<String> fetchAddressesApi(@Header('x-auth-token') String token);
 
-  @r.POST('/api/addresses')
+  @POST('/api/addresses')
   Future<String> saveAddressApi(
-      @r.Header('x-auth-token') String token, @r.Body() String body);
+      @Header('x-auth-token') String token, @Body() String body);
 
-  @r.DELETE('/api/addresses/{addrId}')
-  Future<String> deleteAddressApi(@r.Header('x-auth-token') String token,
-      @r.Path('addrId') String addressId);
+  @DELETE('/api/addresses/{addrId}')
+  Future<String> deleteAddressApi(
+      @Header('x-auth-token') String token, @Path('addrId') String addressId);
 
-  @r.GET('/api/addresses/{addrId}')
-  Future<String> fetchSingleAddressApi(@r.Header('x-auth-token') String token,
-      @r.Path('addrId') String addressId);
+  @GET('/api/addresses/{addrId}')
+  Future<String> fetchSingleAddressApi(
+      @Header('x-auth-token') String token, @Path('addrId') String addressId);
 
-  @r.PUT('/api/addresses/{addrId}')
-  Future<String> updateAddressApi(@r.Header('x-auth-token') String token,
-      @r.Path('addrId') String addressId, @r.Body() String addressObj);
+  @PUT('/api/addresses/{addrId}')
+  Future<String> updateAddressApi(@Header('x-auth-token') String token,
+      @Path('addrId') String addressId, @Body() String addressObj);
 
   // *CART
-  @r.POST('/api/cart')
+  @POST('/api/cart')
   Future<String> saveCartApi(
-      @r.Header('x-auth-token') String token, @r.Body() String cartBody);
+      @Header('x-auth-token') String token, @Body() String cartBody);
 
   //orders
-  @r.GET('/api/orders')
-  Future<String> ordersListApi(@r.Header('x-auth-token') String token);
+  @GET('/api/orders')
+  Future<String> ordersListApi(@Header('x-auth-token') String token);
 
-  @r.GET('/api/orders/{order_id}')
-  Future<String> orderDetailApi(@r.Header('x-auth-token') String token,
-      @r.Path('order_id') String orderId);
+  @GET('/api/orders/{order_id}')
+  Future<String> orderDetailApi(
+      @Header('x-auth-token') String token, @Path('order_id') String orderId);
 
-  @r.GET('/api/shipments/{shipment_id}')
-  Future<String> shippingDetailApi(@r.Header('x-auth-token') String token,
-      @r.Path('shipment_id') String shippingId);
+  @GET('/api/shipments/{shipment_id}')
+  Future<String> shippingDetailApi(@Header('x-auth-token') String token,
+      @Path('shipment_id') String shippingId);
 }
