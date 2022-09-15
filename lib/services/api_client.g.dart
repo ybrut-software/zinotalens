@@ -189,24 +189,17 @@ class _ApiClient implements ApiClient {
   }
 
   @override
-  Future<String> paymentIntentApi(body) async {
+  Future<String> ordersListApi(token) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
-    final _headers = <String, dynamic>{
-      r'Authorization':
-          'Bearer sk_test_51LW3BZSBstzmOfTL8N9hZAoRsWMC8e9nqGcP8monpbNYUh1LGUqWbXErBEkG3Cx1Cm9NlS34fEffkZhUtgsg9Ght0074rB9VIc',
-      r'Content-Type': 'application/x-www-form-urlencoded'
-    };
+    final _headers = <String, dynamic>{r'x-auth-token': token};
     _headers.removeWhere((k, v) => v == null);
-    final _data = body;
-    final _result = await _dio.fetch<String>(_setStreamType<String>(Options(
-            method: 'POST',
-            headers: _headers,
-            extra: _extra,
-            contentType: 'application/x-www-form-urlencoded')
-        .compose(_dio.options, 'https://api.stripe.com/v1/payment_intents',
-            queryParameters: queryParameters, data: _data)
-        .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final _data = <String, dynamic>{};
+    final _result = await _dio.fetch<String>(_setStreamType<String>(
+        Options(method: 'GET', headers: _headers, extra: _extra)
+            .compose(_dio.options, '/api/orders',
+                queryParameters: queryParameters, data: _data)
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
     final value = _result.data!;
     return value;
   }

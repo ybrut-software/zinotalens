@@ -4,7 +4,8 @@ part 'api_client.g.dart';
 
 const String baseUrl = "https://zinota-lens-backend.herokuapp.com";
 
-@r.RestApi(baseUrl: baseUrl) //baseUrl: 'https://zinota-lens-backend.herokuapp.com'
+@r.RestApi(
+    baseUrl: baseUrl) //baseUrl: 'https://zinota-lens-backend.herokuapp.com'
 abstract class ApiClient {
   factory ApiClient(Dio dio) = _ApiClient;
   static ApiClient getServices() {
@@ -55,12 +56,7 @@ abstract class ApiClient {
   Future<String> saveCartApi(
       @r.Header('x-auth-token') String token, @r.Body() String cartBody);
 
-  // *PAYMENT
-  @r.POST('https://api.stripe.com/v1/payment_intents')
-  @r.Headers(<String, dynamic>{
-    'Authorization':
-        'Bearer sk_test_51LW3BZSBstzmOfTL8N9hZAoRsWMC8e9nqGcP8monpbNYUh1LGUqWbXErBEkG3Cx1Cm9NlS34fEffkZhUtgsg9Ght0074rB9VIc',
-    'Content-Type': 'application/x-www-form-urlencoded'
-  })
-  Future<String> paymentIntentApi(@r.Body() String body);
+  //orders
+  @r.GET('/api/orders')
+  Future<String> ordersListApi(@r.Header('x-auth-token') String token);
 }

@@ -5,6 +5,7 @@ import 'package:zinotalens/database/database_helper.dart';
 import 'package:zinotalens/pages/splash_screen.dart';
 import 'package:zinotalens/provider/address_provider.dart';
 import 'package:zinotalens/provider/auth_provider.dart';
+import 'package:zinotalens/provider/order_provider.dart';
 import 'package:zinotalens/provider/payment_provider.dart';
 import 'package:zinotalens/provider/product_cart_provider.dart';
 import 'package:zinotalens/provider/product_details_provider.dart';
@@ -29,6 +30,7 @@ void main() {
           ListenableProvider(create: (context) => AuthProvider()),
           ListenableProvider(create: (context) => AddressProvider()),
           ListenableProvider(create: (context) => PaymentProvider()),
+          ListenableProvider(create: (context) => OrderProvider()),
         ],
         child: MaterialApp(
           theme: ThemeData(
