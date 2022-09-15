@@ -20,7 +20,7 @@ class _MyOrderPageState extends State<MyOrderPage> {
       appBar: customAppBar(context, title: "My Orders", isCartIcon: false),
       body: ListView.builder(
           itemCount: 10,
-          itemBuilder: (context, index) => OrderItemViewholder(context)),
+          itemBuilder: (context, index) => OrderItemsViewholder(context)),
     );
   }
 }
