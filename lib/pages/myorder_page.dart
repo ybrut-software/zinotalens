@@ -4,6 +4,7 @@ import 'package:zinotalens/model/order_list_model.dart';
 import 'package:zinotalens/provider/auth_provider.dart';
 import 'package:zinotalens/provider/order_provider.dart';
 import 'package:zinotalens/widgets/custom_appbar.dart';
+import 'package:zinotalens/widgets/error_widgets.dart';
 import 'package:zinotalens/widgets/order_item_viewholder.dart';
 import 'package:zinotalens/widgets/progress_indicator.dart';
 
@@ -32,13 +33,15 @@ class _MyOrderPageState extends State<MyOrderPage> {
       appBar: customAppBar(context, title: "My Orders", isCartIcon: false),
       body: orderProvider.getIsLoading
           ? circularProgressIndicator()
-          : ListView.builder(
-              itemCount: orderProvider.getOrderListLength,
-              itemBuilder: (context, index) {
-                Order orders = orderProvider.orderList[index];
-                return OrderItemsViewholder(context, orders);
-              },
-            ),
+          : orderProvider.isError
+              ? errorWidget(errorMsg: orderProvider.errorMsg)
+              : ListView.builder(
+                  itemCount: orderProvider.getOrderListLength,
+                  itemBuilder: (context, index) {
+                    Order orders = orderProvider.orderList[index];
+                    return OrderItemsViewholder(context, orders);
+                  },
+                ),
     );
   }
 }

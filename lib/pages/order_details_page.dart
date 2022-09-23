@@ -4,6 +4,7 @@ import 'package:zinotalens/provider/address_provider.dart';
 import 'package:zinotalens/provider/auth_provider.dart';
 import 'package:zinotalens/provider/order_provider.dart';
 import 'package:zinotalens/widgets/custom_appbar.dart';
+import 'package:zinotalens/widgets/error_widgets.dart';
 import 'package:zinotalens/widgets/order_detail_page_widget.dart';
 import 'package:zinotalens/widgets/progress_indicator.dart';
 
@@ -39,20 +40,22 @@ class _OrderDetailsPageState extends State<OrderDetailsPage> {
           : RefreshIndicator(
               onRefresh: () =>
                   orderProvider.fetchOrderDetailProvider(token, widget.orderId),
-              child: ListView(
-                  padding: EdgeInsets.only(top: 3, bottom: 20),
-                  children: [
-                    orderTrakingComponent(
-                        order: orderProvider.getOrder,
-                        shipment: orderProvider.getShipment),
-                    SizedBox(height: 5),
-                    downloadInvoiceButton(),
-                    SizedBox(height: 5),
-                    shippingAddressComponent(
-                        address: orderProvider.getOrder.address!),
-                    SizedBox(height: 5),
-                    orderPricingDetails()
-                  ]),
+              child: orderProvider.isError
+                  ? errorWidget(errorMsg: orderProvider.errorMsg)
+                  : ListView(
+                      padding: EdgeInsets.only(top: 3, bottom: 20),
+                      children: [
+                          orderTrakingComponent(
+                              order: orderProvider.getOrder,
+                              shipment: orderProvider.getShipment),
+                          SizedBox(height: 5),
+                          downloadInvoiceButton(),
+                          SizedBox(height: 5),
+                          shippingAddressComponent(
+                              address: orderProvider.getOrder.address!),
+                          SizedBox(height: 5),
+                          orderPricingDetails()
+                        ]),
             ),
     );
   }

@@ -1,7 +1,10 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:zinotalens/main.dart';
 import 'package:zinotalens/model/product_addcart_model.dart';
 import 'package:zinotalens/pages/order_summary_page.dart';
+import 'package:zinotalens/utils/exception_handler.dart';
+import 'package:zinotalens/widgets/error_widgets.dart';
 
 import '../controller/cart_controller.dart';
 
@@ -101,6 +104,9 @@ class ProductCartProvider extends ChangeNotifier {
     } catch (e) {
       print("error no 235: $e");
       _isCartSavedLoader = false;
+      DioError dioError = e as DioError;
+      String error = DioExceptions.fromDioError(dioError).toString();
+      showSnackBarMessage(context, error);
     }
     notifyListeners();
   }
