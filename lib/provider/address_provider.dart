@@ -97,11 +97,9 @@ class AddressProvider extends ChangeNotifier {
         showSnackBarMessage(context, "Address saved Successfully!");
       }
       _isSaveAddrLoader = false;
-      _isError = false;
     } catch (e) {
       print("error no 349: $e");
       _isSaveAddrLoader = false;
-      _isError = true;
       DioError _dioError = e as DioError;
       String error = DioExceptions.fromDioError(_dioError).toString();
       showSnackBarMessage(context, error);
@@ -119,13 +117,11 @@ class AddressProvider extends ChangeNotifier {
         _addresses.removeAt(index);
         showSnackBarMessage(context, "address has been deleted");
       }
-      _isError = false;
     } catch (e) {
       print("error no 176: $e");
-      _isError = true;
       DioError _dioError = e as DioError;
       String error = DioExceptions.fromDioError(_dioError).toString();
-      _errorMsg = error;
+      showSnackBarMessage(context, error);
     }
     notifyListeners();
   }
@@ -161,14 +157,12 @@ class AddressProvider extends ChangeNotifier {
         showSnackBarMessage(context, "Address updated Successfully!");
       }
       _isUpdateLoader = false;
-      _isError = false;
     } catch (e) {
       print("error no 466: $e");
       _isUpdateLoader = false;
-      _isError = true;
       DioError _dioError = e as DioError;
       String error = DioExceptions.fromDioError(_dioError).toString();
-      _errorMsg = error;
+      showSnackBarMessage(context, error);
     }
     notifyListeners();
   }
