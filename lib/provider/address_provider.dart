@@ -104,7 +104,7 @@ class AddressProvider extends ChangeNotifier {
       _isError = true;
       DioError _dioError = e as DioError;
       String error = DioExceptions.fromDioError(_dioError).toString();
-      _errorMsg = error;
+      showSnackBarMessage(context, error);
     }
     notifyListeners();
   }

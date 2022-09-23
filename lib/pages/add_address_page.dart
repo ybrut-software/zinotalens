@@ -47,6 +47,7 @@ class _AddDeliveryAddressPageState extends State<AddDeliveryAddressPage> {
             child: Column(
               children: [
                 TextFormField(
+                  textInputAction: TextInputAction.next,
                   keyboardType: TextInputType.text,
                   controller: fullNameController,
                   validator: (value) {
@@ -59,6 +60,7 @@ class _AddDeliveryAddressPageState extends State<AddDeliveryAddressPage> {
                 SizedBox(height: 20),
                 TextFormField(
                   controller: contact1Controller,
+                  textInputAction: TextInputAction.next,
                   keyboardType: TextInputType.number,
                   validator: (value) {
                     if (value!.isEmpty) return "required";
@@ -73,6 +75,7 @@ class _AddDeliveryAddressPageState extends State<AddDeliveryAddressPage> {
                   controller: contact2Controller,
                   keyboardType: TextInputType.number,
                   maxLength: 10,
+                  textInputAction: TextInputAction.next,
                   decoration: textFormFieldDecoration(
                       labelText: "Alternate Phone number (Optional)"),
                 ),
@@ -81,6 +84,7 @@ class _AddDeliveryAddressPageState extends State<AddDeliveryAddressPage> {
                   controller: pincodeController,
                   keyboardType: TextInputType.number,
                   maxLength: 6,
+                  textInputAction: TextInputAction.next,
                   validator: (value) {
                     if (value!.isEmpty) return "required";
                     return null;
@@ -93,6 +97,7 @@ class _AddDeliveryAddressPageState extends State<AddDeliveryAddressPage> {
                 TextFormField(
                   controller: countryController,
                   keyboardType: TextInputType.text,
+                  textInputAction: TextInputAction.next,
                   validator: (value) {
                     if (value!.isEmpty) return "required";
                     return null;
@@ -107,6 +112,7 @@ class _AddDeliveryAddressPageState extends State<AddDeliveryAddressPage> {
                     Expanded(
                         child: TextFormField(
                       controller: stateController,
+                      textInputAction: TextInputAction.next,
                       keyboardType: TextInputType.text,
                       validator: (value) {
                         if (value!.isEmpty) return "required";
@@ -119,6 +125,7 @@ class _AddDeliveryAddressPageState extends State<AddDeliveryAddressPage> {
                     Expanded(
                         child: TextFormField(
                       controller: cityController,
+                      textInputAction: TextInputAction.next,
                       keyboardType: TextInputType.text,
                       validator: (value) {
                         if (value!.isEmpty) return "required";
@@ -133,6 +140,7 @@ class _AddDeliveryAddressPageState extends State<AddDeliveryAddressPage> {
                 TextFormField(
                   controller: address1Controller,
                   keyboardType: TextInputType.text,
+                  textInputAction: TextInputAction.next,
                   validator: (value) {
                     if (value!.isEmpty) return "required";
                     return null;
@@ -144,6 +152,7 @@ class _AddDeliveryAddressPageState extends State<AddDeliveryAddressPage> {
                 TextFormField(
                   controller: address2Controller,
                   keyboardType: TextInputType.text,
+                  textInputAction: TextInputAction.done,
                   validator: (value) {
                     if (value!.isEmpty) return "required";
                     return null;
