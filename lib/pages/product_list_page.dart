@@ -31,28 +31,32 @@ class _ProductListPageState extends State<ProductListPage> {
     return Scaffold(
       backgroundColor: Colors.backgroundColor,
       appBar: customAppBar(context, isSearchIcon: true, title: "Eyeglasses"),
-      body: RefreshIndicator(
-        onRefresh: () => productProvider.getProductList(),
-        child: productProvider.isDataLoad
-            ? circularProgressIndicator()
-            : productProvider.productsLength == 0
-                ? errorWidget(errorMsg: "Empty!")
-                : ListView.builder(
-                    padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-                    itemCount: productProvider.productsLength,
-                    itemBuilder: ((context, index) {
-                      Product products = productProvider.productList[index];
-                      return productViewHolder(context,
-                          productId: products.productId!,
-                          title: products.title!,
-                          size: products.specifications!.size!,
-                          rating: products.averageRating?.toDouble(),
-                          photo: products.photos![0],
-                          sellingPrice: products.salesPrice!,
-                          listingPrice: products.listPrice);
-                    }),
-                  ),
-      ),
+      body: productProvider.isDataLoad
+          ? circularProgressIndicator()
+          : productProvider.isError
+              ? errorWidget(errorMsg: productProvider.errorMsg)
+              : RefreshIndicator(
+                  onRefresh: () => productProvider.getProductList(),
+                  child: productProvider.productsLength == 0
+                      ? errorWidget(errorMsg: "Empty!")
+                      : ListView.builder(
+                          padding: EdgeInsets.symmetric(
+                              horizontal: 10, vertical: 10),
+                          itemCount: productProvider.productsLength,
+                          itemBuilder: ((context, index) {
+                            Product products =
+                                productProvider.productList[index];
+                            return productViewHolder(context,
+                                productId: products.productId!,
+                                title: products.title!,
+                                size: products.specifications!.size!,
+                                rating: products.averageRating?.toDouble(),
+                                photo: products.photos![0],
+                                sellingPrice: products.salesPrice!,
+                                listingPrice: products.listPrice);
+                          }),
+                        ),
+                ),
     );
   }
 }
