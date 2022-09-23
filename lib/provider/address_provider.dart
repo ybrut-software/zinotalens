@@ -1,7 +1,9 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:zinotalens/controller/address_controller.dart';
 import 'package:zinotalens/model/address_list_model.dart';
 import 'package:zinotalens/model/single_address_model.dart';
+import 'package:zinotalens/utils/exception_handler.dart';
 import 'package:zinotalens/widgets/error_widgets.dart';
 
 class AddressProvider extends ChangeNotifier {
@@ -11,6 +13,12 @@ class AddressProvider extends ChangeNotifier {
   bool _isFetchAddrLoader = true;
   bool _isSingleAddrLoader = true;
   bool _isUpdateLoader = false;
+
+  //error handlers
+  bool _isError = false;
+  bool get isError => _isError;
+  String _errorMsg = "";
+  String get errorMsg => _errorMsg;
 
   bool get isUpdateLoader => _isUpdateLoader;
   set setIsUpdateLoader(bool _isUpdateLoader) {
@@ -41,14 +49,19 @@ class AddressProvider extends ChangeNotifier {
   int get getAddressesLength => _addresses.length;
   List<Address> get getAddresses => _addresses;
 
-  void getAddressListProvider({required String token}) async {
+  Future<void> getAddressListProvider({required String token}) async {
     try {
       _addresses = await fetchAddressList(token);
       makeDefaultAddress();
       _isFetchAddrLoader = false;
+      _isError = false;
     } catch (e) {
       print("error no 297: $e");
       _isFetchAddrLoader = false;
+      _isError = true;
+      DioError _dioError = e as DioError;
+      String error = DioExceptions.fromDioError(_dioError).toString();
+      _errorMsg = error;
     }
     notifyListeners();
   }
@@ -84,9 +97,14 @@ class AddressProvider extends ChangeNotifier {
         showSnackBarMessage(context, "Address saved Successfully!");
       }
       _isSaveAddrLoader = false;
+      _isError = false;
     } catch (e) {
       print("error no 349: $e");
       _isSaveAddrLoader = false;
+      _isError = true;
+      DioError _dioError = e as DioError;
+      String error = DioExceptions.fromDioError(_dioError).toString();
+      _errorMsg = error;
     }
     notifyListeners();
   }
@@ -101,8 +119,13 @@ class AddressProvider extends ChangeNotifier {
         _addresses.removeAt(index);
         showSnackBarMessage(context, "address has been deleted");
       }
+      _isError = false;
     } catch (e) {
       print("error no 176: $e");
+      _isError = true;
+      DioError _dioError = e as DioError;
+      String error = DioExceptions.fromDioError(_dioError).toString();
+      _errorMsg = error;
     }
     notifyListeners();
   }
@@ -112,9 +135,14 @@ class AddressProvider extends ChangeNotifier {
     try {
       _singleAddress = await fetchSingleAddress(token, addressId);
       _isSingleAddrLoader = false;
+      _isError = false;
     } catch (e) {
       print("error no 476: $e");
       _isSingleAddrLoader = false;
+      _isError = true;
+      DioError _dioError = e as DioError;
+      String error = DioExceptions.fromDioError(_dioError).toString();
+      _errorMsg = error;
     }
     notifyListeners();
   }
@@ -133,9 +161,14 @@ class AddressProvider extends ChangeNotifier {
         showSnackBarMessage(context, "Address updated Successfully!");
       }
       _isUpdateLoader = false;
+      _isError = false;
     } catch (e) {
       print("error no 466: $e");
       _isUpdateLoader = false;
+      _isError = true;
+      DioError _dioError = e as DioError;
+      String error = DioExceptions.fromDioError(_dioError).toString();
+      _errorMsg = error;
     }
     notifyListeners();
   }
